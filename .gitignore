@@ -1,0 +1,6 @@
+.idea/*
+.settings/*
+bin/*
+.classpath
+.project
+fr.n7.stl.block.iml
