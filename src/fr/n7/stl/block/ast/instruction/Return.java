@@ -7,6 +7,7 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -19,6 +20,8 @@ import fr.n7.stl.tam.ast.TAMFactory;
 public class Return implements Instruction {
 
 	protected Expression value;
+	private Register register;
+	private int offset;
 
 	public Return(Expression _value) {
 		this.value = _value;
@@ -37,7 +40,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Return.");
+		return value.collect(new SymbolTable(_scope));
 	}
 	
 	/* (non-Javadoc)
@@ -45,7 +48,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Return.");
+		return value.resolve(new SymbolTable(_scope));
 	}
 
 	/* (non-Javadoc)
@@ -53,7 +56,8 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType undefined in Return.");
+		//return value.getType()!=null;
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -61,7 +65,9 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory undefined in Return.");
+		this.register = _register;
+		this.offset = _offset;
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -69,7 +75,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in Return.");
+		return value.getCode(_factory);
 	}
 
 }

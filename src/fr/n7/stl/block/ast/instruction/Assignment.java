@@ -8,6 +8,7 @@ import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -48,7 +49,8 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Assignment.");
+		SymbolTable _local = new SymbolTable(_scope);
+		return assignable.collect(_local) && value.collect(_local);
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +58,8 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Assignment.");
+		SymbolTable _local = new SymbolTable(_scope);
+		return assignable.resolve(_local) && value.resolve(_local);
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +67,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in Assignment.");
+		return assignable.getType();
 	}
 
 	/* (non-Javadoc)
@@ -72,7 +75,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in Assignment.");
+		return assignable.getType().compatibleWith(value.getType());
 	}
 	
 	/* (non-Javadoc)
@@ -80,7 +83,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Assignment.");
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -88,7 +91,12 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in Assignment.");
+		Fragment fragment = _factory.createFragment();
+		fragment.append(value.getCode(_factory));
+		fragment.append(assignable.getCode(_factory));
+		//TODO code generation
+
+		return fragment;
 	}
 
 }
