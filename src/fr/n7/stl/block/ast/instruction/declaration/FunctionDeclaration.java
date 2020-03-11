@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.block.ast.instruction.declaration;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -125,7 +126,13 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in FunctionDeclaration.");
+		int address = 0;
+		// Allocate the memory using stacks
+		Collections.reverse(parameters);
+		for(ParameterDeclaration param : parameters){
+			//TODO allocate memory for the functions params
+		}
+		return address;
 	}
 
 	/* (non-Javadoc)
