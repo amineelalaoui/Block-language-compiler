@@ -59,7 +59,6 @@ public class Block {
 	 * allowed.
 	 */
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		//throw new SemanticsUndefinedException("Semantics collect is undefined in Block.");
 		boolean _flag = true;
 		SymbolTable _local = new SymbolTable(_scope);
 		for(Instruction ins : instructions){
