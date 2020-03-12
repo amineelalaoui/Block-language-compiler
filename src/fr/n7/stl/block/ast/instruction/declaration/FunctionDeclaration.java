@@ -110,7 +110,8 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return body.resolve(new SymbolTable(_scope));
+		SymbolTable _local = new SymbolTable(_scope);
+		return body.resolve(_local) && type.resolve(_local);
 	}
 
 	/* (non-Javadoc)
