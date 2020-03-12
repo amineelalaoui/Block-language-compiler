@@ -5,6 +5,7 @@ package fr.n7.stl.block.ast.expression;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
@@ -70,12 +71,17 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		boolean result = true;
 		SymbolTable _local = new SymbolTable(_scope);
-		for(Expression exp : arguments){
-			result = result && exp.collect(_local);
+		if(checkFunctionDefinition(_local)){
+			boolean result = true;
+			for(Expression exp : arguments){
+				result = result && exp.collect(_local);
+			}
+			return result && function.collect(_local);
 		}
-		return result && function.collect(_local);
+		else
+			throw new SemanticsUndefinedException("Error : the function " + this.name +" doesnt exist");
+
 	}
 
 	/* (non-Javadoc)
@@ -83,15 +89,40 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in FunctionCall.");
+		SymbolTable _local = new SymbolTable(_scope);
+		if(checkFunctionDefinition(_local)){
+			boolean result = true;
+			for(Expression exp : arguments){
+				result = result && exp.resolve(_local);
+			}
+			return result && function.resolve(_local);
+		}
+		else
+			throw new SemanticsUndefinedException("Error : the function " + this.name + " doesnt exist");
+
 	}
-	
+
+	/**
+	 * @param _local Inherited Scope that should contain the declaration of the called the function
+	 * @return indicates if the function is declared or not
+	 */
+	private boolean checkFunctionDefinition(SymbolTable _local){
+		// get the name of the function from the AST nodes
+		//and check if the function is already defined
+		Declaration functionName = _local.get(this.name);
+		if(functionName instanceof FunctionCall){
+			this.function = (FunctionDeclaration) functionName;
+			return true;
+		}
+		return false;
+
+	}
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getType()
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in FunctionCall.");
+		return function.getType();
 	}
 
 	/* (non-Javadoc)
