@@ -114,6 +114,8 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
+		this.register = _register;
+		this.offset = _offset;
 		return 0;
 	}
 
