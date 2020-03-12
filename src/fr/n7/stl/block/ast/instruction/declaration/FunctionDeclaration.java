@@ -51,6 +51,15 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 * AST node for the body of the function
 	 */
 	protected Block body;
+	/**
+	 *
+	 */
+	protected Register register;
+
+	/**
+	 *
+	 */
+	protected int offset;
 
 	/**
 	 * Builds an AST node for a function declaration
@@ -148,6 +157,8 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
+		this.register = _register;
+		this.offset = _offset;
 		int address = 0;
 		System.out.println("FunctionDeclaration:allocateMemory");
 		// Allocate the memory using stacks
