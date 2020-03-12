@@ -13,6 +13,7 @@ import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a constant declaration instruction.
@@ -92,7 +93,13 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return value.resolve(new SymbolTable(_scope));
+		SymbolTable _local = new SymbolTable(_scope);
+		if(_local.accepts(this)){
+			_local.accepts(this);
+			return value.resolve(_local) && type.resolve(_local);
+		}
+		Logger.error("Error : " + this.name + " already exists" );
+		return false;
 	}
 
 	/* (non-Javadoc)
