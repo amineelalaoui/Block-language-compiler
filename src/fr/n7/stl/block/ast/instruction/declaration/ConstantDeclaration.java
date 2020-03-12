@@ -38,6 +38,16 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	protected Expression value;
 
 	/**
+	 *
+	 */
+	protected Register register;
+
+	/**
+	 *
+	 */
+	protected int offset;
+
+	/**
 	 * Builds an AST node for a constant declaration
 	 * @param _name : Name of the constant
 	 * @param _type : AST node for the type of the constant
@@ -85,6 +95,12 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
+		SymbolTable _local = new SymbolTable(_scope);
+		if(!_local.accepts(this)){
+			Logger.error("Error : " + this.name + " already exists");
+			return false;
+		}
+		_local.register(this);
 		return value.collect(new SymbolTable(_scope));
 	}
 	
