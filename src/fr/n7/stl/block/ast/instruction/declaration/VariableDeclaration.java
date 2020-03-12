@@ -106,8 +106,10 @@ public class VariableDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		if(!_local.accepts(this))
-			throw new SemanticsUndefinedException("Error : previous declaration of " + name + " already exists" );
+		if(!_local.accepts(this)) {
+			Logger.error("Error : previous declaration of " + name + " already exists");
+			return false;
+		}
 		else{
 			_local.register(this);
 			return value.collect(_local);
@@ -125,7 +127,8 @@ public class VariableDeclaration implements Declaration, Instruction {
 			return value.resolve(_local) && type.resolve(_local);
 		}
 		else
-			throw new SemanticsUndefinedException("Error : previous declaration of " + name + " already exists" );
+			Logger.error("Error : previous declaration of " + name + " already exists");
+		return false;
 	}
 
 	/* (non-Javadoc)
