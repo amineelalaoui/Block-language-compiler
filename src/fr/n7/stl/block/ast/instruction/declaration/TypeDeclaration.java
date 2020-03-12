@@ -4,10 +4,13 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
+import java_cup.runtime.Symbol;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a type declaration.
@@ -25,6 +28,16 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 * AST node for the type associated to the name
 	 */
 	private Type type;
+
+	/**
+	 *
+	 */
+	private Register register;
+
+	/**
+	 *
+	 */
+	private int offset;
 
 	/**
 	 * Builds an AST node for a type declaration
@@ -49,7 +62,13 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in TypeDeclaration.");
+		SymbolTable _local = new SymbolTable(_scope);
+		if(_local.accepts(this))
+			_local.register(this);
+		else{
+			Logger.error("Error : " + name + " already exists");
+		}
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -57,7 +76,13 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in TypeDeclaration.");
+		SymbolTable _local = new SymbolTable(_scope);
+		if(_local.accepts(this)){
+			_local.register(this);
+			return type.resolve(_local);
+		}
+		Logger.error("Error : " + name + " already exists");
+		return false;
 	}
 
 	/**
