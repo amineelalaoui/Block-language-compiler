@@ -72,6 +72,7 @@ public class FunctionCall implements Expression {
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
+		System.out.println(_local);
 		if(checkFunctionDefinition(_local)){
 			boolean result = true;
 			for(Expression exp : arguments){
@@ -110,7 +111,7 @@ public class FunctionCall implements Expression {
 		// get the name of the function from the AST nodes
 		//and check if the function is already defined
 		Declaration functionName = _local.get(this.name);
-		if(functionName instanceof FunctionCall){
+		if(functionName instanceof FunctionDeclaration){
 			this.function = (FunctionDeclaration) functionName;
 			return true;
 		}

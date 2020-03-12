@@ -13,6 +13,7 @@ import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Abstract Syntax Tree node for a variable declaration instruction.
@@ -104,7 +105,13 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return value.collect(new SymbolTable(_scope));
+		SymbolTable _local = new SymbolTable(_scope);
+		if(!_local.accepts(this))
+			throw new SemanticsUndefinedException("Error : previous declaration of " + name + " already exists" );
+		else{
+			_local.register(this);
+			return value.collect(_local);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -113,7 +120,12 @@ public class VariableDeclaration implements Declaration, Instruction {
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		return value.resolve(_local);
+		if(_local.accepts(this)){
+			_local.register(this);
+			return value.resolve(_local) && type.resolve(_local);
+		}
+		else
+			throw new SemanticsUndefinedException("Error : previous declaration of " + name + " already exists" );
 	}
 
 	/* (non-Javadoc)
@@ -121,7 +133,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return type !=null;
+		return value.getType().compatibleWith(type);
 	}
 
 	/* (non-Javadoc)
@@ -131,7 +143,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public int allocateMemory(Register _register, int _offset) {
 		this.register = _register;
 		this.offset = _offset;
-		return _offset;
+		return type.length();
 	}
 
 	/* (non-Javadoc)

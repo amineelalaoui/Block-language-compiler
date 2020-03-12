@@ -313,6 +313,7 @@ Declaration ::= Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_P
 					} else {
 						_type = ((PartialType)_type).complete( type );
  					}
+ 					System.out.println("Declared function type : " + _type);
 					RESULT = new FunctionDeclaration( identifiant.getLeft(), _type, parametres, corps);
  
 				:}
@@ -579,4 +580,3 @@ Expression ::= /* Affectable:affectable UL_Egal Expression:expression
 					RESULT = new PointerAllocation( type ); 
 				:}
             ;
-       

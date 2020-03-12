@@ -17,6 +17,7 @@ import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Abstract Syntax Tree node for a function declaration.
@@ -102,6 +103,12 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
+		if(!_scope.accepts(this)) {
+			Logger.error("Error : Function Declaration resolve failed");
+			return false;
+		}
+		else
+			_scope.register(this);
 		return body.collect(new SymbolTable(_scope));
 	}
 	
@@ -111,7 +118,21 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		return body.resolve(_local) && type.resolve(_local);
+		if(!_scope.accepts(this))
+			Logger.error("Error : Function Declaration resolve failed");
+		else{
+			_scope.register(this);
+			boolean _result = true;
+			for(ParameterDeclaration param : parameters){
+				_result = _result && param.type.resolve(_local);
+				if(_local.accepts(param))
+					_local.register(param);
+				else
+					return false;
+			}
+			return _result && body.resolve(_local) && type.resolve(_local);
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -128,6 +149,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
 		int address = 0;
+		System.out.println("FunctionDeclaration:allocateMemory");
 		// Allocate the memory using stacks
 		Collections.reverse(parameters);
 		for(ParameterDeclaration param : parameters){

@@ -1,7 +1,7 @@
 
 test {
 	int i = 1;
-	char r = 'x';
+	i = 'c';
 	int f(){
 	    return 5;
 	}
