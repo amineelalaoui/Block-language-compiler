@@ -1,7 +1,6 @@
 
 test {
 	int i = 1;
-	i = 'c';
 	int f(){
 	    return 5;
 	}
