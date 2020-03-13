@@ -26,6 +26,8 @@ public class Conditional implements Instruction {
 	protected Expression condition;
 	protected Block thenBranch;
 	protected Block elseBranch;
+	protected Register register;
+	protected int offset;
 
 	public Conditional(Expression _condition, Block _then, Block _else) {
 		this.condition = _condition;
@@ -78,7 +80,11 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Conditional.");
+		this.register = _register;
+		this.offset = _offset;
+
+		//TODO memory allocation
+		return 0;
 	}
 
 	/* (non-Javadoc)
