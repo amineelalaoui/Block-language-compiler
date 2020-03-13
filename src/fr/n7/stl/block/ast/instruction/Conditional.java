@@ -55,7 +55,11 @@ public class Conditional implements Instruction {
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		return condition.collect(_local) && thenBranch.collect(_local) &&  elseBranch!=null ? elseBranch.collect(_local) : true;
+		boolean result = false;
+		if(this.condition.collect(_local)){
+			result = this.thenBranch.collect(_local) && (elseBranch==null || elseBranch.collect(_local));
+		}
+		return result;
 	}
 	
 	/* (non-Javadoc)
@@ -64,7 +68,11 @@ public class Conditional implements Instruction {
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		return condition.resolve(_local) && thenBranch.resolve(_local) &&  elseBranch!=null ? elseBranch.resolve(_local) : true;
+		boolean result = false;
+		if(this.condition.resolve(_local)){
+			result = this.thenBranch.resolve(_local) && (elseBranch==null || elseBranch.resolve(_local));
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
