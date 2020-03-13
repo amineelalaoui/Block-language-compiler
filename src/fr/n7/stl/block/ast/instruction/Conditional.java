@@ -80,7 +80,7 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return condition.getType().compatibleWith(AtomicType.BooleanType) && elseBranch.checkType() && thenBranch.checkType();
+		return condition.getType().compatibleWith(AtomicType.BooleanType) && thenBranch.checkType() && (elseBranch==null || elseBranch.checkType());
 	}
 
 	/* (non-Javadoc)

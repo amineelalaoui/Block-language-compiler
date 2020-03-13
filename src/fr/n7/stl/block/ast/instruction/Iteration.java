@@ -8,6 +8,8 @@ import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -40,7 +42,8 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in Iteration.");
+		SymbolTable _local = new SymbolTable(_scope);
+		return condition.collect(_local) && body.collect(_local);
 	}
 	
 	/* (non-Javadoc)
@@ -48,7 +51,8 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in Iteration.");
+		SymbolTable _local = new SymbolTable(_scope);
+		return condition.resolve(_local) && body.resolve(_local);
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +60,7 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in Iteration.");
+		return condition.getType().compatibleWith(AtomicType.BooleanType) && body.checkType();
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +68,8 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Iteration.");
+		body.allocateMemory(_register,_offset);
+		return 0;
 	}
 
 	/* (non-Javadoc)
