@@ -53,7 +53,7 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in FunctionType.");
+		return _other instanceof FunctionType;
 	}
 
 	/* (non-Javadoc)
