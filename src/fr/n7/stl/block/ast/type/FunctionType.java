@@ -53,7 +53,16 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		return _other instanceof FunctionType;
+		if(result.compatibleWith(((FunctionType) _other).result)){
+			if(parameters.size() == ((FunctionType) _other).parameters.size()){
+				boolean result = true;
+				for(int i = 0; i<parameters.size() && result;i++){
+					result = result && ((FunctionType) _other).parameters.get(i).compatibleWith(parameters.get(i));
+				}
+				return result;
+			}
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
