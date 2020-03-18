@@ -39,7 +39,7 @@ public abstract class AbstractPointer implements Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collect is not implemented in AbstractPointer.");		
+		return this.pointer.collect(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -47,7 +47,7 @@ public abstract class AbstractPointer implements Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics resolve is not implemented in AbstractPointer.");		
+		return this.pointer.resolve(_scope);
 	}
 
 	/**

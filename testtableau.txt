@@ -1,0 +1,6 @@
+testtableau{
+
+int tab[] = new int[2];
+tab[1]=2;
+print(tab[1]);
+}

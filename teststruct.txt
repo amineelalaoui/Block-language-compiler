@@ -1,0 +1,14 @@
+teststruct {
+
+	struct Personne {
+		int poids;
+		int taille;
+		boolean alive;
+	}p1 = {65,180,true};
+
+	int i  = p1.taille;
+	p1.alive = false;
+
+	p1 = {20,30,false};
+
+}

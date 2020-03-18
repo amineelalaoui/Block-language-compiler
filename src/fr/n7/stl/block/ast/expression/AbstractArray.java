@@ -46,7 +46,7 @@ public abstract class AbstractArray implements Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in Abstract Array.");
+		return this.array.collect(_scope) && this.index.collect(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +54,8 @@ public abstract class AbstractArray implements Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "resolve is undefined in Abstract Array.");
+
+		return this.array.resolve(_scope) && this.index.resolve(_scope);
 	}
 	
 	/**

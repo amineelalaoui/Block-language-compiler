@@ -1,0 +1,7 @@
+testpointeur {
+
+	int v = 2;
+	int *ptr = &v;
+	*ptr = 3;
+
+}

@@ -72,7 +72,6 @@ public class Conditional implements Instruction {
 		if(this.condition.resolve(_scope)){
 
 			resultat = this.thenBranch.resolve(_scope);
-			System.out.println("test"+resultat);
 			if(this.elseBranch.resolve(_scope)){
 				resultat &= this.elseBranch.resolve(_scope);
 			}

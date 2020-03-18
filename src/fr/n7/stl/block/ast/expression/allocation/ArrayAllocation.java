@@ -38,7 +38,7 @@ public class ArrayAllocation implements Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in ArrayAllocation.");
+		return this.size.collect(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -46,7 +46,7 @@ public class ArrayAllocation implements Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ArrayAllocation.");
+		return this.size.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

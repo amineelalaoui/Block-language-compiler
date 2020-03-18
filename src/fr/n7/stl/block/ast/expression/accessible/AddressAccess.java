@@ -29,7 +29,8 @@ public class AddressAccess implements AccessibleExpression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "collect is undefined in AddressAccess.");	
+
+	return this.assignable.collect(_scope);
 	}
 
 	/* (non-Javadoc)
