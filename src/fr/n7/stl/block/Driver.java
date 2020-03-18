@@ -5,6 +5,7 @@ class Driver {
 	public static void main(String[] args) throws Exception {
 		Parser parser = null;
 		if (args.length == 0) {
+
 			parser = new Parser( "testwhile.txt" );
 			parser.parse();
 		} else {
