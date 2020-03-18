@@ -39,7 +39,7 @@ public class Printer implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return parameter.collect(new SymbolTable(_scope));
+		return this.parameter.collect(new SymbolTable(_scope));
 	}
 	
 	/* (non-Javadoc)
@@ -47,7 +47,7 @@ public class Printer implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return parameter.resolve(new SymbolTable(_scope));
+		return this.parameter.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

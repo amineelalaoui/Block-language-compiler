@@ -15,6 +15,7 @@ import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import sun.util.resources.cldr.so.CurrencyNames_so;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a conditional instruction.
@@ -54,10 +55,9 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
 		boolean result = false;
-		if(this.condition.collect(_local)){
-			result = this.thenBranch.collect(_local) && (elseBranch==null || elseBranch.collect(_local));
+		if(this.condition.collect(_scope)){
+			result = this.thenBranch.collect(_scope) && (elseBranch==null || elseBranch.collect(_scope));
 		}
 		return result;
 	}
@@ -67,12 +67,22 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		boolean result = false;
-		if(this.condition.resolve(_local)){
-			result = this.thenBranch.resolve(_local) && (elseBranch==null || elseBranch.resolve(_local));
+		boolean resultat;
+
+		if(this.condition.resolve(_scope)){
+
+			resultat = this.thenBranch.resolve(_scope);
+			System.out.println("test"+resultat);
+			if(this.elseBranch.resolve(_scope)){
+				resultat &= this.elseBranch.resolve(_scope);
+			}
+			return resultat;
+
+
 		}
-		return result;
+		else{
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)

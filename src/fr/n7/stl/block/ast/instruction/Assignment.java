@@ -49,8 +49,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		return assignable.collect(_local) && value.collect(_local);
+		return this.assignable.collect(_scope) && value.collect(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -58,8 +57,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		return assignable.resolve(_local) && value.resolve(_local);
+		return this.assignable.resolve(_scope) && value.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

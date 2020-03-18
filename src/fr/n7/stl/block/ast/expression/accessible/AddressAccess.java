@@ -37,7 +37,9 @@ public class AddressAccess implements AccessibleExpression {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "resolve is undefined in AddressAccess.");	
+
+		return this.assignable.resolve(_scope);
+
 	}
 	
 	/* (non-Javadoc)

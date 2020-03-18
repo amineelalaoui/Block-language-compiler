@@ -1,0 +1,12 @@
+testif {
+
+	int i = 7;
+
+	if (i == 7) {
+		int j = 2;
+		j = i + 1;
+	} else {
+		boolean k = true;
+	}
+
+}

@@ -51,8 +51,7 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		return condition.resolve(_local) && body.resolve(_local);
+		return this.condition.resolve(_scope) && this.body.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

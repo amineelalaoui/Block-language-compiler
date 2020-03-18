@@ -1,0 +1,10 @@
+testfunction {
+
+	int id(int i){
+		return i;
+	}
+
+	int x = id(4);
+
+
+}

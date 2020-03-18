@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.expression.accessible;
 import fr.n7.stl.block.ast.expression.AbstractIdentifier;
 import fr.n7.stl.block.ast.expression.AbstractAccess;
 import fr.n7.stl.block.ast.instruction.declaration.ConstantDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
@@ -60,7 +61,14 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 			if (_declaration instanceof VariableDeclaration) {
 				this.expression = new VariableAccess((VariableDeclaration) _declaration);
 				return true;
-			} else {
+			}
+			//else if ajouté
+			else if(_declaration instanceof ParameterDeclaration){
+				this.expression = new ParameterAccess((ParameterDeclaration) _declaration);
+				return true;
+			}
+
+			else {
 				if (_declaration instanceof ConstantDeclaration) {
 					// TODO : refactor the management of Constants
 					this.expression = new ConstantAccess((ConstantDeclaration) _declaration);

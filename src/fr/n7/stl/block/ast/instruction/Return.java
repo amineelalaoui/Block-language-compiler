@@ -40,6 +40,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
+
 		return value.collect(new SymbolTable(_scope));
 	}
 	
@@ -48,7 +49,7 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return value.resolve(new SymbolTable(_scope));
+		return this.value.resolve(_scope);
 	}
 
 	/* (non-Javadoc)

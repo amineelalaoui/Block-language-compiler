@@ -76,13 +76,16 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		if(_local.accepts(this)){
-			_local.register(this);
-			return type.resolve(_local);
+		if(!_scope.accepts(this)) {
+			Logger.error("Error : " + name + " already exists");
+			return false;
 		}
-		Logger.error("Error : " + name + " already exists");
-		return false;
+		else
+		{
+			_scope.register(this);
+			this.type.resolve(_scope);
+			return true;
+		}
 	}
 
 	/**

@@ -105,14 +105,14 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		if(!_local.accepts(this)) {
+		if(!_scope.accepts(this)) {
 			Logger.error("Error : previous declaration of " + name + " already exists");
 			return false;
 		}
 		else{
-			_local.register(this);
-			return value.collect(_local);
+
+			_scope.register(this);
+			return value.collect(_scope);
 		}
 	}
 
@@ -121,10 +121,10 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		if(_local.accepts(this)){
-			_local.register(this);
-			return value.resolve(_local) && type.resolve(_local);
+		if(_scope.accepts(this)){
+			_scope.register(this);
+			this.type.resolve(_scope);
+			return this.value.resolve(_scope);
 		}
 		else
 			Logger.error("Error : previous declaration of " + name + " already exists");

@@ -43,8 +43,7 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		return condition.collect(_local) && body.collect(_local);
+		return condition.collect(_scope) && body.collect(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -52,8 +51,7 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		return condition.collect(_local) && body.collect(_local);
+		return condition.resolve(_scope) && body.resolve(_scope);
 	}
 
 	/* (non-Javadoc)
@@ -61,6 +59,7 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
+
 		return condition.getType().compatibleWith(AtomicType.BooleanType) && body.checkType();
 	}
 
