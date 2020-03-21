@@ -15,7 +15,6 @@ import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
-import sun.util.resources.cldr.so.CurrencyNames_so;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a conditional instruction.
