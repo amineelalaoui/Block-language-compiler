@@ -27,12 +27,25 @@ import fr.n7.stl.util.*;
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
 parser code {:
-	protected Lexer lexer;
-	protected String name;
-	public Parser(String _name) {
-		this();
-		this.name = _name;
-	}
+
+protected Lexer lexer;
+
+protected String name;
+
+    public String getName() {
+
+       return this.name;
+
+    }
+
+public Parser(String _name) {
+
+this();
+
+this.name = _name;
+
+}
+
 :}
 
 /* Initialisation de l'analyseur lexical et des variables partagées. */
@@ -110,22 +123,73 @@ precedence left UL_Crochet_Ouvrant, UL_Point, UL_Parenthese_Ouvrante;
 /* UL_Identificateur est un terminal (Unité lexicale) */
 /* bloc est la variable utilisable dans l'action sémantique qui contient la valeur renvoyé par l'analyse du Bloc */
 Program ::= UL_Identificateur:nom Bloc:bloc
-			{:
-				System.out.println( "Block named : " + nom );
-				System.out.println( bloc );
-				SymbolTable tds = new SymbolTable();
-				if (bloc.collect(tds)) {
-					System.out.println("Collect succeeded : " + tds);
-					if (bloc.resolve(tds)) {
-						System.out.println("Resolve succeeded.");
-					} else {
-						System.out.println("Resolve failed." + tds);
-					}
-				} else {
-					System.out.println("Collect failed : " + tds);
-				}
-			:}
-		;
+
+{:
+
+System.out.println( "Block named : " + nom );
+
+System.out.println( bloc );
+
+SymbolTable tds = new SymbolTable();
+
+if (bloc.collectAndPartialResolve(tds)) {
+
+    System.out.println("Collect succeeded : " + tds);
+
+
+if (bloc.completeResolve(tds)) {
+
+    System.out.println("Resolve succeeded.");
+    System.out.println("Resolve succeeded.");
+    System.out.println("Resolve succeeded.");
+
+if (bloc.checkType()) {
+
+    System.out.println("CheckType succeeded.");
+
+    Fragment code = bloc.getCode(new TAMFactoryImpl());
+
+    System.out.println( "Generated code:" );
+
+    System.out.println( code );
+
+      File file = new File(parser.getName() + "_tam");
+
+      PrintStream printer = null;
+
+  try {
+
+    printer = new PrintStream( new FileOutputStream(file) );
+
+    printer.println( code );
+
+ } catch (IOException e) {
+
+    e.printStackTrace();
+
+}
+
+} else {
+
+System.out.println("CheckType failed." + tds);
+
+}
+
+} else {
+
+System.out.println("Resolve failed." + tds);
+
+}
+
+} else {
+
+System.out.println("Collect failed : " + tds);
+
+}
+
+:}
+
+;
 
 Bloc ::= UL_Accolade_Ouvrante Instructions:instructions UL_Accolade_Fermante
 			{:
