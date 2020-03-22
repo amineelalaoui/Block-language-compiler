@@ -23,7 +23,7 @@ public interface Expression {
 	 * @return Synthesized Semantics attribute that indicates if the identifier declaration are
 	 * allowed.
 	 */
-	public boolean collect(HierarchicalScope<Declaration> _scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope);
 	
 	/**
 	 * Inherited Semantics attribute to transmit the scope, fill it and modify the AST
@@ -31,7 +31,7 @@ public interface Expression {
 	 * @return Synthesized Semantics attribute that indicates if the identifier used in the
 	 * expression have been previously defined.
 	 */
-	public boolean resolve(HierarchicalScope<Declaration> _scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope);
 	
 	/**
 	 * Synthesized Semantics attribute to compute the type of an expression.

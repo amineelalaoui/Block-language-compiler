@@ -37,16 +37,16 @@ public class ArrayAllocation implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return this.size.collect(_scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		return this.size.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return this.size.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return this.size.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)

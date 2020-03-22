@@ -48,21 +48,22 @@ public class Assignment implements Instruction, Expression {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return this.assignable.collect(_scope) && value.collect(_scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		return this.assignable.collectAndPartialResolve(_scope) && value.collectAndPartialResolve(_scope);
 	}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return this.assignable.resolve(_scope) && value.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return this.assignable.completeResolve(_scope) && value.completeResolve(_scope);
 	}
 
+
 	/* (non-Javadoc)
-	 * @see fr.n7.stl.block.ast.expression.Expression#getType()
-	 */
+         * @see fr.n7.stl.block.ast.expression.Expression#getType()
+         */
 	@Override
 	public Type getType() {
 		return assignable.getType();

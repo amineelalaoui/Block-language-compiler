@@ -41,17 +41,17 @@ public class Iteration implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
-		return condition.collect(_local) && body.collect(_local);
+		return condition.collectAndPartialResolve(_local) && body.collectAndPartialResolve(_local);
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return this.condition.resolve(_scope) && this.body.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return this.condition.completeResolve(_scope) && this.body.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)

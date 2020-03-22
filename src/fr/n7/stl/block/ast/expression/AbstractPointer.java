@@ -38,16 +38,16 @@ public abstract class AbstractPointer implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return this.pointer.collect(_scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		return this.pointer.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return this.pointer.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return this.pointer.completeResolve(_scope);
 	}
 
 	/**

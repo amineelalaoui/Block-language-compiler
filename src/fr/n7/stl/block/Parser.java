@@ -9,8 +9,10 @@ import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.impl.TAMFactoryImpl;
 import java_cup.runtime.*;
 import fr.n7.stl.block.Lexer;
-
+import java.io.IOException;
+import java.io.File;
 import java.io.*;
+import java.io.FileInputStream;
 import java.util.*;
 import fr.n7.stl.block.ast.*;
 import fr.n7.stl.block.ast.expression.*;
@@ -759,11 +761,11 @@ System.out.println( bloc );
 
 SymbolTable tds = new SymbolTable();
 
-if (bloc.collect(tds)) {
+if (bloc.collectAndPartialResolve(tds)) {
 
 System.out.println("Collect succeeded : " + tds);
 
-if (bloc.resolve(tds)) {
+if (bloc.completeResolve(tds)) {
 
 System.out.println("Resolve succeeded.");
 
@@ -771,7 +773,11 @@ if (bloc.checkType()) {
 
 System.out.println("CheckType succeeded.");
 
+System.out.println("Test");
+
 Fragment code = bloc.getCode(new TAMFactoryImpl());
+
+System.out.println("Test");
 
 System.out.println( "Generated code:" );
 
@@ -1497,6 +1503,7 @@ System.out.println("Collect failed : " + tds);
 		Block sinon = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG40
 
+				    System.out.println("thiiiis "+ condition);
 					RESULT = new Conditional( condition, alors, sinon);
 				
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Instruction",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

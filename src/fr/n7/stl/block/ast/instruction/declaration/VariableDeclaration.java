@@ -104,7 +104,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		if(!_scope.accepts(this)) {
 			Logger.error("Error : previous declaration of " + name + " already exists");
 			return false;
@@ -112,7 +112,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 		else{
 
 			_scope.register(this);
-			return value.collect(_scope);
+			return value.collectAndPartialResolve(_scope);
 		}
 	}
 
@@ -120,11 +120,11 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(_scope.accepts(this)){
 			_scope.register(this);
 			this.type.resolve(_scope);
-			return this.value.resolve(_scope);
+			return this.value.completeResolve(_scope);
 		}
 		else
 			Logger.error("Error : previous declaration of " + name + " already exists");

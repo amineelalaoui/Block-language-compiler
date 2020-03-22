@@ -25,7 +25,7 @@ public interface Instruction {
 	 * @return Synthesized Semantics attribute that indicates if the identifier declaration are
 	 * allowed.
 	 */
-	public boolean collect(HierarchicalScope<Declaration> _scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope);
 	
 	/**
 	 * Inherited Semantics attribute to check that all identifiers have been defined and
@@ -34,7 +34,7 @@ public interface Instruction {
 	 * @return Synthesized Semantics attribute that indicates if the identifier used in the
 	 * instruction have been previously defined.
 	 */
-	public boolean resolve(HierarchicalScope<Declaration> _scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope);
 	
 	/**
 	 * Synthesized Semantics attribute to check that an instruction if well typed.

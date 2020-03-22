@@ -38,16 +38,16 @@ public class Printer implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return this.parameter.collect(new SymbolTable(_scope));
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		return this.parameter.collectAndPartialResolve(new SymbolTable(_scope));
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return this.parameter.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return this.parameter.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)

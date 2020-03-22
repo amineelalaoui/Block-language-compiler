@@ -42,16 +42,16 @@ public class Repetition implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		return condition.collect(_scope) && body.collect(_scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		return condition.collectAndPartialResolve(_scope) && body.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		return condition.resolve(_scope) && body.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return condition.completeResolve(_scope) && body.completeResolve(_scope);
 	}
 
 	/* (non-Javadoc)

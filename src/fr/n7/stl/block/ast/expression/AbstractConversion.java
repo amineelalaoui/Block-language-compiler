@@ -59,7 +59,7 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		throw new SemanticsUndefinedException("Semantics collect undefined in TypeConversion.");
 	}
 
@@ -67,7 +67,7 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		throw new SemanticsUndefinedException("Semantics resolve undefined in TypeConversion.");
 	}
 

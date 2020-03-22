@@ -60,9 +60,9 @@ public class BinaryExpression implements Expression {
 	}
 	
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
-		boolean _left = this.left.collect(_scope);
-		boolean _right = this.right.collect(_scope);
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		boolean _left = this.left.collectAndPartialResolve(_scope);
+		boolean _right = this.right.collectAndPartialResolve(_scope);
 		return _left && _right;
 	}
 	
@@ -70,9 +70,9 @@ public class BinaryExpression implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		boolean _left = this.left.resolve(_scope);
-		boolean _right = this.right.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		boolean _left = this.left.completeResolve(_scope);
+		boolean _right = this.right.completeResolve(_scope);
 		return _left && _right;
 	}
 

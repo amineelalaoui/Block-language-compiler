@@ -55,10 +55,10 @@ public class Sequence implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _result = true;
 		for (Expression _value : this.values) {
-			_result = _result && _value.collect(_scope);
+			_result = _result && _value.collectAndPartialResolve(_scope);
 		}
 		return _result;
 	}
@@ -67,10 +67,10 @@ public class Sequence implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _result = true;
 		for (Expression _value : this.values) {
-			_result = _result && _value.resolve(_scope);
+			_result = _result && _value.completeResolve(_scope);
 		}
 		return _result;
 	}

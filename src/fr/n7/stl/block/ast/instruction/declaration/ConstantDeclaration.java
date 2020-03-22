@@ -94,25 +94,25 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
 		if(!_local.accepts(this)){
 			Logger.error("Error : " + this.name + " already exists");
 			return false;
 		}
 		_local.register(this);
-		return value.collect(new SymbolTable(_scope));
+		return value.collectAndPartialResolve(new SymbolTable(_scope));
 	}
 	
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
 		if(_local.accepts(this)){
 			_local.accepts(this);
-			return value.resolve(_local) && type.resolve(_local);
+			return value.completeResolve(_local) && type.resolve(_local);
 		}
 		Logger.error("Error : " + this.name + " already exists" );
 		return false;

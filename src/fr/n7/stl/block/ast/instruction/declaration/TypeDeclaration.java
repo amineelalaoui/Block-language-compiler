@@ -61,7 +61,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
 		if(_local.accepts(this))
 			_local.register(this);
@@ -75,7 +75,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(!_scope.accepts(this)) {
 			Logger.error("Error : " + name + " already exists");
 			return false;

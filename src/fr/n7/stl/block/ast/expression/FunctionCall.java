@@ -70,15 +70,15 @@ public class FunctionCall implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
 		System.out.println(_local);
 		if(checkFunctionDefinition(_local)){
 			boolean result = true;
 			for(Expression exp : arguments){
-				result = result && exp.collect(_local);
+				result = result && exp.collectAndPartialResolve(_local);
 			}
-			return result && function.collect(_local);
+			return result && function.collectAndPartialResolve(_local);
 		}
 		else
 			throw new SemanticsUndefinedException("Error : the function " + this.name +" doesnt exist");
@@ -89,14 +89,14 @@ public class FunctionCall implements Expression {
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		SymbolTable _local = new SymbolTable(_scope);
 		if(checkFunctionDefinition(_local)){
 			boolean result = true;
 			for(Expression exp : arguments){
-				result = result && exp.resolve(_local);
+				result = result && exp.completeResolve(_local);
 			}
-			return result && function.resolve(_local);
+			return result && function.completeResolve(_local);
 		}
 		else
 			throw new SemanticsUndefinedException("Error : the function " + this.name + " doesnt exist");

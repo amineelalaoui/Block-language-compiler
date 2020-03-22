@@ -58,11 +58,11 @@ public class Block {
 	 * @return Synthesized Semantics attribute that indicates if the identifier declaration are
 	 * allowed.
 	 */
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _flag = true;
 		SymbolTable _local = new SymbolTable(_scope);
 		for(Instruction ins : instructions){
-			_flag = _flag && ins.collect(_local);
+			_flag = _flag && ins.collectAndPartialResolve(_local);
 		}
 		return _flag;
 	}
@@ -74,11 +74,11 @@ public class Block {
 	 * @return Synthesized Semantics attribute that indicates if the identifier used in the
 	 * block have been previously defined.
 	 */
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _flag = true;
 		SymbolTable _local = new SymbolTable(_scope);
 		for(Instruction ins : instructions){
-			_flag = _flag && ins.resolve(_local);
+			_flag = _flag && ins.completeResolve(_local);
 		}
 		return _flag;
 	}

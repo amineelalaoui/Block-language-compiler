@@ -53,10 +53,10 @@ public class Conditional implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean collect(HierarchicalScope<Declaration> _scope) {
+	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean result = false;
-		if(this.condition.collect(_scope)){
-			result = this.thenBranch.collect(_scope) && (elseBranch==null || elseBranch.collect(_scope));
+		if(this.condition.collectAndPartialResolve(_scope)){
+			result = this.thenBranch.collectAndPartialResolve(_scope) && (elseBranch==null || elseBranch.collectAndPartialResolve(_scope));
 		}
 		return result;
 	}
@@ -65,14 +65,14 @@ public class Conditional implements Instruction {
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean resultat;
 
-		if(this.condition.resolve(_scope)){
+		if(this.condition.completeResolve(_scope)){
 
-			resultat = this.thenBranch.resolve(_scope);
-			if(this.elseBranch.resolve(_scope)){
-				resultat &= this.elseBranch.resolve(_scope);
+			resultat = this.thenBranch.completeResolve(_scope);
+			if(this.elseBranch.completeResolve(_scope)){
+				resultat &= this.elseBranch.completeResolve(_scope);
 			}
 			return resultat;
 
@@ -108,7 +108,28 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in Conditional.");
-	}
 
+//		Fragment frag = _factory.createFragment();
+//
+//		int idCond = _factory.createLabelNumber();
+//
+//		frag.append(this.condition.getCode(_factory));
+//
+//		frag.add(_factory.createJumpIf("elseBranch"+ idCond,0));
+//
+//		frag.append(thenBranch.getCode(_factory));
+//
+//		frag.add(_factory.createJump("endCondition"+idCond));
+//
+//		frag.addSuffix("elseBranch"+idCond+":");
+//
+//		if(elseBranch !=null) {
+//			frag.append(elseBranch.getCode(_factory));
+//		}
+
+//		frag.addSuffix("endCondition"+idCond+":");
+//
+		return null;
+//
+ }
 }
