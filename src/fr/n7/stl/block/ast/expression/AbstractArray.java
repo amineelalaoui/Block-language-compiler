@@ -77,7 +77,7 @@ public abstract class AbstractArray implements Expression {
 
 		}
 
-		return null;
+		return AtomicType.ErrorType;
 
 
 
