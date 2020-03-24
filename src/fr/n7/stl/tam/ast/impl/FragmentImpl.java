@@ -41,9 +41,7 @@ public class FragmentImpl implements Fragment {
 	 */
 	@Override
 	public void append(Fragment _fragment) {
-
-
-		this.instructions.addAll(((FragmentImpl)_fragment).instructions);
+			this.instructions.addAll(((FragmentImpl)_fragment).instructions);
 	}
 	
 	@Override
