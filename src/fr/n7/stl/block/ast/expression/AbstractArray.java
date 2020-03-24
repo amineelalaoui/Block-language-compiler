@@ -3,6 +3,8 @@ package fr.n7.stl.block.ast.expression;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.ArrayType;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 
 /**
@@ -63,7 +65,24 @@ public abstract class AbstractArray implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in AbstractArray.");
+
+
+		if(this.array.getType() instanceof ArrayType){
+
+			System.out.println(this.index);
+				if(this.index.getType().compatibleWith(AtomicType.IntegerType)){
+					return ((ArrayType)this.array.getType()).getType();
+				}
+				else return AtomicType.ErrorType;
+
+		}
+
+		return null;
+
+
+
+
+
 	}
 
 }
