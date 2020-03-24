@@ -58,7 +58,6 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public int length() {
-
 		return this.element.length();
 	}
 

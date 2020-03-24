@@ -55,7 +55,7 @@ public abstract class AbstractPointer implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in PointerAccess.");
+		return pointer.getType();
 	}
 
 }
