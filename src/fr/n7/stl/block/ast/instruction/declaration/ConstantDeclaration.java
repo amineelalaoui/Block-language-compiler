@@ -131,9 +131,11 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		this.register = _register;
-		this.offset = _offset;
-		return type.length();
+//		this.register = _register;
+//		this.offset = _offset;
+//		return type.length();
+
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -141,7 +143,11 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		return value.getCode(_factory);
+
+		Fragment fragment = _factory.createFragment();
+		//return value.getCode(_factory);
+
+		return  fragment;
 	}
 
 }

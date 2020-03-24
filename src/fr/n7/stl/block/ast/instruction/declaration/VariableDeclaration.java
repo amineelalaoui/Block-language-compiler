@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.n7.stl.block.ast.instruction.declaration;
 
@@ -26,28 +26,28 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * Name of the declared variable.
 	 */
 	protected String name;
-	
+
 	/**
 	 * AST node for the type of the declared variable.
 	 */
 	protected Type type;
-	
+
 	/**
 	 * AST node for the initial value of the declared variable.
 	 */
 	protected Expression value;
-	
+
 	/**
 	 * Address register that contains the base address used to store the declared variable.
 	 */
 	protected Register register;
-	
+
 	/**
 	 * Offset from the base address used to store the declared variable
 	 * i.e. the size of the memory allocated to the previous declared variables
 	 */
 	protected int offset;
-	
+
 	/**
 	 * Creates a variable declaration instruction node for the Abstract Syntax Tree.
 	 * @param _name Name of the declared variable.
@@ -91,7 +91,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public Register getRegister() {
 		return this.register;
 	}
-	
+
 	/**
 	 * Synthesized semantics attribute for the offset used to compute the address of the variable.
 	 * @return Offset used to compute the address where the declared variable will be stored.
@@ -99,7 +99,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public int getOffset() {
 		return this.offset;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
@@ -146,7 +146,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public int allocateMemory(Register _register, int _offset) {
 		this.register = _register;
 		this.offset = _offset;
-		return type.length();
+		return this.type.length();
 	}
 
 	/* (non-Javadoc)
@@ -154,7 +154,20 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
+//		Fragment frag = _factory.createFragment();
+//
+//		//frag.add(_factory.createPush(this.getType().length()));
+//
+//		frag.append(value.getCode(_factory));
+//
+//		System.out.println(this.getRegister()) ;
+//
+//		//frag.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
+//
+//		return frag;
+
 		return value.getCode(_factory);
+
 	}
 
 }

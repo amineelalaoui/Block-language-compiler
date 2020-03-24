@@ -6,6 +6,8 @@ package fr.n7.stl.block.ast.expression;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.CoupleType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -61,15 +63,30 @@ public class First implements Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType undefined in First.");
+		if(this.target.getType() instanceof CoupleType){
+			CoupleType coupleType = (CoupleType)this.target.getType();
+			return coupleType.getFirst();
+		}else
+			return AtomicType.ErrorType;
 	}
+
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in First.");
+		Fragment fragment = this.target.getCode(_factory);
+
+		Fragment first = _factory.createFragment();
+
+		CoupleType coupleType = (CoupleType) this.target.getType();
+
+		first.add(_factory.createPop(0,coupleType.getSecond().length()));
+
+		fragment.append(first);
+
+		return fragment;
 	}
 
 }

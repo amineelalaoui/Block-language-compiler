@@ -81,7 +81,8 @@ public class Assignment implements Instruction, Expression {
 	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
 	 */
 	@Override
-	public int allocateMemory(Register _register, int _offset) {
+	public int allocateMemory(Register _register, int _offset)
+	{
 		return 0;
 	}
 
@@ -95,6 +96,7 @@ public class Assignment implements Instruction, Expression {
 		fragment.append(assignable.getCode(_factory));
 		//TODO code generation
 
+		fragment.add(_factory.createStoreI(value.getType().length()));
 		return fragment;
 	}
 

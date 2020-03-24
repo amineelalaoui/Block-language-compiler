@@ -29,7 +29,13 @@ public class FieldAssignment extends AbstractField implements AssignableExpressi
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in FieldAssignment.");
+
+		Fragment frag  = _factory.createFragment();
+
+		frag.add(_factory.createLoadL(this.field.getOffset()));
+
+		return frag;
+
 	}
 	
 }

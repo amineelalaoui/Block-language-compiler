@@ -23,7 +23,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 * Name of the declared type
 	 */
 	private String name;
-	
+
 	/**
 	 * AST node for the type associated to the name
 	 */
@@ -56,7 +56,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.instruction.Instruction#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
