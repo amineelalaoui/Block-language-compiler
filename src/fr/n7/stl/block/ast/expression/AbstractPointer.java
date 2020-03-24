@@ -3,7 +3,6 @@ package fr.n7.stl.block.ast.expression;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
-import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 
@@ -49,7 +48,6 @@ public abstract class AbstractPointer implements Expression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-
 		return this.pointer.completeResolve(_scope);
 	}
 
@@ -58,12 +56,7 @@ public abstract class AbstractPointer implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-
-			if(this.pointer.getType() instanceof PointerType){
-				return ((PointerType)this.pointer.getType()).getPointedType();
-
-			}
-			else return AtomicType.ErrorType;
+		return ((PointerType)this.pointer.getType()).getPointedType();
 	}
 
 }
