@@ -129,7 +129,7 @@ public class Conditional implements Instruction {
 
 		frag.addSuffix("endCondition"+idCond+":");
 
-		return null;
+		return frag;
 //
  }
 }
