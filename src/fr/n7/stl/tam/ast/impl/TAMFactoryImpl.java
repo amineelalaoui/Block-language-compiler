@@ -79,6 +79,7 @@ public class TAMFactoryImpl implements TAMFactory {
 	 */
 	@Override
 	public TAMInstruction createLoad(Register _register, int _offset, int _size) {
+		System.out.println("Create load");
 		return new TAMInstructionImpl(
 				TAMInstructionKind.LOAD,
 				Optional.empty(),

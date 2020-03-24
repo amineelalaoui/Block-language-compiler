@@ -5,6 +5,4 @@ test {
 	    return 5;
 	}
 	print f();
-
-
 }

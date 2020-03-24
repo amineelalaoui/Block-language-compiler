@@ -43,6 +43,7 @@ public class ConditionalExpression implements Expression {
 		this.condition = _condition;
 		this.thenExpression = _then;
 		this.elseExpression = _else;
+		System.out.println("test");
 	}
 
 	/* (non-Javadoc)
@@ -50,6 +51,7 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println("test collect");
 		throw new SemanticsUndefinedException( "Semantics collect is undefined in ConditionalExpression.");
 	}
 
@@ -58,6 +60,7 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println("test resolve");
 		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ConditionalExpression.");
 	}
 
@@ -74,6 +77,7 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public Type getType() {
+		System.out.println("test getType");
 		throw new SemanticsUndefinedException( "Semantics getType is undefined in ConditionalExpression.");
 	}
 
@@ -82,6 +86,7 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
+		System.out.println("test getcode");
 		throw new SemanticsUndefinedException( "Semantics getCode is undefined in ConditionalExpression.");
 	}
 

@@ -139,7 +139,6 @@ if (bloc.checkType()) {
 System.out.println("CheckType succeeded.");
 
 System.out.println("Test");
-
 Fragment code = bloc.getCode(new TAMFactoryImpl());
 
 System.out.println("Test");

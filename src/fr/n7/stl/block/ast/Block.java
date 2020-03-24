@@ -100,11 +100,12 @@ public class Block {
 	 * Synthesized Semantics attribute that compute the size of the allocated memory. 
 	 * @param _register Inherited Register associated to the address of the variables.
 	 * @param _offset Inherited Current offset for the address of the variables.
-	 */	
+	 */
 	public void allocateMemory(Register _register, int _offset) {
-		int _address =0 ;
+		int _address =_offset ;
+		System.out.println(_register);
 		for(Instruction ins : instructions){
-			_address+= ins.allocateMemory(_register,_address + _offset);
+			_address+= ins.allocateMemory(_register,_address);
 		}
 	}
 
@@ -115,6 +116,7 @@ public class Block {
 	 * @return Synthesized AST for the generated TAM code.
 	 */
 	public Fragment getCode(TAMFactory _factory) {
+		allocateMemory(Register.SB,0);
 		Fragment _frag = new FragmentImpl();
 		for(Instruction ins : instructions){
 			_frag.append(ins.getCode(_factory));
