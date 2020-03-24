@@ -29,7 +29,9 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException("Semantics equalsTo undefined in PointerType.");
+		if(_other instanceof PointerType)
+			return ((PointerType) _other).element.equalsTo(element);
+		return false;
 	}
 
 	/* (non-Javadoc)
