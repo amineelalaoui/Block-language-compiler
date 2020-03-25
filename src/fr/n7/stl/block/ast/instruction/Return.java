@@ -76,7 +76,12 @@ public class Return implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		return value.getCode(_factory);
+		Fragment _fragment = _factory.createFragment();
+
+		_fragment.append(this.value.getCode(_factory));
+		_fragment.add(_factory.createReturn(this.value.getType().length(), 1));
+
+		return _fragment;
 	}
 
 }

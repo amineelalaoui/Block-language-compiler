@@ -1,10 +1,11 @@
 testfunction {
 
-	int id(int i){
+	int test(){
+		print "test";
 		return 5;
 	}
+    print test();
 
-	int x = id(4);
 
 
 }

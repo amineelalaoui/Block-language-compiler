@@ -11,6 +11,7 @@ import java.util.List;
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.Instruction;
+import fr.n7.stl.block.ast.instruction.Return;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
@@ -184,6 +185,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
+		System.out.println("visit");
 		Fragment _frag = _factory.createFragment();
 		int id = _factory.createLabelNumber();
 		int paramSize = 1;
@@ -193,7 +195,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		if(type.equalsTo(AtomicType.VoidType)){
 			_frag.add(_factory.createReturn(0, paramSize));
 		}
-		_frag.addPrefix("function_" + name + id);
+		_frag.addPrefix("function_" + name + id + ":");
 		return _frag;
 	}
 
