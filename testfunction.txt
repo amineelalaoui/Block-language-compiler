@@ -1,7 +1,7 @@
 testfunction {
 
 	int id(int i){
-		return i;
+		return 5;
 	}
 
 	int x = id(4);
