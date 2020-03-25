@@ -131,7 +131,13 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in FunctionCall.");
+		Fragment _frag = _factory.createFragment();
+		if(arguments!=null){
+			for(Expression _param : arguments)
+				_frag.append(_param.getCode(_factory));
+			//_frag.append(this.function.getCode(_factory));
+		}
+		return _frag;
 	}
 
 }

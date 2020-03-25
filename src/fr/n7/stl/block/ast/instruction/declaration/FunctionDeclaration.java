@@ -5,19 +5,26 @@ package fr.n7.stl.block.ast.instruction.declaration;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.instruction.Instruction;
+import fr.n7.stl.block.ast.instruction.Return;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.TAMInstruction;
+import fr.n7.stl.tam.ast.impl.TAMFactoryImpl;
 import fr.n7.stl.util.Logger;
+
+import javax.print.DocFlavor;
 
 /**
  * Abstract Syntax Tree node for a function declaration.
@@ -157,7 +164,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		this.register = _register;
+		/*this.register = _register;
 		this.offset = _offset;
 		int address = 0;
 		System.out.println("FunctionDeclaration:allocateMemory");
@@ -166,7 +173,11 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		for(ParameterDeclaration param : parameters){
 			//TODO allocate memory for the functions params
 		}
-		return address;
+		return address;*/
+		this.register = _register;
+		this.offset = _offset;
+		this.body.allocateMemory(Register.LB, 3);
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -174,7 +185,18 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics getCode is undefined in FunctionDeclaration.");
+		System.out.println("visit");
+		Fragment _frag = _factory.createFragment();
+		int id = _factory.createLabelNumber();
+		int paramSize = 1;
+		for(ParameterDeclaration param : parameters)
+			paramSize += param.getType().length();
+		_frag.append(body.getCode(_factory));
+		if(type.equalsTo(AtomicType.VoidType)){
+			_frag.add(_factory.createReturn(0, paramSize));
+		}
+		_frag.addPrefix("function_" + name + id + ":");
+		return _frag;
 	}
 
 }
