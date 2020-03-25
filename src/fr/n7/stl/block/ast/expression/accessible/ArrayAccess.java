@@ -3,7 +3,6 @@
  */
 package fr.n7.stl.block.ast.expression.accessible;
 
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractArray;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.tam.ast.Fragment;

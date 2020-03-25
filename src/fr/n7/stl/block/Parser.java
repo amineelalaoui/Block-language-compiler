@@ -773,18 +773,10 @@ if (bloc.checkType()) {
 
 System.out.println("CheckType succeeded.");
 
-System.out.println("Test1");
+System.out.println("Test");
+Fragment code = bloc.getCode(new TAMFactoryImpl());
 
-TAMFactoryImpl tamFactory = new TAMFactoryImpl();
-
-System.out.println("Test2");
-
-System.out.println(bloc.getCode(tamFactory));
-
-
-Fragment code = bloc.getCode(tamFactory);
-
-System.out.println("Test3");
+System.out.println("Test");
 
 System.out.println( "Generated code:" );
 

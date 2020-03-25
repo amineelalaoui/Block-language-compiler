@@ -99,7 +99,7 @@ public class EnumerationType implements Type, Declaration {
 	 * @see fr.n7.stl.block.ast.type.Type#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		return true;
 	}
 

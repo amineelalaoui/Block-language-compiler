@@ -3,7 +3,8 @@ testnamedtype {
 	int i=5;
 
 	typedef int entier;
-	entier x = 15;
+
+
 
 
 }

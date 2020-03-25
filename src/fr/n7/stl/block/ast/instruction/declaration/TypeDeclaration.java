@@ -83,7 +83,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 		else
 		{
 			_scope.register(this);
-			this.type.resolve(_scope);
+			this.type.completeResolve(_scope);
 			return true;
 		}
 	}
