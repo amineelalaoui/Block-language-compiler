@@ -6,7 +6,7 @@ class Driver {
 		Parser parser = null;
 		if (args.length == 0) {
 
-			parser = new Parser( "testfunction.txt" );
+			parser = new Parser( "teststruct.txt" );
 			parser.parse();
 		} else {
 			for (String name : args) {

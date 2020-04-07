@@ -79,6 +79,7 @@ public class Block {
 		SymbolTable _local = new SymbolTable(_scope);
 		for(Instruction ins : instructions){
 			_flag = _flag && ins.completeResolve(_local);
+			System.out.println("resolve of " + ins.getClass().getName() + " is " + _flag);
 		}
 		return _flag;
 	}

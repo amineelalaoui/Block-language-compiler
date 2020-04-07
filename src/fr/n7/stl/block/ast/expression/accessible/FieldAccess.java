@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.expression.accessible;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 
@@ -33,4 +34,8 @@ public class FieldAccess extends AbstractField implements Expression {
 		throw new SemanticsUndefinedException( "getCode is undefined in FieldAccess.");
 	}
 
+	@Override
+	public Type getType() {
+		return super.getType();
+	}
 }

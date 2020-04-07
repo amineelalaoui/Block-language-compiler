@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.type;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -69,7 +70,17 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if(_other instanceof RecordType){
+			boolean flag = false;
+			if(fields.size() == ((RecordType) _other).fields.size()){
+				flag = true;
+				for(int i=0;i<fields.size();i++){
+					flag = flag && fields.get(i).equals(((RecordType) _other).fields.get(i));
+				}
+			}
+			return flag && name.equals(((RecordType) _other).name);
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
