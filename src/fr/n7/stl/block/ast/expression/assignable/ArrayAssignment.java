@@ -30,24 +30,14 @@ public class ArrayAssignment extends AbstractArray implements AssignableExpressi
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-
 		Fragment fragment = _factory.createFragment();
-
 		fragment.append(this.array.getCode(_factory));
-
 		fragment.add(_factory.createLoadI(1));
-
 		fragment.append(this.index.getCode(_factory));
-
 		fragment.add(_factory.createLoadL(this.getType().length()));
-
 		fragment.add(Library.IMul);
-
 		fragment.add(Library.IAdd);
-
 		return fragment;
-
-
 	}
 
 	

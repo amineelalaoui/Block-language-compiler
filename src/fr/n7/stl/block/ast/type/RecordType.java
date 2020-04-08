@@ -88,7 +88,7 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		return _other instanceof RecordType;
 	}
 
 	/* (non-Javadoc)
@@ -96,7 +96,15 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if(compatibleWith(_other)){
+			Type mergedType = new RecordType(name);
+			for(int i=0;i<((RecordType) _other).fields.size();i++){
+				if(!fields.contains(((RecordType) _other).fields.get(i)))
+					fields.add(((RecordType) _other).fields.get(i));
+			}
+			return mergedType;
+		}
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -216,6 +224,7 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public Type getType() {
+		System.out.println("debug:Record.checkType");
 		return this;
 	}
 }

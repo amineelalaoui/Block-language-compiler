@@ -6,9 +6,13 @@ package fr.n7.stl.block.ast.expression.accessible;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.type.RecordType;
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.block.ast.type.declaration.FieldDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+
+import java.lang.reflect.Field;
 
 /**
  * Implementation of the Abstract Syntax Tree node for accessing a field in a record.
@@ -24,7 +28,10 @@ public class FieldAccess extends AbstractField implements Expression {
 	 */
 	public FieldAccess(Expression _record, String _name) {
 		super(_record, _name);
+		System.out.println(record + ":" + name);
 	}
+
+
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getCode(fr.n7.stl.tam.ast.TAMFactory)
@@ -36,6 +43,6 @@ public class FieldAccess extends AbstractField implements Expression {
 
 	@Override
 	public Type getType() {
-		return super.getType();
+		return ((RecordType)((VariableAccess)((IdentifierAccess) record).expression).declaration.getType()).get(name).getType();
 	}
 }

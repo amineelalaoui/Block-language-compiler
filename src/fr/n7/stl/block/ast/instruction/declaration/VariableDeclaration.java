@@ -15,6 +15,8 @@ import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
 
+import java.util.function.Function;
+
 /**
  * Abstract Syntax Tree node for a variable declaration instruction.
  * @author Marc Pantel
