@@ -8,6 +8,8 @@ import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.util.Logger;
 
+import java.util.function.Function;
+
 /**
  * Implementation of the Abstract Syntax Tree node for a named type.
  * 
@@ -28,6 +30,12 @@ public class NamedType implements Type {
 	public NamedType(TypeDeclaration _declaration) {
 		this.declaration = _declaration;
 		this.name = _declaration.getName();
+	}
+
+	Function<Void,TypeDeclaration> getDeclaration = (Void) -> declaration;
+
+	public TypeDeclaration getDeclaration() {
+		return declaration;
 	}
 
 	/*

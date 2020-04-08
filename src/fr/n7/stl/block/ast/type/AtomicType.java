@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.block.ast.type;
 
+import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 
@@ -35,9 +36,15 @@ public enum AtomicType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
+
 		if (this.equalsTo(_other)) {
 			return true;
-		} else {
+		}
+		else if(_other instanceof NamedType){
+			TypeDeclaration declaration = ((NamedType) _other).getDeclaration();
+			return this == declaration.getType();
+		}
+		else {
 			switch (this) {
 			case NullType : return ((_other != ErrorType) && (_other != VoidType));
 			case IntegerType: return (_other == FloatingType);
