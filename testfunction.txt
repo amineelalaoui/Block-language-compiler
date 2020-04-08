@@ -1,8 +1,14 @@
 testfunction {
 
 	int test(){
-		print "test";
-		return 5;
+		int i = 0;
+		int *ptr = &i;
+		int x = 10;
+		while(*ptr<5){
+		    x = x*2;
+		    i = i+1;
+		}
+		return x;
 	}
     print test();
 

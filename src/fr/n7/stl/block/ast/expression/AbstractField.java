@@ -57,9 +57,7 @@ public abstract class AbstractField implements Expression {
 	 * @return Synthesized Type of the expression.
 	 */
 	public Type getType() {
-
-		return this.record.getType();
-
+		throw new SemanticsUndefinedException( "getType is undefined in FieldAccess.");
 	}
 
 }

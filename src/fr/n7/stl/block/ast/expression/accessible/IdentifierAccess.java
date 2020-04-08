@@ -14,6 +14,8 @@ import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
 
+import java.util.function.Function;
+
 /**
  * Implementation of the Abstract Syntax Tree node for an identifier access expression (can be a variable,
  * a parameter, a constant, a function, ...).
@@ -41,6 +43,8 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	public String toString() {
 		return this.name;
 	}
+
+	Function<Void,AbstractAccess> getExpression = (Void)->expression;
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
@@ -91,6 +95,7 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	 */
 	@Override
 	public Type getType() {
+		System.out.println(this.expression.getClass());
 		return this.expression.getType();
 	}
 

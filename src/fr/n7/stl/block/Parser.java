@@ -754,69 +754,39 @@ class CUP$Parser$actions {
 		Block bloc = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG3
 
-
-System.out.println( "Block named : " + nom );
-
-System.out.println( bloc );
-
-SymbolTable tds = new SymbolTable();
-
-if (bloc.collectAndPartialResolve(tds)) {
-
-System.out.println("Collect succeeded : " + tds);
-
-if (bloc.completeResolve(tds)) {
-
-System.out.println("Resolve succeeded.");
-
-if (bloc.checkType()) {
-
-System.out.println("CheckType succeeded.");
-
-System.out.println("Test");
-Fragment code = bloc.getCode(new TAMFactoryImpl());
-
-System.out.println("Test");
-
-System.out.println( "Generated code:" );
-
-System.out.println( code );
-
-  File file = new File(parser.getName() + "_tam");
-
-  PrintStream printer = null;
-
-  try {
-
-  printer = new PrintStream( new FileOutputStream(file) );
-
-printer.println( code );
-
-} catch (IOException e) {
-
-    e.printStackTrace();
-
-}
-
-} else {
-
-System.out.println("Resolve failed." + tds);
-
-}
-
-} else {
-
-System.out.println("Resolve failed." + tds);
-
-}
-
-} else {
-
-System.out.println("Collect failed : " + tds);
-
-}
-
-
+            System.out.println( "Block named : " + nom );
+            System.out.println( bloc );
+            SymbolTable tds = new SymbolTable();
+            if (bloc.collectAndPartialResolve(tds)) {
+                System.out.println("Collect succeeded : " + tds);
+                if (bloc.completeResolve(tds)) {
+                    System.out.println("Resolve succeeded.");
+                    if (bloc.checkType()) {
+                        System.out.println("CheckType succeeded.");
+                        System.out.println("Test");
+                        Fragment code = bloc.getCode(new TAMFactoryImpl());
+                        System.out.println("Test");
+                        System.out.println( "Generated code:" );
+                        System.out.println( code );
+                        File file = new File(parser.getName() + "_tam");
+                        PrintStream printer = null;
+                        try {
+                            printer = new PrintStream( new FileOutputStream(file) );
+                            printer.println( code );
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                    System.out.println("checkType failed." + tds);
+                    }
+                } else {
+                System.out.println("Resolve failed." + tds);
+                }
+            }
+            else {
+            System.out.println("Collect failed : " + tds);
+            }
+            
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Program",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

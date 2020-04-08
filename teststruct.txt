@@ -1,7 +1,7 @@
 teststruct {
 
 	struct Point { int x; int y;} p = { 1, 2};
-         int i = p.x + p.y;
-
+    int i = p.x + p.y;
+    print i+1;
 }
 
