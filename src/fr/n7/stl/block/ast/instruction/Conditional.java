@@ -67,9 +67,7 @@ public class Conditional implements Instruction {
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean resultat;
-
 		if(this.condition.completeResolve(_scope)){
-
 			resultat = this.thenBranch.completeResolve(_scope);
 			if(this.elseBranch!=null) {
 				if (this.elseBranch.completeResolve(_scope)) {
@@ -77,12 +75,8 @@ public class Conditional implements Instruction {
 				}
 			}
 			return resultat;
-
-
 		}
-		else{
-			return false;
-		}
+		return false;
 	}
 
 	/* (non-Javadoc)

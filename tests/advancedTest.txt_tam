@@ -1,0 +1,84 @@
+LOADL 47
+LOADL 53
+LOADL 0
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@520a3426
+LOAD (2) 0[SB]
+POP (0) 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@18eed359
+LOAD (2) 0[SB]
+POP (1) 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3e9b1010
+;(a * b)
+;((a * b) != test)
+BEGWhile_1:
+LOAD (1) 3[SB]
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6c3708b3
+LOAD (1) 4[SB]
+LOADI (1)
+SUBR IMul
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@335eadca
+LOAD (1) 2[SB]
+LOADI (1)
+SUBR INeq
+JUMPIF (0) ENDWhile_1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@731a74c
+;(a > b)
+LOAD (1) 3[SB]
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@369f73a2
+LOAD (1) 4[SB]
+LOADI (1)
+SUBR IGtr
+JUMPIF (0) elseBranch2
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1f28c152
+;(b - a)
+LOAD (1) 4[SB]
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7d907bac
+LOAD (1) 3[SB]
+LOADI (1)
+SUBR ISub
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7791a895
+LOAD (1) 0[SB]
+LOADA 3[SB]
+STOREI (1)
+JUMP endCondition2
+elseBranch2:
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3a5ed7a6
+;(b - a)
+LOAD (1) 4[SB]
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6325a3ee
+LOAD (1) 3[SB]
+LOADI (1)
+SUBR ISub
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1d16f93d
+LOAD (1) 0[SB]
+LOADA 4[SB]
+STOREI (1)
+endCondition2:
+JUMP BEGWhile_1
+ENDWhile1:
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@67b92f0a
+LOAD (1) 3[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@2b9627bc
+;(res == test)
+LOAD (1) 5[SB]
+LOADI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@65e2dbf3
+LOAD (1) 2[SB]
+LOADI (1)
+SUBR IEq
+JUMPIF (0) elseBranch3
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4f970963
+LOAD (1) 4[SB]
+LOADA 5[SB]
+STOREI (1)
+JUMP endCondition3
+elseBranch3:
+endCondition3:
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@61f8bee4
+LOAD (1) 5[SB]
+SUBR IOut
+
