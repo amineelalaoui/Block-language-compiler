@@ -71,8 +71,10 @@ public class Conditional implements Instruction {
 		if(this.condition.completeResolve(_scope)){
 
 			resultat = this.thenBranch.completeResolve(_scope);
-			if(this.elseBranch.completeResolve(_scope)){
-				resultat &= this.elseBranch.completeResolve(_scope);
+			if(this.elseBranch!=null) {
+				if (this.elseBranch.completeResolve(_scope)) {
+					resultat &= this.elseBranch.completeResolve(_scope);
+				}
 			}
 			return resultat;
 
