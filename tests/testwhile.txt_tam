@@ -1,13 +1,13 @@
 LOADL 2
 ;fr.n7.stl.block.ast.expression.accessible.VariableAccess@ff5b51f
 ;(i < 5)
-BEGWhile_1:
+BEGWhile_1
 LOAD (1) 0[SB]
 LOADI (1)
 LOADL 5
 SUBR ILss
 JUMPIF (0) ENDWhile_1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5025a98f
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4b952a2d
 ;(i + 1)
 LOAD (1) 0[SB]
 LOADI (1)
@@ -16,8 +16,8 @@ SUBR IAdd
 LOADA 0[SB]
 STOREI (1)
 JUMP BEGWhile_1
-ENDWhile1:
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@49993335
+ENDWhile1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3159c4b8
 LOAD (1) 0[SB]
 SUBR IOut
 
