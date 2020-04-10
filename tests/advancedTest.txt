@@ -1,20 +1,5 @@
-pgcd {
-    <int, int> c = {47, 53};
-    int test = 0;
-    int a = fst c;
-    int b = snd c;
-    while( (a * b)!= test){
-        if(a > b){
-            int na = b - a;
-            a = na;
-        }  else {
-            int nb = b - a;
-            b = nb;
-        }
-    }
-    int res = a;
-    if(res == test){
-        res = b;
-    }
-    print res;
-}
+test{
+   int x = 0;
+   x = 15;
+   print x;
+ }

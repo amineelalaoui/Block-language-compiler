@@ -117,7 +117,6 @@ public class Block {
 	 * @return Synthesized AST for the generated TAM code.
 	 */
 	public Fragment getCode(TAMFactory _factory) {
-		allocateMemory(Register.SB,0);
 		Fragment _frag = new FragmentImpl();
 		for(Instruction ins : instructions){
 			_frag.append(ins.getCode(_factory));
