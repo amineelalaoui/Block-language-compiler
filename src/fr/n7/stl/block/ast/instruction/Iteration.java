@@ -80,11 +80,11 @@ public class Iteration implements Instruction {
 		Fragment fragment = _factory.createFragment();
 		int id = _factory.createLabelNumber();
 		fragment.append(condition.getCode(_factory));
-		fragment.addPrefix("begin_While_"+id);
-		fragment.add(_factory.createJumpIf("end_While_"+id,0));
+		fragment.addPrefix("begin_while_"+id);
+		fragment.add(_factory.createJumpIf("end_while_"+id,0));
 		fragment.append(body.getCode(_factory));
-		fragment.add(_factory.createJump("begin_While_"+id));
-		fragment.addSuffix("end_While_"+id);
+		fragment.add(_factory.createJump("begin_while_"+id));
+		fragment.addSuffix("end_while_"+id);
 		return fragment;
 	}
 
