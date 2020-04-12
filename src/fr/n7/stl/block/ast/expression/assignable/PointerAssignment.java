@@ -31,11 +31,8 @@ public class PointerAssignment extends AbstractPointer implements AssignableExpr
 	public Fragment getCode(TAMFactory _factory) {
 
 		Fragment frag = _factory.createFragment();
-
 		frag.append(pointer.getCode(_factory));
-
 		frag.add(_factory.createLoadI(this.getType().length()));
-
 		return frag;
 
 

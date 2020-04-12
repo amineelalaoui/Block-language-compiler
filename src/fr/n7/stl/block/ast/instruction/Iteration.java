@@ -76,7 +76,7 @@ public class Iteration implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-
+		System.out.println(condition.getClass());
 		Fragment fragment = _factory.createFragment();
 		int id = _factory.createLabelNumber();
 		fragment.append(condition.getCode(_factory));
