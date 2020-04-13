@@ -158,19 +158,11 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-//		Fragment frag = _factory.createFragment();
-//
-//		//frag.add(_factory.createPush(this.getType().length()));
-//
-//		frag.append(value.getCode(_factory));
-//
-//		System.out.println(this.getRegister()) ;
-//
-//		//frag.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
-//
-//		return frag;
-
-		return value.getCode(_factory);
+		Fragment frag = _factory.createFragment();
+		frag.add(_factory.createPush(this.getType().length()));
+		frag.append(value.getCode(_factory));
+		frag.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
+		return frag;
 
 	}
 
