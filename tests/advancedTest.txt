@@ -1,5 +1,7 @@
 test{
-   int x = 0;
-   x = 15;
-   print x;
+   int x=5;
+   if(x==5){
+        print "true";
+   }
+   print "end";
  }
