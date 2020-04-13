@@ -112,11 +112,11 @@ public class Conditional implements Instruction {
 		frag.add(_factory.createJumpIf("elseBranch"+ idCond,0));
 		frag.append(thenBranch.getCode(_factory));
 		frag.add(_factory.createJump("endCondition"+idCond));
-		frag.addSuffix("elseBranch"+idCond+":");
+		frag.addSuffix("elseBranch"+idCond);
 		if(elseBranch !=null) {
 			frag.append(elseBranch.getCode(_factory));
 		}
-		frag.addSuffix("endCondition"+idCond+":");
+		frag.addSuffix("endCondition"+idCond);
 
 		return frag;
 //
