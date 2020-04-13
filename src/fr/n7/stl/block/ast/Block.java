@@ -123,7 +123,7 @@ public class Block {
 			System.out.println(ins);
 			_frag.append(ins.getCode(_factory));
 		}
-		_frag.add(_factory.createHalt());
+		//_frag.add(_factory.createHalt());
 		return _frag;
 	}
 	

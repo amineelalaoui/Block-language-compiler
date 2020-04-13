@@ -128,9 +128,10 @@ Program ::= UL_Identificateur:nom Bloc:bloc
                     if (bloc.checkType()) {
                         System.out.println("CheckType succeeded.");
                         Fragment code = bloc.getCode(new TAMFactoryImpl());
+                        code.add((new TAMFactoryImpl()).createHalt());
                         System.out.println( "Generated code:" );
                         System.out.println( code );
-                        File file = new File("genrated/"+parser.getName() + "_tam");
+                        File file = new File(parser.getName() + "_tam");
                         PrintStream printer = null;
                         try {
                             printer = new PrintStream( new FileOutputStream(file) );
