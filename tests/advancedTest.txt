@@ -1,7 +1,8 @@
 test{
    int x=5;
    if(x==5){
-        print "true";
+        String res = "true";
+        print res;
    }
    print "end";
  }

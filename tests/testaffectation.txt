@@ -1,6 +1,5 @@
 testaffectation {
-
 	int i = 7;
 	i = i+2;
-
+	print i;
 }

@@ -1,5 +1,5 @@
 pgcd {
-    <int,int> c = {47,53};
+    <int,int> c = {20,150};
     const int test = 0;
     int a = fst c;
     int b = snd c;
@@ -16,5 +16,4 @@ pgcd {
     if (res == test) {
         res = b;
     }
-    print res ;
 }

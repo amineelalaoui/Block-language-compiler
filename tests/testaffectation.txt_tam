@@ -1,10 +1,15 @@
+PUSH 1
 LOADL 7
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5bcab519
+STORE (1) 0[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@56ef9176
 ;(i + 2)
 LOAD (1) 0[SB]
-LOADI (1)
 LOADL 2
 SUBR IAdd
 LOADA 0[SB]
 STOREI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@25bbe1b6
+LOAD (1) 0[SB]
+SUBR IOut
+HALT
 
