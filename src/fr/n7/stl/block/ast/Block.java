@@ -120,8 +120,10 @@ public class Block {
 		allocateMemory(Register.SB,0);
 		Fragment _frag = new FragmentImpl();
 		for(Instruction ins : instructions){
+			System.out.println(ins);
 			_frag.append(ins.getCode(_factory));
 		}
+		//_frag.add(_factory.createHalt());
 		return _frag;
 	}
 	

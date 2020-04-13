@@ -75,6 +75,7 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 		VariableDeclaration vd = (VariableDeclaration) this.declaration;
 		frag.add(_factory.createLoadA(vd.getRegister(), vd.getOffset()));
 
-		return frag;	}
+		return frag;
+	}
 
 }

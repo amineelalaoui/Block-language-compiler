@@ -95,13 +95,12 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		if(!_local.accepts(this)){
+		if(!_scope.accepts(this)){
 			Logger.error("Error : " + this.name + " already exists");
 			return false;
 		}
-		_local.register(this);
-		return value.collectAndPartialResolve(new SymbolTable(_scope));
+		_scope.register(this);
+		return value.collectAndPartialResolve(_scope);
 	}
 	
 	/* (non-Javadoc)
@@ -145,8 +144,7 @@ public class ConstantDeclaration implements Instruction, Declaration {
 	public Fragment getCode(TAMFactory _factory) {
 
 		Fragment fragment = _factory.createFragment();
-		//return value.getCode(_factory);
-
+		fragment.append(value.getCode(_factory));
 		return  fragment;
 	}
 

@@ -1,9 +1,0 @@
-LOADL 15
-LOADL 16
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@2626b418
-LOAD (2) 0[SB]
-POP (0) 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5a07e868
-LOAD (2) 0[SB]
-POP (1) 1
-
