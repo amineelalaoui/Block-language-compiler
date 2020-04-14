@@ -75,8 +75,13 @@ public class Printer implements Instruction {
 		Fragment frag = _factory.createFragment();
 
 		frag.append(parameter.getCode(_factory));
-		frag.add(Library.IOut);
+		switch((AtomicType) parameter.getType()){
+			case IntegerType : frag.add(Library.IOut); break;
+			case StringType: frag.add(Library.SOut); break;
+			case BooleanType: frag.add(Library.BOut); break;
+		}
 
-		return frag;	}
+		return frag;
+	}
 
 }

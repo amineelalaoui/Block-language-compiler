@@ -1,24 +1,42 @@
 PUSH 1
 LOADL 7
 STORE (1) 0[SB]
+<<<<<<< HEAD
 ;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27bc2616
+=======
+PUSH 1
+LOADL 2
+STORE (1) 1[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6adede5
+>>>>>>> origin/master
 ;(i == 7)
 LOAD (1) 0[SB]
 LOADL 7
 SUBR IEq
 JUMPIF (0) elseBranch1
+<<<<<<< HEAD
 PUSH 1
 LOADL 2
 STORE (1) 0[SB]
 ;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3941a79c
+=======
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31dc339b
+>>>>>>> origin/master
 ;(i + 1)
 LOAD (1) 0[SB]
 LOADL 1
 SUBR IAdd
+<<<<<<< HEAD
 LOADA 0[SB]
 STOREI (1)
 ;fr.n7.stl.block.ast.expression.accessible.VariableAccess@506e1b77
 LOAD (1) 0[SB]
+=======
+LOADA 1[SB]
+STOREI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@544fe44c
+LOAD (1) 1[SB]
+>>>>>>> origin/master
 SUBR IOut
 JUMP endCondition1
 elseBranch1

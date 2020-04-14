@@ -6,7 +6,7 @@ class Driver {
 		Parser parser = null;
 		if (args.length == 0) {
 
-			parser = new Parser( "tests/advancedTest.txt" );
+			parser = new Parser( "tests/pgcd.txt" );
 			parser.parse();
 		} else {
 			for (String name : args) {

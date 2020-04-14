@@ -66,15 +66,9 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		boolean resultat;
 		if(this.condition.completeResolve(_scope)){
-			resultat = this.thenBranch.completeResolve(_scope);
-			if(this.elseBranch!=null) {
-				if (this.elseBranch.completeResolve(_scope)) {
-					resultat &= this.elseBranch.completeResolve(_scope);
-				}
-			}
-			return resultat;
+			boolean result = this.thenBranch.completeResolve(_scope);
+			return this.elseBranch!=null ? result && this.elseBranch.completeResolve(_scope) : result;
 		}
 		return false;
 	}
@@ -104,7 +98,6 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-
 		Fragment frag = _factory.createFragment();
 		int idCond = _factory.createLabelNumber();
 		System.out.println(condition == null);
@@ -117,8 +110,6 @@ public class Conditional implements Instruction {
 			frag.append(elseBranch.getCode(_factory));
 		}
 		frag.addSuffix("endCondition"+idCond);
-
 		return frag;
-//
  }
 }

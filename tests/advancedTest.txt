@@ -1,7 +1,4 @@
 test{
-   int x=5;
-   if(x==5){
-        print "true";
-   }
-   print "end";
- }
+    boolean test = true;
+    print test;
+}

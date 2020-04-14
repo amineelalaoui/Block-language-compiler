@@ -1,12 +1,33 @@
 PUSH 1
+<<<<<<< HEAD
 LOADL 2
+=======
+LOADL 125
+>>>>>>> origin/master
 STORE (1) 0[SB]
 PUSH 1
 LOADA 0[SB]
 STORE (1) 1[SB]
+<<<<<<< HEAD
 LOADL 3
 LOADA 1[SB]
 LOADI (1)
 STOREI (1)
+=======
+LOAD (1) 1[SB]
+LOADI (1)
+SUBR IOut
+;((*ptr) + 1)
+LOAD (1) 1[SB]
+LOADI (1)
+LOADL 1
+SUBR IAdd
+LOADA 1[SB]
+LOADI (1)
+STOREI (1)
+LOAD (1) 1[SB]
+LOADI (1)
+SUBR IOut
+>>>>>>> origin/master
 HALT
 

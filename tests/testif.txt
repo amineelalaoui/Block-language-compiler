@@ -1,10 +1,10 @@
 testif {
 
 	int i = 7;
-
+    int j = 2;
 	if (i == 7) {
-		int j = 2;
 		j = i + 1;
+		print j;
 	} else {
 		boolean k = true;
 	}
