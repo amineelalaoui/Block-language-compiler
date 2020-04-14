@@ -1,20 +1,7 @@
 PUSH 1
-LOADL 5
 STORE (1) 0[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@ff5b51f
-;(x == 5)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@42d80b78
 LOAD (1) 0[SB]
-LOADL 5
-SUBR IEq
-JUMPIF (0) elseBranch1
-PUSH 1
-STORE (1) 0[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4b952a2d
-LOAD (1) 0[SB]
-SUBR IOut
-JUMP endCondition1
-elseBranch1
-endCondition1
-SUBR IOut
+SUBR SOut
 HALT
 

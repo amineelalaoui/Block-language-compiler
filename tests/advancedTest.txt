@@ -1,8 +1,4 @@
 test{
-   int x=5;
-   if(x==5){
-        String res = "true";
-        print res;
-   }
-   print "end";
- }
+    boolean test = true;
+    print test;
+}
