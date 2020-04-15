@@ -60,6 +60,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 		this.name = _name;
 		this.type = _type;
 		this.value = _value;
+		System.out.println("value : " + value.getClass());
 	}
 
 	/* (non-Javadoc)

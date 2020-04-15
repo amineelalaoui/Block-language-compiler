@@ -74,9 +74,7 @@ public class ArrayAllocation implements Expression {
 	public Fragment getCode(TAMFactory _factory) {
 
 		Fragment fragment = this.size.getCode(_factory);
-
 		fragment.add(_factory.createLoadL(this.element.length()));
-
 		fragment.add(Library.IMul);
 		fragment.add(Library.MAlloc);
 		return fragment;

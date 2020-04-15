@@ -31,20 +31,14 @@ public class ArrayAccess extends AbstractArray implements AccessibleExpression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-
-		Fragment frag = _factory.createFragment();
-
-		frag.add(_factory.createLoadL(this.getType().length()));
-
-		frag.append(this.index.getCode(_factory));
-
-		frag.add(Library.IMul);
-
-		frag.add(Library.IAdd);
-
-		frag.add(_factory.createLoadI(this.getType().length()));
-
-		return frag;
+		Fragment fragment = _factory.createFragment();
+		fragment.append(this.array.getCode(_factory));
+		fragment.append(this.index.getCode(_factory));
+		fragment.add(_factory.createLoadL(this.getType().length()));
+		fragment.add(Library.IMul);
+		fragment.add(Library.IAdd);
+		fragment.add(_factory.createLoadI(this.getType().length()));
+		return fragment;
 	}
 
 }

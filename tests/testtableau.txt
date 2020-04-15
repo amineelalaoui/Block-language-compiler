@@ -1,6 +1,9 @@
-testtableau{
-
-int tab[] = new int[2];
-tab[1]=2;
-print(tab[1]);
-}
+ testtableau{
+    int t[] = new int[4];
+    t[3] = 4;
+    int i = t[3];
+    t[1] = 5;
+    int j = t[1];
+    print i;
+    print j;
+ }

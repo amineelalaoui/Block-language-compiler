@@ -1,19 +1,22 @@
 pgcd {
-    <int,int> c = {20,150};
+    <int,int> c = {47,53};
     const int test = 0;
-    int a = fst c;
-    int b = snd c;
-    while (a * b != test) {
-        if ( a > b ) {
-            int na = a-b;
-            a = na;
+    int x = fst c;
+    int y = snd c;
+    int *a = &x;
+    int *b = &y;
+    while (*a * *b != test) {
+        if ( (*a) > (*b) ) {
+            int na = (*a)-(*b);
+            a = &na;
         } else {
-            int nb = b-a;
-            b = nb;
+            int nb = (*b)-(*a);
+            b = &nb;
         }
     }
-    int res = a;
+    int res = *a;
     if (res == test) {
-        res = b;
+        res = *b;
     }
+    print res;
 }

@@ -3,5 +3,6 @@ testpointeur {
 	int *ptr = &v;
 	print *ptr;
 	*ptr = *ptr + 1;
+	int r = 160;
 	print *ptr;
 }
