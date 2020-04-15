@@ -1,0 +1,16 @@
+PUSH 4
+;(- 1)
+LOADL 1
+SUBR INeg
+;(- 2)
+LOADL 2
+SUBR INeg
+;(- 3)
+LOADL 3
+SUBR INeg
+;(- 4)
+LOADL 4
+SUBR INeg
+STORE (4) 0[SB]
+HALT
+

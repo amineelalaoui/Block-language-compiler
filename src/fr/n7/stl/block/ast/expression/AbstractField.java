@@ -60,4 +60,7 @@ public abstract class AbstractField implements Expression {
 		return record.getType();
 	}
 
+	public Expression getRecord() {
+		return record;
+	}
 }

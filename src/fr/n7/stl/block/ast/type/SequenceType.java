@@ -101,6 +101,7 @@ public class SequenceType implements Type {
 				}
 				return _result;
 			} else {
+				//System.out.println("SequenceType.checkType:" + _other.getClass());
 				if (_other instanceof RecordType) {
 					return this.compatibleWith(((RecordType)_other).erase());
 				} else {
@@ -112,7 +113,10 @@ public class SequenceType implements Type {
 							return false;
 						}
 					} else {
-						return false;
+						if (_other instanceof NamedType)
+							return this.compatibleWith(((NamedType) _other).getType());
+						else
+							return false;
 					}
 				}
 			}

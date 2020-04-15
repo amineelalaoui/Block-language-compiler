@@ -227,4 +227,8 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 		System.out.println("debug:Record.checkType");
 		return this;
 	}
+
+	public List<FieldDeclaration> getFields() {
+		return fields;
+	}
 }

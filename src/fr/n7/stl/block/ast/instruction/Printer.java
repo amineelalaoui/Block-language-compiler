@@ -56,7 +56,8 @@ public class Printer implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return parameter.getType().equalsTo(AtomicType.IntegerType) || parameter.getType().equalsTo(AtomicType.FloatingType) || parameter.getType().equalsTo(AtomicType.StringType);
+		return parameter.getType().equalsTo(AtomicType.IntegerType) || parameter.getType().equalsTo(AtomicType.FloatingType) || parameter.getType().equalsTo(AtomicType.StringType)
+				|| parameter.getType().equalsTo(AtomicType.BooleanType);
 	}
 
 	/* (non-Javadoc)

@@ -1,7 +1,8 @@
 PUSH 1
+LOADL 1
 STORE (1) 0[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@42d80b78
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@26653222
 LOAD (1) 0[SB]
-SUBR SOut
+SUBR BOut
 HALT
 
