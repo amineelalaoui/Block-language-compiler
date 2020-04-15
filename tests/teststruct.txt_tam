@@ -12,5 +12,13 @@ SUBR INeg
 LOADL 4
 SUBR INeg
 STORE (4) 0[SB]
+PUSH 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@490ab905
+LOAD (4) 0[SB]
+POP (0) 0
+POP (0) 4
+POP (0) 0
+POP (1) 1
+STORE (1) 4[SB]
 HALT
 

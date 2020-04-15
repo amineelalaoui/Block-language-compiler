@@ -43,25 +43,48 @@ public class FieldAccess extends AbstractField implements Expression {
 	public Fragment getCode(TAMFactory _factory) {
 		int length = 0;
 		Fragment _fragment = _factory.createFragment();
-		// TODO check the record class name before doing cast
-		if(record instanceof IdentifierAccess)
-			length = ((RecordType)((VariableAccess)((IdentifierAccess) record).expression).declaration.getType()).get(name).getType().length();
-		else{
-			FieldAccess _field = (FieldAccess) record;
-			IdentifierAccess _id =(IdentifierAccess)  _field.record;
-			NamedType _type = (NamedType) _id.getType();
-			RecordType _recType = (RecordType) _type.getDeclaration().getType();
-			if(_recType.get(name) == null){
-				List<FieldDeclaration> _fields = _recType.getFields();
-				if(_fields.contains(name))
-					length= _fields.get(_fields.indexOf("name")).getType().length();
-				else {
-					for (FieldDeclaration field : _fields) {
-						if(field.getType() instanceof RecordType)
-							length = ((RecordType) field.getType()).get(name).getType().length();
-						else if(field.getType() instanceof NamedType){
-							if(((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
-								length = ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType().length();
+		if(record instanceof IdentifierAccess) {
+			if (((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType)
+				length = ((RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType()).get(name).getType().length();
+		}
+		else if(record instanceof FieldAccess) {
+			if (((IdentifierAccess) ((FieldAccess) record).record).expression.getType() instanceof NamedType) {
+				FieldAccess _id = (FieldAccess) record;
+				IdentifierAccess _varAccess = (IdentifierAccess) _id.record;
+				NamedType _type = (NamedType) _varAccess.expression.getType();
+				RecordType _recType = (RecordType) _type.getDeclaration().getType();
+				if (_recType.get(name) == null) {
+					List<FieldDeclaration> _fields = _recType.getFields();
+					if (_fields.contains(name))
+						length = _fields.get(_fields.indexOf("name")).getType().length();
+					else {
+						for (FieldDeclaration field : _fields) {
+							if (field.getType() instanceof RecordType)
+								length = ((RecordType) field.getType()).get(name).getType().length();
+							else if (field.getType() instanceof NamedType) {
+								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
+									length = ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType().length();
+							}
+						}
+					}
+				}
+			} else {
+				FieldAccess _field = (FieldAccess) record;
+				IdentifierAccess _id = (IdentifierAccess) _field.record;
+				NamedType _type = (NamedType) _id.getType();
+				RecordType _recType = (RecordType) _type.getDeclaration().getType();
+				if (_recType.get(name) == null) {
+					List<FieldDeclaration> _fields = _recType.getFields();
+					if (_fields.contains(name))
+						length = _fields.get(_fields.indexOf("name")).getType().length();
+					else {
+						for (FieldDeclaration field : _fields) {
+							if (field.getType() instanceof RecordType)
+								length = ((RecordType) field.getType()).get(name).getType().length();
+							else if (field.getType() instanceof NamedType) {
+								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
+									length = ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType().length();
+							}
 						}
 					}
 				}
@@ -75,9 +98,33 @@ public class FieldAccess extends AbstractField implements Expression {
 
 	@Override
 	public Type getType() {
-		//TODO : Bug fix -> check instance of (getRecord & expression) if they are an instance of VariableAccess or IdentifierAccess
-		if(record instanceof IdentifierAccess)
-			return ((RecordType)((VariableAccess)((IdentifierAccess) record).expression).declaration.getType()).get(name).getType();
+		if(record instanceof IdentifierAccess) {
+			if(((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType)
+				return ((RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType()).get(name).getType();
+			else{
+				//instanceof namedtype
+				VariableAccess _access = ((VariableAccess) ((IdentifierAccess) record).expression);
+				NamedType _namedType = (NamedType) _access.declaration.getType();
+				RecordType _rectype = (RecordType) _namedType.getType();
+				if(_rectype.get(name)!=null)
+						return _rectype.get(name).getType();
+				else{
+					List<FieldDeclaration> _fields = _rectype.getFields();
+					if(_fields.contains(name))
+						return _fields.get(_fields.indexOf("name")).getType();
+					else {
+						for (FieldDeclaration field : _fields) {
+							if(field.getType() instanceof RecordType)
+								return ((RecordType) field.getType()).get(name).getType();
+							else if(field.getType() instanceof NamedType){
+								if(((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
+									return ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType();
+							}
+						}
+					}
+				}
+			}
+		}
 		else if(record instanceof FieldAccess){
 			FieldAccess _field = (FieldAccess) record;
 			IdentifierAccess _id =(IdentifierAccess)  _field.record;
