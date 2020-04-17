@@ -5,7 +5,10 @@ package fr.n7.stl.block.ast;
 
 import java.util.List;
 
+import com.sun.org.apache.regexp.internal.RE;
 import fr.n7.stl.block.ast.instruction.Instruction;
+import fr.n7.stl.block.ast.instruction.Return;
+import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
@@ -119,8 +122,20 @@ public class Block {
 	public Fragment getCode(TAMFactory _factory) {
 		allocateMemory(Register.SB,0);
 		Fragment _frag = new FragmentImpl();
+		FunctionDeclaration f = null;
 		for(Instruction ins : instructions){
+			System.out.println(ins);
+			if(ins instanceof FunctionDeclaration){
+
+				f = (FunctionDeclaration) ins;
+				continue;
+			}
 			_frag.append(ins.getCode(_factory));
+
+		}
+		if(f!=null){
+			_frag.add(_factory.createHalt());
+			_frag.append(f.getCode(_factory));
 		}
 		return _frag;
 	}

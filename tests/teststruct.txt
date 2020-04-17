@@ -1,14 +1,9 @@
-structblock {
-  typedef struct Pointi { int x; int y; } Point;
-  typedef struct Segmenti { Point ext1; Point ext2; } Segment;
-  Segment s = {{-1,-2},{-3,-4}};
-  print s.ext1.x;
-  print s.ext1.y;
-  print s.ext2.y;
-  print s.ext1.x;
-  int i = s.ext1.x + s.ext1.y;
-  int j = s.ext2.x + s.ext2.y;
-  print i;
-  print j;
-  print i+j;
+teststruct {
+
+	typedef struct Point { int x; int y;} Point ;
+	Point p = { 1, 2}
+    int i = p.x + p.y;
+    print i+1;
 }
+
+

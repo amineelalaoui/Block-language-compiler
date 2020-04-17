@@ -1,17 +1,23 @@
-testfunction {
+ pgcd {
+  const int test = 0;
+   int pgcd(int a , int b ) {
+     while (a * b != test) {
+       if ( a > b ) {
+ 	int na = a-b;
+ 	a = na;
+       } else {
+ 	int nb = b-a;
+ 	b = nb;
+       }
+     }
+     int res = a;
+     if (res == test) {
+       res = b;
+     }
+     return res;
+   }
 
-	int test(){
-		int i = 0;
-		int *ptr = &i;
-		int x = 10;
-		while(*ptr<5){
-		    x = x*2;
-		    i = i+1;
-		}
-		return x;
-	}
-    print test();
-
-
-
-}
+    int a = 47;
+    int b = 53;
+   print pgcd(a,b);
+ }

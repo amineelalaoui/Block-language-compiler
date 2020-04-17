@@ -1,9 +1,6 @@
- testtableau{
-    int t[] = new int[4];
-    t[3] = 4;
-    int i = t[3];
-    t[1] = 5;
-    int j = t[1];
-    print i;
-    print j;
- }
+testtableau{
+int t[] = new int[5];
+t[1] = 4;
+int i = t[1];
+print i ;
+}
