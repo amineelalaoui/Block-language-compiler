@@ -99,6 +99,11 @@ public class FunctionCall implements Expression {
 			for (Expression e : this.arguments) {
 				result = e.completeResolve(_scope) && result;
 			}
+			for(int i=0;i<=arguments.size();i++){
+				result &= arguments.get(i).getType().compatibleWith(function.getParameters().get(i).getType());
+				if(!result)
+					throw new SemanticsUndefinedException("arguments types missmatched with parameters type. Expected " + function.getParameters().get(i).getType() + " , got " + arguments.get(i).getType() );
+			}
 			return result;
 		}
 		else
