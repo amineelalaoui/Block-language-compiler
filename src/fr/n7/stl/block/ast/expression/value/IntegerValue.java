@@ -27,6 +27,15 @@ public class IntegerValue implements Value {
 		value = Integer.parseInt(_text);
 	}
 
+	/**
+	 * (non-Javadoc)
+	 *  used for debugging purposes
+	 * @return Integer
+	 */
+	public int getValue() {
+		return value;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

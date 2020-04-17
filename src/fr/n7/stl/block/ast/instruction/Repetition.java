@@ -59,7 +59,6 @@ public class Repetition implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-
 		return condition.getType().compatibleWith(AtomicType.BooleanType) && body.checkType();
 	}
 

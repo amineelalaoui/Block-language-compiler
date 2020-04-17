@@ -13,7 +13,7 @@ import fr.n7.stl.block.ast.type.declaration.FieldDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 
-import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,10 +42,87 @@ public class FieldAccess extends AbstractField implements Expression {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		int length = 0;
+		boolean _found = false;
+		int _lengthBypass = 0;
 		Fragment _fragment = _factory.createFragment();
-		if(record instanceof IdentifierAccess) {
-			if (((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType)
+		_fragment.append(this.record.getCode(_factory));
+		// record can be an instance of IdentifierAccess or FieldAccess
+		// Field access can have a recursive NamedType
+		if(record instanceof IdentifierAccess){
+			System.out.println("Identifier Access");
+			if(((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType) {
+				RecordType _record = (RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType();
+				length = _record.get(name).getType().length();
+				List<FieldDeclaration> _fields = _record.getFields();
+				for (int i = _fields.size() - 1; i >= 0; i--) {
+					System.out.println("test");
+					System.out.println(_fields.get(i).getName());
+					if (!_fields.get(i).getName().equals(name))
+						_lengthBypass += _fields.get(i).getType().length();
+					else
+						break;
+				}
+				System.out.println("Bypass value " + _lengthBypass);
+			}
+			else{
+				//we're dealing here with an instance of NamedType
+				NamedType _namedType = (NamedType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType();
+			}
+		}
+		else{
+			System.out.println("Field Access");
+			// record now is an instance of FieldAccess
+			// check if we're dealing with an instance of RecordType or NamedType ...
+			IdentifierAccess _idAccess = ((IdentifierAccess) ((FieldAccess) record).record);
+			if(_idAccess.expression.getType() instanceof NamedType){
+				// get the record type from the namedType
+				RecordType _record = ((RecordType) ((NamedType) _idAccess.expression.getType()).getDeclaration().getType());
+				if(_record.get(name)==null)
+					throw new SemanticsUndefinedException(name + " is undefined in " + _record.getName());
+				else{
+					List<FieldDeclaration> _fields = _record.getFields();
+					for(int i=_fields.size()-1; i>=0;i--){
+						int _localLength = _fields.get(i).getType().length();;
+						if(_fields.get(i).getName().equals(name)){
+							length = _localLength;
+							break;
+						}
+						else
+							_lengthBypass+=_localLength;
+					}
+				}
+			}
+			else{
+				// we're dealing with a RecordType instead of NamedType
+				RecordType _record = (RecordType) _idAccess.expression.getType();
+				if(!_record.get(name).getName().equals(name))
+					throw new SemanticsUndefinedException(name + " is undefined in " + _record.getName());
+				var _fields = _record.getFields();
+				Collections.reverse(_fields);
+				for(int i=_fields.size()-1; i>=0;i--){
+					int _localLength = _fields.get(i).getType().length();;
+					if(_fields.get(i).getName().equals(name)){
+						length = _localLength;
+						break;
+					}
+					else
+						_lengthBypass+=_localLength;
+				}
+			}
+
+		}
+		/*if(record instanceof IdentifierAccess) {
+			if (((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType) {
 				length = ((RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType()).get(name).getType().length();
+				List<FieldDeclaration> _fields =((RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType()).getFields();
+				Collections.reverse(_fields);
+				int i=0;
+				for(FieldDeclaration _field : _fields){
+					_found |= _field.getName().equals(name);
+					if(!_found)
+						_lengthBypass+=_field.getType().length();
+				}
+			}
 		}
 		else if(record instanceof FieldAccess) {
 			if (((IdentifierAccess) ((FieldAccess) record).record).expression.getType() instanceof NamedType) {
@@ -55,15 +132,33 @@ public class FieldAccess extends AbstractField implements Expression {
 				RecordType _recType = (RecordType) _type.getDeclaration().getType();
 				if (_recType.get(name) == null) {
 					List<FieldDeclaration> _fields = _recType.getFields();
-					if (_fields.contains(name))
-						length = _fields.get(_fields.indexOf("name")).getType().length();
+					Collections.reverse(_fields);
+					if (_fields.contains(name)) {
+						for(FieldDeclaration _field : _fields) {
+							_found |= _field.getName().equals(name);
+							if(_found)
+								length = _field.getType().length();
+							else
+								_lengthBypass+=_field.getType().length();
+						}
+					}
 					else {
 						for (FieldDeclaration field : _fields) {
-							if (field.getType() instanceof RecordType)
+							if (field.getType() instanceof RecordType) {
 								length = ((RecordType) field.getType()).get(name).getType().length();
+								_found |= field.getName().equals(name);
+								if(!_found)
+									_lengthBypass+=field.getType().length();
+								else break;
+							}
 							else if (field.getType() instanceof NamedType) {
-								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
+								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType) {
 									length = ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType().length();
+									_found |= field.getName().equals(name);
+									if(!_found)
+										_lengthBypass+=field.getType().length();
+									else break;
+								}
 							}
 						}
 					}
@@ -75,24 +170,39 @@ public class FieldAccess extends AbstractField implements Expression {
 				RecordType _recType = (RecordType) _type.getDeclaration().getType();
 				if (_recType.get(name) == null) {
 					List<FieldDeclaration> _fields = _recType.getFields();
-					if (_fields.contains(name))
+					Collections.reverse(_fields);
+					if (_fields.contains(name)) {
 						length = _fields.get(_fields.indexOf("name")).getType().length();
+						for (FieldDeclaration field : _fields) {
+							_found |= field.getName().equals(name);
+							if(!_found)
+								_lengthBypass+=field.getType().length();
+						}
+					}
 					else {
 						for (FieldDeclaration field : _fields) {
-							if (field.getType() instanceof RecordType)
+							if (field.getType() instanceof RecordType) {
 								length = ((RecordType) field.getType()).get(name).getType().length();
+								_found |= field.getName().equals(name);
+								if(!_found)
+									_lengthBypass+=field.getType().length();
+							}
 							else if (field.getType() instanceof NamedType) {
-								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
+								if (((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType) {
 									length = ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType().length();
+									_found |= field.getName().equals(name);
+									if(!_found)
+										_lengthBypass+=field.getType().length();
+								}
 							}
 						}
 					}
 				}
 			}
-		}
-		_fragment.append(this.record.getCode(_factory));
-		_fragment.add(_factory.createPop(0, 0));
-		_fragment.add(_factory.createPop(length, this.record.getType().length() - length ));
+		}*/
+
+		_fragment.add(_factory.createPop(0, _lengthBypass));
+		_fragment.add(_factory.createPop(length, this.record.getType().length() - length - _lengthBypass ));
 		return _fragment;
 	}
 

@@ -7,11 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.value.IntegerValue;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.SequenceType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -70,6 +73,7 @@ public class Sequence implements Expression {
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _result = true;
 		for (Expression _value : this.values) {
+			//System.out.println(((IntegerValue)_value).getValue());
 			_result = _result && _value.completeResolve(_scope);
 		}
 		return _result;
@@ -93,13 +97,10 @@ public class Sequence implements Expression {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
-
 		for(Expression value : this.values){
 			fragment.append(value.getCode(_factory));
-
 		}
-
 		return fragment;
-		}
+	}
 
 }

@@ -1,12 +1,15 @@
 /*teststruct {
 
-	struct Point { int x; int y;} p = { 1, 2};
-    int i = p.x + p.y;
-    print p.x;
-    print "\n";
+	struct Point { int x; int y;} p = { 4, 5};
+	int i = p.x + p.y;
     print p.y;
-}
-*/
+    print p.x;
+    print i;
+    print p.y;
+    print p.x;
+
+}*/
+
 test {
   typedef struct Pointi { int x; int y; } Point;
   typedef struct Segmenti { Point ext1; Point ext2; } Segment;
