@@ -78,7 +78,8 @@ public class FunctionCall implements Expression {
 			for (Expression e : this.arguments) {
 				result = e.collectAndPartialResolve(_scope) && result;
 			}
-			return result;
+
+			return result && arguments.size() == function.getParameters().size();
 		}
 		else
 			throw new SemanticsUndefinedException("Error : the function " + this.name + " doesnt exist");
