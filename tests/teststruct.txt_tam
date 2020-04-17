@@ -1,41 +1,89 @@
-PUSH 2
+PUSH 4
+;(- 1)
+LOADL 1
+SUBR INeg
+;(- 2)
+LOADL 2
+SUBR INeg
+;(- 3)
+LOADL 3
+SUBR INeg
+;(- 4)
 LOADL 4
-LOADL 5
-STORE (2) 0[SB]
-PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@ff5b51f
-;(p.x + p.y)
-LOAD (2) 0[SB]
+SUBR INeg
+STORE (4) 0[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31610302
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
 POP (0) 1
 POP (1) 0
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@25bbe1b6
-LOAD (2) 0[SB]
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@a67c67e
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
+POP (0) 0
+POP (1) 1
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3327bd23
+LOAD (4) 0[SB]
+POP (0) 0
+POP (2) 2
+POP (0) 0
+POP (1) 1
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4e1d422d
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
+POP (0) 1
+POP (1) 0
+SUBR IOut
+PUSH 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@66480dd7
+;(s.ext1.x + s.ext1.y)
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
+POP (0) 1
+POP (1) 0
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@52a86356
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
 POP (0) 0
 POP (1) 1
 SUBR IAdd
-STORE (1) 2[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3159c4b8
-LOAD (2) 0[SB]
+STORE (1) 4[SB]
+PUSH 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5ce81285
+;(s.ext2.x + s.ext2.y)
+LOAD (4) 0[SB]
 POP (0) 0
-POP (1) 1
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4bec1f0c
-LOAD (2) 0[SB]
+POP (2) 2
 POP (0) 1
 POP (1) 0
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@29ca901e
-LOAD (1) 2[SB]
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5649fd9b
-LOAD (2) 0[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@78c03f1f
+LOAD (4) 0[SB]
+POP (0) 0
+POP (2) 2
 POP (0) 0
 POP (1) 1
+SUBR IAdd
+STORE (1) 5[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5ec0a365
+LOAD (1) 4[SB]
 SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6adede5
-LOAD (2) 0[SB]
-POP (0) 1
-POP (1) 0
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4fe3c938
+LOAD (1) 5[SB]
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5383967b
+;(i + j)
+LOAD (1) 4[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@2ac273d3
+LOAD (1) 5[SB]
+SUBR IAdd
 SUBR IOut
 HALT
 
