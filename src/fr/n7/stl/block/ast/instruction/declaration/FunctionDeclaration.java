@@ -180,9 +180,13 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		return 0;
 	}
 
+	public Register getRegister() {
+		return register;
+	}
+
 	/* (non-Javadoc)
-	 * @see fr.n7.stl.block.ast.instruction.Instruction#getCode(fr.n7.stl.tam.ast.TAMFactory)
-	 */
+         * @see fr.n7.stl.block.ast.instruction.Instruction#getCode(fr.n7.stl.tam.ast.TAMFactory)
+         */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		System.out.println("visit");
