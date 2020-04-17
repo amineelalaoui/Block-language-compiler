@@ -111,7 +111,7 @@ public class ConstantDeclaration implements Instruction, Declaration {
 		SymbolTable _local = new SymbolTable(_scope);
 		if(_local.accepts(this)){
 			_local.accepts(this);
-			return value.completeResolve(_local) && type.resolve(_local);
+			return value.completeResolve(_local) && type.completeResolve(_local);
 		}
 		Logger.error("Error : " + this.name + " already exists" );
 		return false;

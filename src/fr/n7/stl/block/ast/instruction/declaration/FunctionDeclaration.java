@@ -140,13 +140,13 @@ public class FunctionDeclaration implements Instruction, Declaration {
 			_scope.register(this);
 			boolean _result = true;
 			for(ParameterDeclaration param : parameters){
-				_result = _result && param.type.resolve(_local);
+				_result = _result && param.type.completeResolve(_local);
 				if(_local.accepts(param))
 					_local.register(param);
 				else
 					return false;
 			}
-			return _result && body.completeResolve(_local) && type.resolve(_local);
+			return _result && body.completeResolve(_local) && type.completeResolve(_local);
 		}
 		return false;
 	}

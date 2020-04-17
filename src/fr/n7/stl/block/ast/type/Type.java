@@ -56,6 +56,6 @@ public interface Type {
 	 * type have been previously defined.
 
 	 */
-	public boolean resolve(HierarchicalScope<Declaration> _scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope);
 	
 }

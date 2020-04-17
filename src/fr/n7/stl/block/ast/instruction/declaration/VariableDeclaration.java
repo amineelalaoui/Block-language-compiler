@@ -126,7 +126,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(_scope.accepts(this)){
 			_scope.register(this);
-			this.type.resolve(_scope);
+			this.type.completeResolve(_scope);
 			return this.value.completeResolve(_scope);
 		}
 		else

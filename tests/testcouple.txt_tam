@@ -1,0 +1,22 @@
+PUSH 2
+LOADL 15
+LOADL 16
+STORE (2) 0[SB]
+PUSH 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27bc2616
+LOAD (2) 0[SB]
+POP (0) 1
+STORE (1) 2[SB]
+PUSH 1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3941a79c
+LOAD (2) 0[SB]
+POP (1) 1
+STORE (1) 3[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@506e1b77
+LOAD (1) 2[SB]
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4fca772d
+LOAD (1) 3[SB]
+SUBR IOut
+HALT
+

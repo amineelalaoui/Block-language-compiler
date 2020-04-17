@@ -102,9 +102,9 @@ public class CoupleType implements Type {
 	 * @see fr.n7.stl.block.ast.type.Type#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
-		boolean _first = this.first.resolve(_scope);
-		boolean _second = this.second.resolve(_scope);
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		boolean _first = this.first.completeResolve(_scope);
+		boolean _second = this.second.completeResolve(_scope);
 		return _first && _second;
 	}
 
