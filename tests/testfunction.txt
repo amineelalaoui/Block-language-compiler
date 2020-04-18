@@ -6,12 +6,11 @@
      int b = snd c;
      while (a * b != test) {
        if ( a > b ) {
-       int h = 0;
- 	 a=a-b;
+        int na  = a-b;
+ 	     a=na;
        } else {
-              int k = 0;
-
- 	 b = b-a;
+       int nb = b-a;
+ 	     b = nb;
        }
      }
      int res = a;
