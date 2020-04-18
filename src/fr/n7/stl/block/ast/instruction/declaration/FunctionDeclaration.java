@@ -159,27 +159,49 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		return body.checkType();
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.n7.stl.block.ast.instruction.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
-	 */
-	@Override
-	public int allocateMemory(Register _register, int _offset) {
-		/*this.register = _register;
-		this.offset = _offset;
-		int address = 0;
-		System.out.println("FunctionDeclaration:allocateMemory");
-		// Allocate the memory using stacks
-		Collections.reverse(parameters);
-		for(ParameterDeclaration param : parameters){
-			//TODO allocate memory for the functions params
-		}
-		return address;*/
-		this.register = _register;
-		this.offset = _offset;
-		this.body.allocateMemory(Register.LB, 3);
-		return 0;
+	public int getOffset() {
+		return offset;
 	}
 
+	/* (non-Javadoc)
+         * @see fr.n7.stl.block.ast.instruction.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
+         */
+	@Override
+//	public int allocateMemory(Register _register, int _offset) {
+//		/*this.register = _register;
+//		this.offset = _offset;
+//		int address = 0;
+//		System.out.println("FunctionDeclaration:allocateMemory");
+//		// Allocate the memory using stacks
+//		Collections.reverse(parameters);
+//		for(ParameterDeclaration param : parameters){
+//			//TODO allocate memory for the functions params
+//		}
+//		return address;*/
+//		this.register = _register;
+//		this.offset = _offset;
+//		this.body.allocateMemory(Register.LB, 3);
+//		return 0;
+//	}
+	public int allocateMemory(Register _register, int _offset) {
+
+		this.register = _register;
+		System.out.println(this.register);
+
+		//System.exit(0);
+
+		this.offset = _offset;
+		int _paramSize = 0;
+		// init parameters offset
+		for(int i = parameters.size()-1;i>=0;i--){
+			parameters.get(i).setOffset(-1*_paramSize);
+
+			_paramSize+=  parameters.get(i).getType().length();
+		}
+		body.allocateMemory(Register.LB,3);
+
+		return 0;
+	}
 	public Register getRegister() {
 		return register;
 	}
@@ -189,17 +211,26 @@ public class FunctionDeclaration implements Instruction, Declaration {
          */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		System.out.println("visit");
+
 		Fragment _frag = _factory.createFragment();
+
 		int id = _factory.createLabelNumber();
+
 		int paramSize = 1;
+
 		for(ParameterDeclaration param : parameters)
+
 			paramSize += param.getType().length();
+
 		_frag.append(body.getCode(_factory));
-		if(type.equalsTo(AtomicType.VoidType)){
+
+		if(type.equalsTo(AtomicType.VoidType)) {
+
 			_frag.add(_factory.createReturn(0, paramSize));
+
 		}
-		_frag.addPrefix("function_" + name + id + ":");
+		_frag.addPrefix("function_" + name);
+
 		return _frag;
 	}
 

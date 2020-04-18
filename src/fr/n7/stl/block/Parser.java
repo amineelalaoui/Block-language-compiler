@@ -6,6 +6,7 @@
 package fr.n7.stl.block;
 
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.impl.TAMFactoryImpl;
 import java_cup.runtime.*;
 import fr.n7.stl.block.Lexer;
@@ -763,6 +764,7 @@ class CUP$Parser$actions {
                     System.out.println("Resolve succeeded.");
                     if (bloc.checkType()) {
                         System.out.println("CheckType succeeded.");
+                        bloc.allocateMemory(Register.SB,0);
                         Fragment code = bloc.getCode(new TAMFactoryImpl());
                         code.add((new TAMFactoryImpl()).createHalt());
                         System.out.println( "Generated code:" );

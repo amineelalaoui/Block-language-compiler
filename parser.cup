@@ -127,6 +127,7 @@ Program ::= UL_Identificateur:nom Bloc:bloc
                     System.out.println("Resolve succeeded.");
                     if (bloc.checkType()) {
                         System.out.println("CheckType succeeded.");
+                        bloc.allocateMemory(Register.SB,0);
                         Fragment code = bloc.getCode(new TAMFactoryImpl());
                         code.add((new TAMFactoryImpl()).createHalt());
                         System.out.println( "Generated code:" );

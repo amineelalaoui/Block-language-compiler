@@ -14,6 +14,7 @@ import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -99,7 +100,7 @@ public class FunctionCall implements Expression {
 			for (Expression e : this.arguments) {
 				result = e.completeResolve(_scope) && result;
 			}
-			for(int i=0;i<=arguments.size();i++){
+			for(int i=0;i<arguments.size();i++){
 				result &= arguments.get(i).getType().compatibleWith(function.getParameters().get(i).getType());
 				if(!result)
 					throw new SemanticsUndefinedException("arguments types missmatched with parameters type. Expected " + function.getParameters().get(i).getType() + " , got " + arguments.get(i).getType() );
@@ -143,14 +144,13 @@ public class FunctionCall implements Expression {
 		if(arguments!=null){
 			for(Expression _param : arguments)
 				_frag.append(_param.getCode(_factory));
-
-			_frag.add(_factory.createCall("function_"+this.function.getName(), this.function.getRegister()));
-
-
-
-
 		}
-		//_frag.append(this.function.getCode(_factory));
+
+		_frag.add(_factory.createCall("function_"+this.function.getName(), this.function.getRegister()));
+
+
+
+	//	_frag.append(this.function.getCode(_factory));
 
 
 		return _frag;
