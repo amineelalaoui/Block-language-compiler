@@ -4,6 +4,7 @@
 package fr.n7.stl.block.ast.instruction.declaration;
 
 import fr.n7.stl.block.ast.scope.Declaration;
+import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Register;
 
@@ -79,7 +80,9 @@ public class ParameterDeclaration implements Declaration {
 	}
 
 	public void setOffset(int offset) {
-		this.offset = offset - type.length();
+
+			this.offset = offset - type.length();
+
 	}
 
 	public void setRegister(Register register) {

@@ -128,7 +128,7 @@ public class FieldAccess extends AbstractField implements Expression {
 				RecordType _record = (RecordType) _idAccess.expression.getType();
 				if(!_record.get(name).getName().equals(name))
 					throw new SemanticsUndefinedException(name + " is undefined in " + _record.getName());
-				var _fields = _record.getFields();
+				List<FieldDeclaration> _fields = _record.getFields();
 				Collections.reverse(_fields);
 				for(int i=_fields.size()-1; i>=0;i--){
 					int _localLength = _fields.get(i).getType().length();;

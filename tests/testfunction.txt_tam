@@ -1,39 +1,39 @@
-function_test1:
 PUSH 1
-LOADL 0
+LOADL 1
 STORE (1) 0[SB]
 PUSH 1
 LOADA 0[SB]
 STORE (1) 1[SB]
 PUSH 1
-LOADL 10
-STORE (1) 2[SB]
-;((*ptr) < 5)
-begin_while_2
-LOAD (1) 1[SB]
-LOADI (1)
 LOADL 5
-SUBR ILss
-JUMPIF (0) end_while_2
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@617faa95
-;(x * 2)
-LOAD (1) 2[SB]
-LOADL 2
-SUBR IMul
+STORE (1) 2[SB]
+PUSH 1
 LOADA 2[SB]
-STOREI (1)
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e127982
-;(i + 1)
-LOAD (1) 0[SB]
+STORE (1) 3[SB]
+PUSH 1
+LOADL 4
+STORE (1) 4[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@76ed5528
+LOAD (1) 1[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@2c7b84de
+LOAD (1) 4[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3fee733d
+LOAD (1) 3[SB]
+CALL (SB) function_id
+SUBR IOut
+HALT
+function_id
+LOAD (1) 0[LB]
+SUBR IOut
+LOAD (1) 4[SB]
+LOADI (1)
+SUBR IOut
+;((*pt) + 1)
+LOAD (1) 2[SB]
+LOADI (1)
 LOADL 1
 SUBR IAdd
-LOADA 0[SB]
-STOREI (1)
-JUMP begin_while_2
-end_while_2
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@60c6f5b
-LOAD (1) 2[SB]
 RETURN (1) 1
-RETURN (0) 1
+RETURN (0) 4
 HALT
 

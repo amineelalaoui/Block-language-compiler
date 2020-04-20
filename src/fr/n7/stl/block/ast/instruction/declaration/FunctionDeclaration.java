@@ -10,12 +10,14 @@ import java.util.List;
 
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.PointerAccess;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.instruction.Return;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -195,13 +197,34 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		// init parameters offset
 		for(int i = parameters.size()-1;i>=0;i--){
 			parameters.get(i).setRegister(this.register);
-			parameters.get(i).setOffset(-1*_paramSize);
+			System.out.println(	parameters.get(i).getName());
+			if(parameters.get(i).getType() instanceof PointerType){
+				System.out.println(parameters.get(i).getType().length());
+				//System.out.println(tailleListe(parameters));
+				//System.exit(0);
+				parameters.get(i).setOffset(1*_paramSize + tailleListe(parameters));}
 
-			_paramSize+=  parameters.get(i).getType().length();
+			else{
+				parameters.get(i).setOffset(-1*_paramSize);
+			}
+			System.out.println(	"parameters : "+parameters.get(i)+"offset : "+parameters.get(i).getOffset());
+			_paramSize-=  parameters.get(i).getType().length();
+
 		}
 		body.allocateMemory(Register.LB,3);
 
 		return 0;
+	}
+
+	int tailleListe( List<ParameterDeclaration> paramss){
+		int x = 0;
+		for (ParameterDeclaration param: paramss) {
+
+			x += param.getType().length();
+
+		}
+		return x;
+
 	}
 	public Register getRegister() {
 		return register;
