@@ -48,6 +48,14 @@ public class FieldDeclaration implements Declaration {
 	}
 
 	/**
+	 *
+	 * @param offset
+	 */
+	public void setOffset(int offset) {
+		this.offset = offset + type.length();
+	}
+
+	/**
 	 * Provide the offset of the field in a record.
 	 * @return Offset of the field.
 	 */

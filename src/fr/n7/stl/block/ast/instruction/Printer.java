@@ -9,6 +9,7 @@ import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.NamedType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
@@ -76,13 +77,29 @@ public class Printer implements Instruction {
 		Fragment frag = _factory.createFragment();
 
 		frag.append(parameter.getCode(_factory));
-		switch((AtomicType) parameter.getType()){
-			case IntegerType : frag.add(Library.IOut); break;
-			case StringType: frag.add(Library.SOut); break;
-			case BooleanType: frag.add(Library.BOut); break;
+		if(parameter.getType() instanceof AtomicType)
+			checkPrintType(frag,(AtomicType) parameter.getType());
+		else{
+			AtomicType _atomicType =(AtomicType) ((NamedType) parameter.getType()).getDeclaration().getType();
+			checkPrintType(frag,_atomicType);
+
 		}
 
 		return frag;
+	}
+
+	private void checkPrintType(Fragment frag,AtomicType type) {
+		switch (type) {
+			case IntegerType:
+				frag.add(Library.IOut);
+				break;
+			case StringType:
+				frag.add(Library.SOut);
+				break;
+			case BooleanType:
+				frag.add(Library.BOut);
+				break;
+		}
 	}
 
 }

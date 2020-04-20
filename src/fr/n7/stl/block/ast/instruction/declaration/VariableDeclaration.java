@@ -60,7 +60,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 		this.name = _name;
 		this.type = _type;
 		this.value = _value;
-		System.out.println("value : " + value.getClass());
 	}
 
 	/* (non-Javadoc)
@@ -113,7 +112,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 			return false;
 		}
 		else{
-
 			_scope.register(this);
 			return value.collectAndPartialResolve(_scope);
 		}
@@ -126,8 +124,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(_scope.accepts(this)){
 			_scope.register(this);
-			this.type.resolve(_scope);
-			return this.value.completeResolve(_scope);
+			return this.value.completeResolve(_scope) && this.type.resolve(_scope);
 		}
 		else
 			Logger.error("Error : previous declaration of " + name + " already exists");
@@ -139,10 +136,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		//System.out.println(value.getType().getClass());
-		System.out.println(type.getClass());
-		System.out.println("debug : " + value.getType().compatibleWith(type));
-		System.out.println(value.getType().getClass());
 		return value.getType().compatibleWith(type);
 	}
 
@@ -167,7 +160,6 @@ public class VariableDeclaration implements Declaration, Instruction {
 		frag.append(value.getCode(_factory));
 		frag.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
 		return frag;
-
 	}
 
 }

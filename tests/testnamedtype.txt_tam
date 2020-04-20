@@ -1,24 +1,27 @@
+PUSH 1
 LOADL 5
+STORE (1) 0[SB]
+PUSH 1
 LOADL 0
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@55d56113
+STORE (1) 1[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4bec1f0c
 ;(x < 5)
-BEGWhile_1:
+begin_while_1
 LOAD (1) 1[SB]
-LOADI (1)
 LOADL 5
 SUBR ILss
-JUMPIF (0) ENDWhile_1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@544fe44c
+JUMPIF (0) end_while_1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3327bd23
 ;(x + 1)
 LOAD (1) 1[SB]
-LOADI (1)
 LOADL 1
 SUBR IAdd
 LOADA 1[SB]
 STOREI (1)
-JUMP BEGWhile_1
-ENDWhile1:
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31610302
+JUMP begin_while_1
+end_while_1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4e1d422d
 LOAD (1) 1[SB]
 SUBR IOut
+HALT
 

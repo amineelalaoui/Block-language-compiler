@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.expression.accessible;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.type.ArrayType;
 import fr.n7.stl.block.ast.type.NamedType;
 import fr.n7.stl.block.ast.type.RecordType;
 import fr.n7.stl.block.ast.type.Type;
@@ -13,6 +14,7 @@ import fr.n7.stl.block.ast.type.declaration.FieldDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +32,6 @@ public class FieldAccess extends AbstractField implements Expression {
 	 */
 	public FieldAccess(Expression _record, String _name) {
 		super(_record, _name);
-		System.out.println(record.getClass() + ":" + name);
 	}
 
 
@@ -63,10 +64,23 @@ public class FieldAccess extends AbstractField implements Expression {
 				System.out.println("Bypass value " + _lengthBypass);
 			}
 			else{
+				RecordType _recTypr;
 				//we're dealing here with an instance of NamedType
-				NamedType _namedType = (NamedType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType();
-				RecordType _recTypr = (RecordType) _namedType.getDeclaration().getType();
-				System.out.println("fields of " + _namedType.getDeclaration().getName());
+				if(((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof NamedType) {
+					NamedType _namedType = (NamedType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType();
+					_recTypr = (RecordType) _namedType.getDeclaration().getType();
+				}
+				else{
+					//we're dealing with an instance of ArrayType
+					ArrayType _array = (ArrayType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType();
+					if(_array.getType() instanceof NamedType){
+						_recTypr = (RecordType)((NamedType) _array.getType()).getDeclaration().getType();
+					}
+					else
+						// we're dealing with an instance of record type
+						_recTypr = (RecordType) _array.getType();
+				}
+
 				_recTypr.getFields().forEach(System.out::println);
 				FieldDeclaration _target = _recTypr.get(name);
 				if(_target ==null)
@@ -135,14 +149,28 @@ public class FieldAccess extends AbstractField implements Expression {
 
 	@Override
 	public Type getType() {
+		//TODO check if name is defined and declared
 		if(record instanceof IdentifierAccess) {
 			if(((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType() instanceof RecordType)
 				return ((RecordType) ((VariableAccess) ((IdentifierAccess) record).expression).declaration.getType()).get(name).getType();
 			else{
 				//instanceof namedtype
 				VariableAccess _access = ((VariableAccess) ((IdentifierAccess) record).expression);
-				NamedType _namedType = (NamedType) _access.declaration.getType();
-				RecordType _rectype = (RecordType) _namedType.getType();
+				NamedType _namedType;
+				RecordType _rectype;
+				if(_access.declaration.getType() instanceof NamedType) {
+					_namedType = (NamedType) _access.declaration.getType();
+					_rectype = (RecordType) _namedType.getType();
+				}
+				else {
+					ArrayType _array = (ArrayType) _access.declaration.getType();
+					if(_array.getType() instanceof RecordType)
+						_rectype = (RecordType) _array.getType();
+					else{
+						// instance of named type
+						_rectype = (RecordType) ((NamedType) _array.getType()).getDeclaration().getType();
+					}
+				}
 				if(_rectype.get(name)!=null)
 						return _rectype.get(name).getType();
 				else{
@@ -177,7 +205,7 @@ public class FieldAccess extends AbstractField implements Expression {
 							return ((RecordType) field.getType()).get(name).getType();
 						else if(field.getType() instanceof NamedType){
 							if(((NamedType) field.getType()).getDeclaration().getType() instanceof RecordType)
-								return ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType();
+									return ((RecordType) ((NamedType) field.getType()).getDeclaration().getType()).get(name).getType();
 						}
 					}
 				}

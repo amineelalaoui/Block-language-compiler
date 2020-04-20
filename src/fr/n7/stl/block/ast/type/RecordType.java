@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.Sequence;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.Scope;
@@ -33,9 +34,16 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	public RecordType(String _name, Iterable<FieldDeclaration> _fields) {
 		this.name = _name;
 		this.fields = new LinkedList<FieldDeclaration>();
-		for (FieldDeclaration _field : _fields) {
+		int _paramSize = 0;
+		for (FieldDeclaration _field : _fields)
 			this.fields.add(_field);
-		}
+		//TODO to test if it work in resolve with all features.
+		/*for (FieldDeclaration _field : _fields) {
+			System.out.println(_field == null ? "null " : _field.getName() + " length : " + _field.getType());
+			this.fields.add(_field);
+			_field.setOffset(_paramSize);
+			_paramSize+=_field.getType().length();
+		}*/
 	}
 
 	/**
@@ -88,7 +96,7 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		return _other instanceof RecordType;
+		return _other instanceof RecordType || (_other instanceof SequenceType && fields.size() == ((SequenceType) _other).length());
 	}
 
 	/* (non-Javadoc)
@@ -205,9 +213,13 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	@Override
 	public boolean resolve(HierarchicalScope<Declaration> _scope) {
 		boolean _result = true;
+		int _paramSize = 0;
 		for (FieldDeclaration f : this.fields) {
 			_result = _result && f.getType().resolve(_scope);
+			f.setOffset(_paramSize);
+			_paramSize+=f.getType().length();
 		}
+
 		return _result;
 	}
 

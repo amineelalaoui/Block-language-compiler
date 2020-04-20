@@ -1,0 +1,4 @@
+booleanTest{
+    boolean x = true;
+    print x;
+}

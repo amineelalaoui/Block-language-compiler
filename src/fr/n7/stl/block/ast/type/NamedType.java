@@ -60,10 +60,19 @@ public class NamedType implements Type {
 	@Override
 	public boolean compatibleWith(Type _other) {
 		if (_other instanceof NamedType) {
+			if(name.equals(((NamedType) _other).name)){
+				declaration = ((NamedType) _other).declaration ;
+				return true;
+			}
 			return (this.declaration.getName().equals(((NamedType) _other).declaration.getName()));
-		} else {
-			return (this.declaration.getType().compatibleWith(_other));
 		}
+		else if(_other instanceof AtomicType) {
+			if(this.getDeclaration().getType() instanceof NamedType)
+				return _other.equalsTo(((NamedType) this.getDeclaration().getType()).getDeclaration().getType());
+			return _other.equalsTo(this.getDeclaration().getType());
+		}
+		return (this.declaration.getType().compatibleWith(_other));
+
 	}
 
 	/*
@@ -105,6 +114,7 @@ public class NamedType implements Type {
 	 */
 	@Override
 	public int length() {
+		System.out.println(name);
 		return this.declaration.getType().length();
 	}
 

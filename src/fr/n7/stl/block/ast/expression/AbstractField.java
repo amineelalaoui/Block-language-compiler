@@ -1,8 +1,12 @@
 package fr.n7.stl.block.ast.expression;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.NamedType;
+import fr.n7.stl.block.ast.type.PointerType;
+import fr.n7.stl.block.ast.type.RecordType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.block.ast.type.declaration.FieldDeclaration;
 
@@ -26,6 +30,33 @@ public abstract class AbstractField implements Expression {
 	public AbstractField(Expression _record, String _name) {
 		this.record = _record;
 		this.name = _name;
+	}
+
+	public FieldDeclaration getField() {
+		// TODO problem to access ext1 from here
+		if(field == null){
+			Type _recordType = record.getType();
+			if(_recordType instanceof RecordType)
+				return ((RecordType) _recordType).get(name);
+			else if(_recordType instanceof NamedType){
+				TypeDeclaration _typeDeclaration = ((NamedType) _recordType).getDeclaration();
+				if(_typeDeclaration.getType() instanceof RecordType) {
+					System.out.println(((RecordType) _typeDeclaration.getType()).get(name));
+					System.out.println(name);
+					System.out.println((RecordType) _typeDeclaration.getType());
+					return ((RecordType) _typeDeclaration.getType()).get(name);
+				}
+				else if(_typeDeclaration.getType() instanceof NamedType) {
+					System.out.println(((RecordType) ((NamedType) _typeDeclaration.getType()).getDeclaration().getType()).get(name));
+					return ((RecordType) ((NamedType) _typeDeclaration.getType()).getDeclaration().getType()).get(name);
+				}
+				else
+					throw new SemanticsUndefinedException("undefined instance of TypeDeclaration.getType() : found " + _typeDeclaration.getType().getClass());
+			}
+
+		}
+
+		return field;
 	}
 
 	/* (non-Javadoc)

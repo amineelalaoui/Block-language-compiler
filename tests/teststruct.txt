@@ -1,14 +1,25 @@
-structblock {
-  typedef struct Pointi { int x; int y; } Point;
-  typedef struct Segmenti { Point ext1; Point ext2; } Segment;
-  Segment s = {{-1,-2},{-3,-4}};
-  print s.ext1.x;
-  print s.ext1.y;
-  print s.ext2.y;
-  print s.ext1.x;
-  int i = s.ext1.x + s.ext1.y;
-  int j = s.ext2.x + s.ext2.y;
-  print i;
-  print j;
-  print i+j;
-}
+ test {
+   typedef struct Pointi { int x; int y; } Point;
+   typedef struct Segmenti { Point ext1; Point ext2; } Segment;
+   Segment s = {{-1,-2},{-3,-4}};
+   int x1 = s.ext1.x;
+   int y2 = s.ext2.y;
+   s.ext2.x = x1;
+   s.ext1.y = y2;
+ }
+
+/*test{
+    typedef struct point {
+        int x;
+        int y;
+        int *z;
+    } Point;
+    int r = 99;
+    Point p = {1,23,&r};
+    p.x = 5;
+    p.y = 122;
+    print p.x;
+    print p.y;
+    print *(p.z);
+}*/
+

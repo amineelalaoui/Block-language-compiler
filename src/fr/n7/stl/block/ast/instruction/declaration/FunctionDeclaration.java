@@ -169,6 +169,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		int _paramSize = 0;
 		// init parameters offset
 		for(int i = parameters.size()-1;i>=0;i--){
+			parameters.get(i).setRegister(this.register);
 			parameters.get(i).setOffset(-1*_paramSize);
 			_paramSize+=parameters.get(i).getType().length();
 		}

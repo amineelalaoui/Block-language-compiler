@@ -3,6 +3,9 @@
  */
 package fr.n7.stl.block.ast.type;
 
+import fr.n7.stl.block.ast.scope.Declaration;
+import fr.n7.stl.block.ast.scope.HierarchicalScope;
+
 /**
  * @author Marc Pantel
  *
@@ -39,5 +42,6 @@ public class PartialPointerType extends PointerType implements PartialType {
 			((PartialType) this.element).enrich(_type);
 		}
 	}
+
 
 }

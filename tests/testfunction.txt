@@ -1,6 +1,5 @@
 testfunction {
-
-	int test(){
+	void test(){
 		int i = 0;
 		int *ptr = &i;
 		int x = 10;
@@ -10,8 +9,5 @@ testfunction {
 		}
 		return x;
 	}
-    print test();
-
-
-
+    test();
 }

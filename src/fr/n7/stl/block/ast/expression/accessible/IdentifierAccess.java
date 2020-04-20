@@ -45,8 +45,6 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 		return this.name;
 	}
 
-	Function<Void,AbstractAccess> getExpression = (Void)->expression;
-
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
@@ -116,4 +114,11 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 		return this.expression.getCode(_factory);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
+	public AbstractAccess getExpression() {
+		return expression;
+	}
 }
