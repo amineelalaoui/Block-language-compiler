@@ -6,7 +6,7 @@ class Driver {
 		Parser parser = null;
 		if (args.length == 0) {
 
-			parser = new Parser( "tests/test68.bloc" );
+			parser = new Parser( "tests/test84.bloc" );
 			parser.parse();
 		} else {
 			for (String name : args) {

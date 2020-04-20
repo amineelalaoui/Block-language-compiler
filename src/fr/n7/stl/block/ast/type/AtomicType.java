@@ -47,7 +47,7 @@ public enum AtomicType implements Type {
 		else {
 			switch (this) {
 			case NullType : return ((_other != ErrorType) && (_other != VoidType));
-			case IntegerType: return (_other == FloatingType);
+			case IntegerType: return (_other == FloatingType) || (_other == BooleanType);
 			default: return false;
 			}
 		}

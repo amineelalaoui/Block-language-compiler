@@ -53,8 +53,15 @@ public class CoupleType implements Type {
 		else if(_other instanceof SequenceType){
 			if(((SequenceType) _other).getTypes().size()!=2)
 				throw new SemanticsUndefinedException(" Sequence must have two elements ");
-			else
-				return first.compatibleWith(((SequenceType) _other).getTypes().get(0)) && second.compatibleWith(((SequenceType) _other).getTypes().get(1));
+			else {
+				boolean _first = first.compatibleWith(((SequenceType) _other).getTypes().get(0));
+				if(!_first)
+					throw new SemanticsUndefinedException("Type mismatched");
+				boolean _second = second.compatibleWith(((SequenceType) _other).getTypes().get(1));
+				if(!_second)
+					throw new SemanticsUndefinedException("Type mismatched");
+				return true;
+			}
 		}
 		else {
 			return false;

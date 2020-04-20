@@ -1,0 +1,14 @@
+PUSH 2
+LOADL 1
+LOADL 1
+STORE (2) 0[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5f341870
+begin_while_1
+LOAD (2) 0[SB]
+POP (0) 1
+POP (1) 0
+JUMPIF (0) end_while_1
+JUMP begin_while_1
+end_while_1
+HALT
+
