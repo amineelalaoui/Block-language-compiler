@@ -96,7 +96,8 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		return _other instanceof RecordType || (_other instanceof SequenceType && fields.size() == ((SequenceType) _other).length());
+		System.out.println(_other.getClass());
+		return _other instanceof RecordType || (_other instanceof SequenceType && fields.size() == ((SequenceType) _other).length()) || _other instanceof AtomicType;
 	}
 
 	/* (non-Javadoc)
