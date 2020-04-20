@@ -6,11 +6,13 @@ package fr.n7.stl.block.ast.expression;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.block.ast.expression.assignable.AssignableExpression;
+import fr.n7.stl.block.ast.instruction.declaration.TypeDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Common elements between left (Assignable) and right (Expression) end sides of assignments. These elements
@@ -20,17 +22,17 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public abstract class AbstractConversion<TargetType> implements Expression {
 
-	protected TargetType target;
+	protected Expression target;
 	protected Type type;
 	protected String name;
 
-	public AbstractConversion(TargetType _target, String _type) {
+	public AbstractConversion(Expression _target, String _type) {
 		this.target = _target;
 		this.name = _type;
 		this.type = null;
 	}
 	
-	public AbstractConversion(TargetType _target, Type _type) {
+	public AbstractConversion(Expression _target, Type _type) {
 		this.target = _target;
 		this.name = null;
 		this.type = _type;
@@ -52,7 +54,9 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType undefined in TypeConversion.");
+
+		return this.type;
+
 	}
 	
 	/* (non-Javadoc)
@@ -60,7 +64,27 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collect undefined in TypeConversion.");
+		if(this.type == null) {
+			if (_scope.knows(this.name)) {
+				Declaration declaration = _scope.get(this.name);
+
+				if (declaration instanceof TypeDeclaration) {
+					this.type = ((TypeDeclaration) declaration).getType();
+					return this.target.collectAndPartialResolve(_scope);
+				} else {
+					Logger.error(this.name + " is not a declared type.");
+					this.target.collectAndPartialResolve(_scope);
+					return false;
+
+				}
+			} else {
+				Logger.error(this.name + " is not a declared type.");
+				this.target.collectAndPartialResolve(_scope);
+				return false;
+			}
+		}
+		return this.target.collectAndPartialResolve(_scope);
+
 	}
 
 	/* (non-Javadoc)
@@ -68,15 +92,37 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics resolve undefined in TypeConversion.");
-	}
+		if(this.type == null) {
+			if (_scope.knows(this.name)) {
+				Declaration declaration = _scope.get(this.name);
+
+				if (declaration instanceof TypeDeclaration) {
+					this.type = ((TypeDeclaration) declaration).getType();
+					System.out.println("abstract conversion 888 "+this.target.completeResolve(_scope));
+					return this.target.completeResolve(_scope);
+				} else {
+					Logger.error(this.name + " is not a declared type.");
+					this.target.completeResolve(_scope);
+					return false;
+
+				}
+			} else {
+				Logger.error(this.name + " is not a declared type.");
+				this.target.completeResolve(_scope);
+				return false;
+			}
+		}
+			 return this.target.completeResolve(_scope);
+
+			}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in TypeConversion.");
+
+			return this.target.getCode(_factory);
 	}
 
 }

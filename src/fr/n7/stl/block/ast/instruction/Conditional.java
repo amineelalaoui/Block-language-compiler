@@ -89,7 +89,9 @@ public class Conditional implements Instruction {
 		this.register = _register;
 		this.offset = _offset;
 
-		//TODO memory allocation
+		this.thenBranch.allocateMemory(_register,_offset);
+		if(elseBranch !=null)
+			elseBranch.allocateMemory(_register,_offset);
 		return 0;
 	}
 

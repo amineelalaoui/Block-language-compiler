@@ -6,6 +6,8 @@ package fr.n7.stl.block.ast;
 import java.util.List;
 
 import fr.n7.stl.block.ast.instruction.Instruction;
+import fr.n7.stl.block.ast.instruction.Return;
+import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
@@ -104,7 +106,7 @@ public class Block {
 	 */
 	public void allocateMemory(Register _register, int _offset) {
 		int _address =_offset ;
-		System.out.println(_register);
+	//	System.out.println(_register );
 		for(Instruction ins : instructions){
 			_address+= ins.allocateMemory(_register,_address);
 		}
@@ -117,10 +119,27 @@ public class Block {
 	 * @return Synthesized AST for the generated TAM code.
 	 */
 	public Fragment getCode(TAMFactory _factory) {
-		allocateMemory(Register.SB,0);
-		Fragment _frag = new FragmentImpl();
+		Fragment _frag = _factory.createFragment();
+		FunctionDeclaration f = null;
 		for(Instruction ins : instructions){
+			System.out.println(ins);
+			if(ins instanceof FunctionDeclaration){
+
+
+				f = (FunctionDeclaration) ins;
+
+				continue;
+			}
 			_frag.append(ins.getCode(_factory));
+
+		}
+		if(f!=null){
+			System.out.println(f.getRegister());
+		//	System.exit(0);
+		//			f.allocateMemory(f.getRegister(),f.getOffset());
+
+			_frag.add(_factory.createHalt());
+			_frag.append(f.getCode(_factory));
 		}
 		return _frag;
 	}

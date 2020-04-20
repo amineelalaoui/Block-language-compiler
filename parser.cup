@@ -127,6 +127,7 @@ Program ::= UL_Identificateur:nom Bloc:bloc
                     System.out.println("Resolve succeeded.");
                     if (bloc.checkType()) {
                         System.out.println("CheckType succeeded.");
+                        bloc.allocateMemory(Register.SB,0);
                         Fragment code = bloc.getCode(new TAMFactoryImpl());
                         code.add((new TAMFactoryImpl()).createHalt());
                         System.out.println( "Generated code:" );
@@ -271,6 +272,7 @@ Identifiant ::= UL_Identificateur:nom
 				{:
 					RESULT = new Pair<String,PartialType>( nom, null );
 				:}
+
 			| UL_Asterisque Identifiant:identifiant
 				{:
 					if (identifiant.getRight() == null) {
@@ -338,7 +340,7 @@ Declaration ::= Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_P
 					} else {
 						_type = ((PartialType)_type).complete( type );
  					}
- 					System.out.println("Declared function type : " + _type);
+ 					System.out.println("Declared function type (THIS FROM PARSER.cup)_ : " + _type);
 					RESULT = new FunctionDeclaration( identifiant.getLeft(), _type, parametres, corps);
 
 				:}
@@ -380,6 +382,7 @@ Instruction ::= Declaration:declaration
 				{:
 					RESULT = declaration;
 				:}
+
 			| Affectable:affectable UL_Egal Expression:expression UL_Point_Virgule
 				{:
 					RESULT = new Assignment( affectable, expression);

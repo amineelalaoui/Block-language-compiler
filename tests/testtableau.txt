@@ -1,9 +1,9 @@
- testtableau{
-    int t[] = new int[4];
-    t[3] = 4;
-    int i = t[3];
-    t[1] = 5;
-    int j = t[1];
-    print i;
-    print j;
- }
+test {
+int v = 1;
+int *ptr = &v;
+int j = *ptr;
+*ptr = 2;
+int t[] = new int[5];
+int i = t[3];
+t[3] = 4;
+}

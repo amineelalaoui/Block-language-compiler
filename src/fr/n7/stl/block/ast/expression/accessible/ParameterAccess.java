@@ -41,6 +41,7 @@ public class ParameterAccess extends AbstractAccess {
 
 		Fragment _frag = _factory.createFragment();
 		_frag.add(_factory.createLoad(Register.LB, declaration.getOffset(),declaration.getType().length()));
+
 		return _frag;
 	}
 

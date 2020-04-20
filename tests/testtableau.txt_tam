@@ -1,5 +1,5 @@
 PUSH 1
-LOADL 4
+LOADL 5
 LOADL 1
 SUBR IMul
 SUBR MAlloc
@@ -7,42 +7,20 @@ STORE (1) 0[SB]
 LOADL 4
 LOADA 0[SB]
 LOADI (1)
-LOADL 3
+LOADL 1
 LOADL 1
 SUBR IMul
 SUBR IAdd
 STOREI (1)
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5f2108b5
-LOAD (1) 0[SB]
-LOADL 3
+LOADL 1
 LOADL 1
 SUBR IMul
 SUBR IAdd
 LOADI (1)
 STORE (1) 1[SB]
-LOADL 5
-LOADA 0[SB]
-LOADI (1)
-LOADL 1
-LOADL 1
-SUBR IMul
-SUBR IAdd
-STOREI (1)
-PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31a5c39e
-LOAD (1) 0[SB]
-LOADL 1
-LOADL 1
-SUBR IMul
-SUBR IAdd
-LOADI (1)
-STORE (1) 2[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3f49dace
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27bc2616
 LOAD (1) 1[SB]
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@490ab905
-LOAD (1) 2[SB]
 SUBR IOut
 HALT
 

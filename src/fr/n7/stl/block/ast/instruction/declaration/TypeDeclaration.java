@@ -84,7 +84,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 		else
 		{
 			_scope.register(this);
-			this.type.resolve(_scope);
+			this.type.completeResolve(_scope);
 			return true;
 		}
 	}
@@ -114,7 +114,7 @@ public class TypeDeclaration implements Declaration, Instruction {
 	}
 
 	/* (non-Javadoc)
-	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
+	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.sl.tam.ast.Register, int)
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {

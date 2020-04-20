@@ -14,6 +14,7 @@ import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -71,32 +72,40 @@ public class FunctionCall implements Expression {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		System.out.println(_local);
-		if(checkFunctionDefinition(_local)){
-			boolean result = true;
-			for(Expression exp : arguments){
-				result = result && exp.collectAndPartialResolve(_local);
+		Declaration declaration = _scope.get(this.name);
+		boolean result = true;
+		if(declaration instanceof FunctionDeclaration) {
+			this.function = (FunctionDeclaration) declaration;
+			for (Expression e : this.arguments) {
+				result = e.collectAndPartialResolve(_scope) && result;
 			}
-			return result && function.collectAndPartialResolve(_local);
+
+			return result && arguments.size() == function.getParameters().size();
 		}
 		else
-			throw new SemanticsUndefinedException("Error : the function " + this.name +" doesnt exist");
+			throw new SemanticsUndefinedException("Error : the function " + this.name + " doesnt exist");
 
 	}
+
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#resolve(fr.n7.stl.block.ast.scope.HierarchicalScope)
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		SymbolTable _local = new SymbolTable(_scope);
-		if(checkFunctionDefinition(_local)){
-			boolean result = true;
-			for(Expression exp : arguments){
-				result = result && exp.completeResolve(_local);
+		Declaration declaration = _scope.get(this.name);
+		boolean result = true;
+		if(declaration instanceof FunctionDeclaration) {
+			this.function = (FunctionDeclaration) declaration;
+			for (Expression e : this.arguments) {
+				result = e.completeResolve(_scope) && result;
 			}
-			return result && function.completeResolve(_local);
+			for(int i=0;i<arguments.size();i++){
+				result &= arguments.get(i).getType().compatibleWith(function.getParameters().get(i).getType());
+				if(!result)
+					throw new SemanticsUndefinedException("arguments types missmatched with parameters type. Expected " + function.getParameters().get(i).getType() + " , got " + arguments.get(i).getType() );
+			}
+			return result;
 		}
 		else
 			throw new SemanticsUndefinedException("Error : the function " + this.name + " doesnt exist");
@@ -135,8 +144,15 @@ public class FunctionCall implements Expression {
 		if(arguments!=null){
 			for(Expression _param : arguments)
 				_frag.append(_param.getCode(_factory));
-			//_frag.append(this.function.getCode(_factory));
 		}
+
+		_frag.add(_factory.createCall("function_"+this.function.getName(), this.function.getRegister()));
+
+
+
+	//	_frag.append(this.function.getCode(_factory));
+
+
 		return _frag;
 	}
 
