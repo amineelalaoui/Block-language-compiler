@@ -272,6 +272,7 @@ Identifiant ::= UL_Identificateur:nom
 				{:
 					RESULT = new Pair<String,PartialType>( nom, null );
 				:}
+
 			| UL_Asterisque Identifiant:identifiant
 				{:
 					if (identifiant.getRight() == null) {
@@ -339,7 +340,7 @@ Declaration ::= Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_P
 					} else {
 						_type = ((PartialType)_type).complete( type );
  					}
- 					System.out.println("Declared function type : " + _type);
+ 					System.out.println("Declared function type (THIS FROM PARSER.cup)_ : " + _type);
 					RESULT = new FunctionDeclaration( identifiant.getLeft(), _type, parametres, corps);
 
 				:}
@@ -381,6 +382,7 @@ Instruction ::= Declaration:declaration
 				{:
 					RESULT = declaration;
 				:}
+
 			| Affectable:affectable UL_Egal Expression:expression UL_Point_Virgule
 				{:
 					RESULT = new Assignment( affectable, expression);
@@ -391,7 +393,6 @@ Instruction ::= Declaration:declaration
 				:}
 			| UL_Si UL_Parenthese_Ouvrante Expression:condition UL_Parenthese_Fermante Bloc:alors UL_Sinon Bloc:sinon
 				{:
-				    System.out.println("thiiiis "+ condition);
 					RESULT = new Conditional( condition, alors, sinon);
 				:}
 

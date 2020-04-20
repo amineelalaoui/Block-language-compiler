@@ -224,7 +224,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 
 		_frag.append(body.getCode(_factory));
 
-		if(type.equalsTo(AtomicType.VoidType)) {
+		if(!type.equalsTo(AtomicType.VoidType)) {
 
 			_frag.add(_factory.createReturn(0, paramSize));
 

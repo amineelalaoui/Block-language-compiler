@@ -1,24 +1,14 @@
- pgcd {
-  const int test = 0;
-   int pgcd( <int,int> c ) {
+testfunction {
 
-     int a = fst c;
-     int b = snd c;
-     while (a * b != test) {
-       if ( a > b ) {
-        int na  = a-b;
- 	     a=na;
-       } else {
-       int nb = b-a;
- 	     b = nb;
-       }
-     }
-     int res = a;
-     if (res == test) {
-       res = b;
-     }
-     return res;
-   }
+	int id(int *pt){
+	  return (*pt+1);
+	}
 
-   print pgcd( {10,20} );
- }
+
+int v = 1;
+int *ptr = &v;
+
+print id(ptr);
+
+
+}

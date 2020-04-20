@@ -32,6 +32,8 @@ public class PointerAccess extends AbstractPointer implements Expression {
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment _frag = _factory.createFragment();
 		IdentifierAccess _idAccess = (IdentifierAccess)super.pointer;
+		System.out.println(_idAccess.expression.getClass());
+		//System.exit(0);
 		VariableAccess _varAccess = (VariableAccess) _idAccess.expression;
 		VariableDeclaration _varDeclaration = _varAccess.declaration;
 		_frag.add(_factory.createLoad(_varDeclaration.getRegister(),_varDeclaration.getOffset(),_varDeclaration.getType().length()));

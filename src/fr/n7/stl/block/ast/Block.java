@@ -109,7 +109,6 @@ public class Block {
 	//	System.out.println(_register );
 		for(Instruction ins : instructions){
 			_address+= ins.allocateMemory(_register,_address);
-			System.out.println("&**&*&*&*&*&*&*& "+_register + " for   " +ins);
 		}
 	}
 
