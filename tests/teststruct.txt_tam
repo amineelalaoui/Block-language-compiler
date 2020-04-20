@@ -32,29 +32,15 @@ STORE (1) 5[SB]
 LOAD (1) 4[SB]
 LOADL 1
 STOREI (1)
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e397ed7
-LOAD (1) 5[SB]
+LOADL 25
 LOADL 2
 STOREI (1)
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@490ab905
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e397ed7
 LOAD (4) 0[SB]
 POP (0) 2
 POP (2) 0
-POP (0) 1
-POP (1) 0
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27c20538
-LOAD (4) 0[SB]
-POP (0) 0
-POP (2) 2
 POP (0) 0
 POP (1) 1
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@72d818d1
-LOAD (1) 4[SB]
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6e06451e
-LOAD (1) 5[SB]
 SUBR IOut
 HALT
 

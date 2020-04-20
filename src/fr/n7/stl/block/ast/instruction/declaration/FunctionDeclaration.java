@@ -16,6 +16,7 @@ import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -194,10 +195,11 @@ public class FunctionDeclaration implements Instruction, Declaration {
 		int _paramSize = 0;
 		// init parameters offset
 		for(int i = parameters.size()-1;i>=0;i--){
-			parameters.get(i).setRegister(this.register);
-			parameters.get(i).setOffset(-1*_paramSize);
-
-			_paramSize+=  parameters.get(i).getType().length();
+			if(!(parameters.get(i).getType() instanceof PointerType)) {
+				parameters.get(i).setRegister(this.register);
+				parameters.get(i).setOffset(-1 * _paramSize);
+				_paramSize += parameters.get(i).getType().length();
+			}
 		}
 		body.allocateMemory(Register.LB,3);
 

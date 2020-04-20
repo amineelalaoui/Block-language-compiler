@@ -71,6 +71,7 @@ public abstract class AbstractArray implements Expression {
 
 			System.out.println(this.index);
 				if(this.index.getType().compatibleWith(AtomicType.IntegerType)){
+					//throw new NullPointerException("null pointer");
 					return ((ArrayType)this.array.getType()).getType();
 				}
 				else return AtomicType.ErrorType;

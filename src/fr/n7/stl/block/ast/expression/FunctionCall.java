@@ -8,10 +8,16 @@ import java.util.List;
 import java.util.function.Function;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.IdentifierAccess;
+import fr.n7.stl.block.ast.expression.accessible.PointerAccess;
+import fr.n7.stl.block.ast.expression.accessible.VariableAccess;
 import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -40,7 +46,7 @@ public class FunctionCall implements Expression {
 	 * List of AST nodes that computes the values of the parameters for the function call.
 	 */
 	protected List<Expression> arguments;
-	
+
 	/**
 	 * @param _name : Name of the called function.
 	 * @param _arguments : List of AST nodes that computes the values of the parameters for the function call.
@@ -135,12 +141,21 @@ public class FunctionCall implements Expression {
 		return function.getType();
 	}
 
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Expression#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment _frag = _factory.createFragment();
+		for(int i=0;i<arguments.size();i++){
+			if(arguments.get(i).getType() instanceof PointerType){
+				IdentifierAccess _idAccess = (IdentifierAccess) arguments.get(i);
+				VariableDeclaration _varDecl = (VariableDeclaration) _idAccess.getExpression().getDeclaration();
+				function.getParameters().get(i).setOffset(_varDecl.getOffset());
+				function.getParameters().get(i).setRegister(_varDecl.getRegister());
+			}
+		}
 		if(arguments!=null){
 			for(Expression _param : arguments)
 				_frag.append(_param.getCode(_factory));
