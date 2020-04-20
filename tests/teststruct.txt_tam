@@ -13,7 +13,7 @@ LOADL 4
 SUBR INeg
 STORE (4) 0[SB]
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7085bdee
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@e45f292
 LOAD (4) 0[SB]
 POP (0) 2
 POP (2) 0
@@ -21,12 +21,40 @@ POP (0) 1
 POP (1) 0
 STORE (1) 4[SB]
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5700d6b1
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31a5c39e
 LOAD (4) 0[SB]
 POP (0) 0
 POP (2) 2
 POP (0) 0
 POP (1) 1
 STORE (1) 5[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3f49dace
+LOAD (1) 4[SB]
+LOADL 1
+STOREI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e397ed7
+LOAD (1) 5[SB]
+LOADL 2
+STOREI (1)
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@490ab905
+LOAD (4) 0[SB]
+POP (0) 2
+POP (2) 0
+POP (0) 1
+POP (1) 0
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27c20538
+LOAD (4) 0[SB]
+POP (0) 0
+POP (2) 2
+POP (0) 0
+POP (1) 1
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@72d818d1
+LOAD (1) 4[SB]
+SUBR IOut
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6e06451e
+LOAD (1) 5[SB]
+SUBR IOut
 HALT
 

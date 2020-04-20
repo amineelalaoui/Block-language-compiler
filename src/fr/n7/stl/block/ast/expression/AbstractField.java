@@ -41,9 +41,16 @@ public abstract class AbstractField implements Expression {
 			else if(_recordType instanceof NamedType){
 				TypeDeclaration _typeDeclaration = ((NamedType) _recordType).getDeclaration();
 				if(_typeDeclaration.getType() instanceof RecordType) {
-					System.out.println(((RecordType) _typeDeclaration.getType()).get(name));
-					System.out.println(name);
-					System.out.println((RecordType) _typeDeclaration.getType());
+					if(((RecordType) _typeDeclaration.getType()).get(name) == null){
+						var _fields = ((RecordType) _typeDeclaration.getType()).getFields();
+						for(FieldDeclaration _field : _fields){
+							if(_field.getType() instanceof NamedType){
+								if(((RecordType) ((NamedType) _field.getType()).getDeclaration().getType()).get(name) !=null)
+									return ((RecordType) ((NamedType) _field.getType()).getDeclaration().getType()).get(name);
+							}
+						}
+						throw new SemanticsUndefinedException("field " + name + " is not declared");
+					}
 					return ((RecordType) _typeDeclaration.getType()).get(name);
 				}
 				else if(_typeDeclaration.getType() instanceof NamedType) {

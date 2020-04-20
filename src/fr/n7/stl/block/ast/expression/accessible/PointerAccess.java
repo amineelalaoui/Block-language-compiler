@@ -53,7 +53,6 @@ public class PointerAccess extends AbstractPointer implements Expression {
 				ParameterDeclaration _paramDecl = _paramAccess.declaration;
 				_frag.add(_factory.createLoad(_paramDecl.getRegister(),_paramDecl.getOffset(),_paramDecl.getType().length()));
 				_frag.add(_factory.createLoadI(_paramDecl.getType().length()));
-
 			}
 		}
 		else{
