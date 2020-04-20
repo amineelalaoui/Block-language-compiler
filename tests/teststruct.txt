@@ -1,4 +1,4 @@
- test {
+/* test {
    typedef struct Pointi { int x; int y; } Point;
    typedef struct Segmenti { Point ext1; Point ext2; } Segment;
    Segment s = {{-1,-2},{-3,-4}};
@@ -6,20 +6,22 @@
    int y2 = s.ext2.y;
    s.ext2.x = x1;
    s.ext1.y = y2;
- }
+ }*/
 
-/*test{
+test{
     typedef struct point {
         int x;
         int y;
         int *z;
+        boolean e;
     } Point;
     int r = 99;
-    Point p = {1,23,&r};
+    Point p = {1,23,&r,true};
     p.x = 5;
     p.y = 122;
     print p.x;
     print p.y;
+    print p.e;
     print *(p.z);
-}*/
+}
 

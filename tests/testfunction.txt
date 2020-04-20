@@ -1,13 +1,18 @@
 testfunction {
-	void test(){
-		int i = 0;
-		int *ptr = &i;
-		int x = 10;
-		while(*ptr<5){
-		    x = x*2;
-		    i = i+1;
-		}
-		return x;
+
+	int id(int *pt, int x,int *p){
+	  print x ;
+	  print (*p);
+	  return (*pt+1);
 	}
-    test();
+
+    int v = 1;
+    int *ptr = &v;
+    int y = 5;
+    int *pa = &y;
+    int z = 4;
+    print id(ptr, z,pa);
+
+
+
 }

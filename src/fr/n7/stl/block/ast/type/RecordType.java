@@ -211,11 +211,11 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 * @see fr.n7.stl.block.ast.type.Type#resolve(fr.n7.stl.block.ast.scope.Scope)
 	 */
 	@Override
-	public boolean resolve(HierarchicalScope<Declaration> _scope) {
+	public boolean  completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean _result = true;
 		int _paramSize = 0;
 		for (FieldDeclaration f : this.fields) {
-			_result = _result && f.getType().resolve(_scope);
+			_result = _result && f.getType().completeResolve(_scope);
 			f.setOffset(_paramSize);
 			_paramSize+=f.getType().length();
 		}

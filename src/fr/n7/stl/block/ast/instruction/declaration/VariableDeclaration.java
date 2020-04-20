@@ -124,7 +124,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(_scope.accepts(this)){
 			_scope.register(this);
-			return this.value.completeResolve(_scope) && this.type.resolve(_scope);
+			return this.value.completeResolve(_scope) && this.type.completeResolve(_scope);
 		}
 		else
 			Logger.error("Error : previous declaration of " + name + " already exists");
