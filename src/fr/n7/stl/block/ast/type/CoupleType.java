@@ -3,6 +3,8 @@
  */
 package fr.n7.stl.block.ast.type;
 
+import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.Sequence;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 
@@ -47,7 +49,14 @@ public class CoupleType implements Type {
 		if (_other instanceof CoupleType) {
 			return this.first.compatibleWith(((CoupleType) _other).first)
 					&& this.second.compatibleWith(((CoupleType) _other).second);
-		} else {
+		}
+		else if(_other instanceof SequenceType){
+			if(((SequenceType) _other).getTypes().size()!=2)
+				throw new SemanticsUndefinedException(" Sequence must have two elements ");
+			else
+				return first.compatibleWith(((SequenceType) _other).getTypes().get(0)) && second.compatibleWith(((SequenceType) _other).getTypes().get(1));
+		}
+		else {
 			return false;
 		}
 	}

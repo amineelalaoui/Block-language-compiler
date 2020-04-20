@@ -4,6 +4,7 @@
 package fr.n7.stl.block.ast.type;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.Sequence;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 
@@ -43,6 +44,12 @@ public class ArrayType implements Type {
 		}
 		else if(_other instanceof NamedType){
 			return this.element.compatibleWith((((NamedType ) _other).getDeclaration().getType()));
+		}
+		else if(_other instanceof SequenceType){
+			boolean _result = true;
+			for(int i=0;i<((SequenceType) _other).getTypes().size();i++)
+				_result = _result && element.compatibleWith(((SequenceType) _other).getTypes().get(i));
+			return _result;
 		} else{
 			return false;
 		}

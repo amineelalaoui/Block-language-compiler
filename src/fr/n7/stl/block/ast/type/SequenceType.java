@@ -169,4 +169,12 @@ public class SequenceType implements Type {
 		}
 		return _result;
 	}
+
+	/**
+	 *
+	 * @return list of types
+	 */
+	public List<Type> getTypes() {
+		return types;
+	}
 }

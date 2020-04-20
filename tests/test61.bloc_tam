@@ -1,0 +1,19 @@
+PUSH 1
+LOADL 2
+LOADL 1
+SUBR IMul
+SUBR MAlloc
+STORE (1) 0[SB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27c20538
+LOAD (1) 0[SB]
+LOADL 0
+LOADL 1
+SUBR IMul
+SUBR IAdd
+LOADI (1)
+JUMPIF (0) elseBranch1
+JUMP endCondition1
+elseBranch1
+endCondition1
+HALT
+

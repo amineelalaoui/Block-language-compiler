@@ -212,6 +212,10 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		if(_scope.accepts(this))
+			_scope.register(this);
+		else
+			throw new SemanticsUndefinedException("The record type " + name + " already exists");
 		boolean _result = true;
 		int _paramSize = 0;
 		for (FieldDeclaration f : this.fields) {
