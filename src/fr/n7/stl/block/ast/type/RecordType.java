@@ -96,8 +96,20 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		System.out.println(_other.getClass());
-		return _other instanceof RecordType || (_other instanceof SequenceType && fields.size() == ((SequenceType) _other).length()) || _other instanceof AtomicType;
+		if(_other instanceof RecordType)
+			return _other instanceof RecordType;
+		if(_other instanceof SequenceType){
+			if(fields.size() != ((SequenceType) _other).length())
+				throw new SemanticsUndefinedException("Sequence Type size mismatched with the record fields");
+			else{
+				for(int i=0;i<fields.size();i++){
+					if(!fields.get(i).getType().compatibleWith(((SequenceType) _other).getTypes().get(i)))
+						throw new SemanticsUndefinedException("Type mismatched. Expected " + fields.get(i).getType() + " instead of " + ((SequenceType) _other).getTypes().get(i));
+				}
+				return true;
+			}
+		}
+		return _other instanceof AtomicType;
 	}
 
 	/* (non-Javadoc)

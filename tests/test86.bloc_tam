@@ -1,9 +1,11 @@
 PUSH 1
-LOADL 1
 LOADL 2
+LOADL 1
+SUBR IMul
+SUBR MAlloc
 STORE (1) 0[SB]
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7085bdee
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@5f2108b5
 LOAD (1) 0[SB]
 LOADL 0
 LOADL 1

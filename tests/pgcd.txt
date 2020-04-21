@@ -3,20 +3,22 @@ pgcd {
     const int test = 0;
     int x = fst c;
     int y = snd c;
-    int *a = &x;
-    int *b = &y;
-    while (*a * *b != test) {
-        if ( (*a) > (*b) ) {
-            int na = (*a)-(*b);
-            a = &na;
+    while (x * y != test) {
+        if ( x > y ) {
+            int na = x-y;
+            x = na;
         } else {
-            int nb = (*b)-(*a);
-            b = &nb;
+            int nb = y-x;
+            y = nb;
         }
     }
-    int res = *a;
+    int res = x;
     if (res == test) {
-        res = *b;
+        res = y;
     }
     print res;
 }
+// pgcd pointeurs
+// pgcd fonction appel avec pointeurs
+// structures récursives
+// structures avec pointeurs
