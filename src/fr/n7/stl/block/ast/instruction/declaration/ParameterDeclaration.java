@@ -80,9 +80,11 @@ public class ParameterDeclaration implements Declaration {
 	}
 
 	public void setOffset(int offset) {
+		this.offset = offset - type.length();
+	}
 
-			this.offset = offset - type.length();
-
+	public void setPointerOffset(int _offset){
+		this.offset = _offset;
 	}
 
 	public void setRegister(Register register) {

@@ -99,7 +99,8 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 		if(_other instanceof RecordType)
 			return _other instanceof RecordType;
 		if(_other instanceof SequenceType){
-			if(fields.size() != ((SequenceType) _other).length())
+			System.out.println( _other.length());
+			if(length() != _other.length())
 				throw new SemanticsUndefinedException("Sequence Type size mismatched with the record fields");
 			else{
 				for(int i=0;i<fields.size();i++){

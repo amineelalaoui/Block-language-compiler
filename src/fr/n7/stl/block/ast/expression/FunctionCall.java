@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.function.Function;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import fr.n7.stl.block.ast.expression.accessible.AddressAccess;
 import fr.n7.stl.block.ast.expression.accessible.IdentifierAccess;
+import fr.n7.stl.block.ast.expression.assignable.VariableAssignment;
 import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -146,10 +148,19 @@ public class FunctionCall implements Expression {
 		Fragment _frag = _factory.createFragment();
 		for(int i = 0;i<arguments.size();i++){
 			if(arguments.get(i).getType() instanceof PointerType){
-				IdentifierAccess _idAccess = (IdentifierAccess) arguments.get(i);
-				VariableDeclaration _varDecl = (VariableDeclaration) _idAccess.getExpression().getDeclaration();
+				VariableDeclaration _varDecl;
+				if(arguments.get(i) instanceof IdentifierAccess) {
+					IdentifierAccess _idAccess = (IdentifierAccess) arguments.get(i);
+					 _varDecl = (VariableDeclaration) _idAccess.getExpression().getDeclaration();
+				}
+				else{
+					//Address Access in this case
+					AddressAccess _adrAccess = (AddressAccess) arguments.get(i);
+					_varDecl = (VariableDeclaration) ((VariableAssignment) _adrAccess.getAssignable()).getDeclaration();
+				}
+				System.out.println("Register : " + _varDecl.getRegister() + " : offset " + _varDecl.getOffset());
 				function.getParameters().get(i).setRegister(_varDecl.getRegister());
-				function.getParameters().get(i).setOffset(_varDecl.getOffset());
+				function.getParameters().get(i).setPointerOffset(_varDecl.getOffset());
 			}
 		}
 		if(arguments!=null){

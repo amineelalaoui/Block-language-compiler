@@ -13,7 +13,7 @@ LOADL 4
 SUBR INeg
 STORE (4) 0[SB]
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@e45f292
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7e0b0338
 LOAD (4) 0[SB]
 POP (0) 2
 POP (2) 0
@@ -21,40 +21,34 @@ POP (0) 1
 POP (1) 0
 STORE (1) 4[SB]
 PUSH 1
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31a5c39e
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e127982
 LOAD (4) 0[SB]
 POP (0) 0
 POP (2) 2
 POP (0) 0
 POP (1) 1
 STORE (1) 5[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3f49dace
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@60c6f5b
 LOAD (1) 4[SB]
 LOADL 1
 STOREI (1)
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1e397ed7
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@2038ae61
 LOAD (1) 5[SB]
 LOADL 2
 STOREI (1)
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@490ab905
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3c0f93f1
 LOAD (4) 0[SB]
 POP (0) 2
 POP (2) 0
 POP (0) 1
 POP (1) 0
 SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@27c20538
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@544fe44c
 LOAD (4) 0[SB]
-POP (0) 0
-POP (2) 2
+POP (0) 2
+POP (2) 0
 POP (0) 0
 POP (1) 1
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@72d818d1
-LOAD (1) 4[SB]
-SUBR IOut
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@6e06451e
-LOAD (1) 5[SB]
 SUBR IOut
 HALT
 

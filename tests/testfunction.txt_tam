@@ -13,23 +13,23 @@ STORE (1) 3[SB]
 PUSH 1
 LOADL 4
 STORE (1) 4[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@56ef9176
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@3c0f93f1
 LOAD (1) 1[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@4566e5bd
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@31dc339b
 LOAD (1) 4[SB]
-;fr.n7.stl.block.ast.expression.accessible.VariableAccess@1ed4004b
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@544fe44c
 LOAD (1) 3[SB]
 CALL (SB) function_id
 SUBR IOut
 HALT
 function_id
-LOAD (1) -1[LB]
+LOAD (1) -2[LB]
 SUBR IOut
-LOAD (1) 2[SB]
+LOAD (1) 3[SB]
 LOADI (1)
 SUBR IOut
 ;((*pt) + 1)
-LOAD (1) 0[SB]
+LOAD (1) 1[SB]
 LOADI (1)
 LOADL 1
 SUBR IAdd

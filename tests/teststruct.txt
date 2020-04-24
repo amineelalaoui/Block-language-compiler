@@ -1,4 +1,4 @@
- test {
+test {
    typedef struct Pointi { int x; int y; } Point;
    typedef struct Segmenti { Point ext1; Point ext2; } Segment;
    Segment s = {{-1,-2},{-3,-4}};
@@ -7,11 +7,8 @@
    s.ext2.x = x1;
    s.ext1.y = y2;
    print s.ext1.x;
-   print s.ext2.y;
-   print x1;
-   print y2;
- }
-/*
+   print s.ext1.y;
+ }/*
 test{
     typedef struct point {
         int x;
@@ -25,5 +22,19 @@ test{
     print p.x;
     print p.y;
     print *(p.z);
+    int t[] = new int[10];
+    int *test = new int();
+    t[0] = 1;
+    t[1] = 2;
+    t[2] = 3;
+    //test[0] = 4;
+    //test[1] = 5;
+    int i=0;
+    while(i<3){
+        print t[i];
+        i=i+1;
+    }
+    //print test[0];
+    //print test[1];
 }*/
 

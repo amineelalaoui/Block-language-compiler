@@ -5,8 +5,7 @@ class Driver {
 	public static void main(String[] args) throws Exception {
 		Parser parser = null;
 		if (args.length == 0) {
-			//TODO dynamic arrays and cast int boolean ..
-			parser = new Parser( "tests/test87.bloc" );
+			parser = new Parser( "tests/testfunction.txt" );
 			parser.parse();
 		} else {
 			for (String name : args) {

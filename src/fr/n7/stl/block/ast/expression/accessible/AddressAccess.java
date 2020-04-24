@@ -23,7 +23,15 @@ public class AddressAccess implements AccessibleExpression {
 	public AddressAccess(AssignableExpression _assignable) {
 		this.assignable = _assignable;
 	}
-	
+
+	/**
+	 *
+	 * @return AssignableExpression
+	 */
+	public AssignableExpression getAssignable() {
+		return assignable;
+	}
+
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.expression.Expression#collect(fr.n7.stl.block.ast.scope.Scope)
 	 */
@@ -48,7 +56,6 @@ public class AddressAccess implements AccessibleExpression {
 	 */
 	@Override
 	public Type getType() {
-
 		return new PointerType(this.assignable.getType());
 
 	}

@@ -122,7 +122,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		if(!_scope.accepts(this)) {
-			Logger.error("Error : Function Declaration resolve failed");
+			Logger.error("Error : Function Declaration collect failed");
 			return false;
 		}
 		else
@@ -198,8 +198,9 @@ public class FunctionDeclaration implements Instruction, Declaration {
 			System.out.println(	parameters.get(i).getName());
 			if(!(parameters.get(i).getType() instanceof PointerType)){
 				parameters.get(i).setOffset(-1*_paramSize);
-				_paramSize+= parameters.get(i).getType().length();
+				//_paramSize+= parameters.get(i).getType().length();
 			}
+			_paramSize+= parameters.get(i).getType().length();
 			System.out.println(	"parameters : "+parameters.get(i)+"offset : "+parameters.get(i).getOffset());
 
 		}

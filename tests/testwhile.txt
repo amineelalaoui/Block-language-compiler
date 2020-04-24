@@ -1,22 +1,20 @@
-factorielle {
+pgcd {
 	<int,int> c = {20,150};
     const int test = 0;
-    int x = fst c;
-    int y = snd c;
-    int *a = &x;
-    int *b = &y;
-    while (((*a) * (*b)) != test) {
-        if ( (*a) > (*b) ) {
-            int na = (*a)-(*b);
-            a = &na;
+    int a = fst c;
+    int b = snd c;
+    while ((a * b) != test) {
+        if ( a > b ) {
+            int na = a-b;
+            a = na;
         } else {
-            int nb = (*b)-(*a);
-            b = &nb;
+            int nb = b-a;
+            b = nb;
         }
     }
-    int *res = a;
-    if (*res == test) {
-        res = &b;
+    int res = a;
+    if (res == test) {
+        res = b;
     }
-    print *res ;
+    print res ;
 }

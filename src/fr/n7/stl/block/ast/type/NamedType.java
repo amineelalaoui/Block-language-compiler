@@ -114,7 +114,7 @@ public class NamedType implements Type {
 	 */
 	@Override
 	public int length() {
-		System.out.println(name);
+		System.out.println("length " + this.declaration.getType().length());
 		return this.declaration.getType().length();
 	}
 
