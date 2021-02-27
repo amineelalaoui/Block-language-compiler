@@ -1,0 +1,8 @@
+//Sous typage // polymorphisme
+interface Interface2374{
+}
+class Classe25947 implements Interface2374{
+    public void m() {
+        Interface2374 i = new Classe25947();
+    }
+}

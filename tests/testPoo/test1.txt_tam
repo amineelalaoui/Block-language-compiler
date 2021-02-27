@@ -1,0 +1,81 @@
+PUSH 1
+LOADL 0
+STORE (1) 0[CB]
+PUSH 1
+LOADL 2
+STORE (1) 1[CB]
+PUSH 1
+LOADL 8
+STORE (1) 2[CB]
+function_fonct
+LOADL 1
+RETURN (1) 1
+function_f2
+PUSH 1
+LOAD (1) 2[CB]
+STORE (1) 3[LB]
+LOADL 8
+LOAD (1) 2[CB]
+STOREI (1)
+LOADL 2
+RETURN (1) 1
+JUMP FUNC_A_1_END
+FUNC_A_START
+PUSH 1
+LOADL 5
+CALL (SB) function_fonct
+STORE (1) 3[LB]
+FUNC_A_1_END
+PUSH 1
+;fr.n7.stl.poo.type.Instanciation@36baf30c.x
+LOAD (1) 0[CB]
+STORE (1) 3[CB]
+;(zz == true)
+function_attack
+LOAD (1) -2[LB]
+LOADL 1
+SUBR IEq
+JUMPIF (0) elseBranch2
+;(! zz)
+beginwhile3
+LOAD (1) -2[LB]
+LOADI (1)
+SUBR BNeg
+JUMPIF (0) endwhile3
+RETURN (1) 1
+JUMP beginwhile3
+endwhile3
+JUMP endCondition2
+elseBranch2
+PUSH 1
+LOAD (1) -4[LB]
+STORE (1) 3[LB]
+endCondition2
+RETURN (1) 1
+function_move
+PUSH 0
+RETURN (0) 2
+function_show
+PUSH 1
+LOADL 10
+STORE (1) 3[LB]
+;fr.n7.stl.block.ast.expression.accessible.VariableAccess@7a81197d
+LOAD (1) 3[LB]
+RETURN (1) 1
+JUMP FUNC_Fighter_4_END
+FUNC_Fighter_START
+PUSH 0
+FUNC_Fighter_4_END
+PUSH 1
+LOADL 0
+STORE (1) 6[CB]
+PUSH 1
+STORE (1) 7[CB]
+PUSH 1
+STORE (1) 8[CB]
+JUMP FUNC_Caracter_5_END
+FUNC_Caracter_START
+PUSH 0
+FUNC_Caracter_5_END
+HALT
+

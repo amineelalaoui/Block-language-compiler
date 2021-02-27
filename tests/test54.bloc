@@ -1,5 +1,0 @@
-test54 {
-   // Sans erreur : initialisation d'une variable de type tableau d'entier avec un tableau créé statiquement, puis affectation du tableau
-   int p[] = { 1, 2};
-   p = { 3, 4};
-}

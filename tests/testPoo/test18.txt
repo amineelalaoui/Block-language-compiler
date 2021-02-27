@@ -1,0 +1,5 @@
+// Nom du classe est le meme que le nom du methode paasss
+
+class Classe22 {
+    private int classe22() {return 1;}
+}

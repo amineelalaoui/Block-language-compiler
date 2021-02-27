@@ -3,13 +3,20 @@
  */
 package fr.n7.stl.block.ast.instruction;
 
+import com.sun.javafx.tools.packager.Param;
 import fr.n7.stl.block.ast.expression.Expression;
+import fr.n7.stl.block.ast.expression.accessible.IdentifierAccess;
+import fr.n7.stl.block.ast.expression.accessible.ParameterAccess;
+import fr.n7.stl.block.ast.expression.accessible.VariableAccess;
 import fr.n7.stl.block.ast.expression.assignable.AssignableExpression;
+import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.AtomicType;
 import fr.n7.stl.block.ast.type.NamedType;
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.poo.call.AttributAssignement;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -20,6 +27,41 @@ import fr.n7.stl.tam.ast.TAMFactory;
  *
  */
 public class Assignment implements Instruction, Expression {
+
+	Register register;
+	int offset;
+
+	public Register getRegister() {
+		return register;
+	}
+
+	public void setRegister(Register register) {
+		this.register = register;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	public Expression getValue() {
+		return value;
+	}
+
+	public void setValue(Expression value) {
+		this.value = value;
+	}
+
+	public AssignableExpression getAssignable() {
+		return assignable;
+	}
+
+	public void setAssignable(AssignableExpression assignable) {
+		this.assignable = assignable;
+	}
 
 	protected Expression value;
 	protected AssignableExpression assignable;
@@ -82,9 +124,46 @@ public class Assignment implements Instruction, Expression {
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
 	 */
+//	@Override
+//	public int allocateMemory(Register _register, int _offset)
+//	{
+//
+//		if(this.value instanceof IdentifierAccess) {
+//			if( ((IdentifierAccess)this.value).getExpression() instanceof VariableAccess) {
+//				VariableAccess va = (VariableAccess) ((IdentifierAccess)this.value).getExpression();
+//				VariableDeclaration vd = (VariableDeclaration) va.getDeclaration();
+//				 vd.allocateMemory(_register, _offset);
+//			}
+//
+//		}
+//		this.register = _register;
+//		this.offset = _offset;
+//
+//		return  0;
+//	}
+
 	@Override
 	public int allocateMemory(Register _register, int _offset)
 	{
+		if(this.value instanceof IdentifierAccess) {
+			if( ((IdentifierAccess)this.value).getExpression() instanceof VariableAccess) {
+				VariableAccess va = (VariableAccess) ((IdentifierAccess)this.value).getExpression();
+				VariableDeclaration vd = (VariableDeclaration) va.getDeclaration();
+				vd.allocateMemory(_register, _offset);
+			}else if(((IdentifierAccess)this.value).getExpression() instanceof ParameterAccess) {
+				ParameterAccess pa = (ParameterAccess) ((IdentifierAccess)this.value).getExpression();
+				ParameterDeclaration pd = (ParameterDeclaration) pa.getDeclaration();
+				pd.setRegister(_register);
+//                pd.allocateMemory(_register, _offset);
+			}
+		}
+		if(this.assignable instanceof AttributAssignement) {
+			this.register = ((AttributAssignement) this.assignable).getAttribut().getRegister();
+			this.offset = ((AttributAssignement) this.assignable).getAttribut().getOffset();
+		}else {
+			this.register = _register;
+			this.offset = _offset;
+		}
 		return 0;
 	}
 

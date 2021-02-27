@@ -1,0 +1,8 @@
+PUSH 1
+STORE (1) 0[CB]
+function_m1
+LOAD (1) -2[LB]
+SUBR IOut
+RETURN (0) 2
+HALT
+

@@ -1,0 +1,29 @@
+
+class A {
+
+	public static int x = 0;
+	public static int y = 2;
+	public int z = 8;
+    public construct A()
+	{
+
+		int x = A.fonct(5);
+
+	}
+
+	public static int fonct(int e)
+	{
+		 //int z = A.x;
+		 return 1;
+	}
+
+	public int f2()
+	{
+		int y = this.z;
+		this.z = 8;
+		return 2;
+	}
+
+	public A a = new A();
+
+}

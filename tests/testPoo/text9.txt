@@ -1,0 +1,22 @@
+class A {
+   public int i;
+
+    public construct A(){
+
+    }
+}
+
+ class Main {
+   public static void main(String[] args) {
+      A a = new A();
+
+      a.i = 3;
+      print( a.i );
+      a.i = a.i + 1;
+      print( a.i );
+      a.i = a.i + 1;
+            print( a.i );
+            a.i = a.i + 1;
+                  print( a.i );
+   }
+}

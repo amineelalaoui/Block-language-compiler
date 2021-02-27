@@ -1,0 +1,4 @@
+//Attribut de nom identique a une classe
+class Classe {
+    private int classe;
+}

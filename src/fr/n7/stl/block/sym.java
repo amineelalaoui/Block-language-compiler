@@ -8,66 +8,82 @@ package fr.n7.stl.block;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int UL_Definition_Constante = 42;
+  public static final int UL_Second = 26;
+  public static final int UL_Sinon = 38;
   public static final int UL_Egal = 8;
-  public static final int UL_Moins_Unaire = 15;
-  public static final int UL_Double_Plus = 9;
-  public static final int UL_Afficher = 40;
-  public static final int UL_Nombre_Flottant = 56;
-  public static final int UL_Identificateur = 52;
-  public static final int UL_Moins = 14;
-  public static final int UL_Virgule = 3;
-  public static final int UL_Parenthese_Fermante = 23;
-  public static final int UL_Sinon = 37;
-  public static final int UL_Exclamation_Egal = 35;
-  public static final int UL_Double_Moins = 10;
-  public static final int UL_Definition_Type = 43;
-  public static final int UL_Superieur_Egal = 33;
-  public static final int UL_Double_Barre = 20;
-  public static final int UL_Esperluette = 19;
-  public static final int UL_Chaine = 53;
-  public static final int UL_Double_Plus_Prefixe = 11;
   public static final int UL_Point = 4;
-  public static final int UL_Premier = 24;
-  public static final int UL_Pour_Cent = 18;
-  public static final int UL_Accolade_Ouvrante = 26;
-  public static final int UL_Double_Esperluette = 21;
-  public static final int UL_Nombre_Entier = 55;
-  public static final int UL_Plus = 13;
+  public static final int UL_Double_Plus_Prefixe = 11;
+  public static final int UL_This = 63;
+  public static final int UL_Double_Egal = 35;
   public static final int UL_Point_Exclamation = 7;
-  public static final int UL_Enumeration = 45;
-  public static final int UL_Second = 25;
-  public static final int UL_Type_Flottant = 50;
-  public static final int UL_Type_Booleen = 46;
-  public static final int UL_Crochet_Fermant = 29;
-  public static final int UL_Type_Caractere = 47;
-  public static final int UL_Retour = 41;
-  public static final int UL_Superieur = 31;
-  public static final int UL_Oblique = 17;
-  public static final int EOF = 0;
-  public static final int UL_Faux = 59;
-  public static final int UL_Double_Moins_Prefixe = 12;
-  public static final int UL_Point_Virgule = 2;
-  public static final int error = 1;
-  public static final int UL_Parenthese_Ouvrante = 22;
-  public static final int UL_Tant_Que = 38;
-  public static final int UL_Inferieur_Egal = 32;
-  public static final int UL_Inferieur = 30;
-  public static final int UL_Enregistrement = 44;
-  public static final int UL_Crochet_Ouvrant = 28;
-  public static final int UL_Nul = 57;
-  public static final int UL_Double_Egal = 34;
-  public static final int UL_Si = 36;
-  public static final int UL_Caractere = 54;
-  public static final int UL_Vrai = 58;
-  public static final int UL_Nouveau = 39;
-  public static final int UL_Type_Vide = 51;
-  public static final int UL_Point_Interrogation = 6;
-  public static final int UL_Deux_Points = 5;
+  public static final int UL_Chaine = 69;
+  public static final int UL_Retour = 42;
+  public static final int UL_Type_Flottant = 51;
   public static final int UL_Asterisque = 16;
-  public static final int UL_Accolade_Fermante = 27;
-  public static final int UL_Type_Entier = 49;
-  public static final int UL_Type_Chaine = 48;
+  public static final int UL_Vrai = 74;
+  public static final int UL_Inferieur = 31;
+  public static final int UL_Double_Moins_Prefixe = 12;
+  public static final int UL_Parenthese_Fermante = 23;
+  public static final int UL_Caractere = 70;
+  public static final int UL_Crochet_Fermant = 30;
+  public static final int UL_Parenthese_Ouvrante = 22;
+  public static final int UL_Type_Caractere = 48;
+  public static final int UL_Point_Virgule = 2;
+  public static final int UL_Type_Booleen = 47;
+  public static final int UL_Definition_Constante = 43;
+  public static final int UL_Accolade_Fermante = 28;
+  public static final int UL_Accolade_Ouvrante = 27;
+  public static final int UL_Point_Interrogation = 6;
+  public static final int UL_Inferieur_Egal = 33;
+  public static final int UL_Superieur = 32;
+  public static final int UL_Private = 58;
+  public static final int UL_Nombre_Flottant = 72;
+  public static final int UL_Nul = 73;
+  public static final int UL_Exclamation_Egal = 36;
+  public static final int UL_SUPER = 64;
+  public static final int UL_Virgule = 3;
+  public static final int UL_Public = 57;
+  public static final int UL_Oblique = 17;
+  public static final int UL_Crochet_Ouvrant = 29;
+  public static final int UL_Abstract = 56;
+  public static final int UL_Double_Esperluette = 21;
+  public static final int UL_Identificateur = 67;
+  public static final int UL_Type_Vide = 52;
+  public static final int UL_Protected = 62;
+  public static final int UL_Implements = 61;
+  public static final int UL_Comme = 24;
+  public static final int UL_Moins = 14;
+  public static final int UL_Enregistrement = 45;
+  public static final int EOF = 0;
+  public static final int UL_Deux_Points = 5;
+  public static final int UL_Type_Chaine = 49;
+  public static final int UL_Final = 55;
+  public static final int error = 1;
+  public static final int UL_Nouveau = 40;
+  public static final int UL_Type_Entier = 50;
+  public static final int UL_Interface = 53;
+  public static final int UL_Static = 59;
+  public static final int UL_Extends = 54;
+  public static final int UL_Identificateur_Type = 68;
+  public static final int UL_Class = 60;
+  public static final int UL_Double_Barre = 20;
+  public static final int UL_Afficher = 41;
+  public static final int UL_Construct = 65;
+  public static final int UL_Plus = 13;
+  public static final int UL_Esperluette = 19;
+  public static final int UL_Enumeration = 46;
+  public static final int UL_Superieur_Egal = 34;
+  public static final int UL_Double_Plus = 9;
+  public static final int UL_Tant_Que = 39;
+  public static final int UL_Faux = 75;
+  public static final int UL_ARGS = 66;
+  public static final int UL_Definition_Type = 44;
+  public static final int UL_Si = 37;
+  public static final int UL_Nombre_Entier = 71;
+  public static final int UL_Pour_Cent = 18;
+  public static final int UL_Double_Moins = 10;
+  public static final int UL_Premier = 25;
+  public static final int UL_Moins_Unaire = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -93,6 +109,7 @@ public interface sym {
   "UL_Double_Esperluette",
   "UL_Parenthese_Ouvrante",
   "UL_Parenthese_Fermante",
+  "UL_Comme",
   "UL_Premier",
   "UL_Second",
   "UL_Accolade_Ouvrante",
@@ -121,7 +138,22 @@ public interface sym {
   "UL_Type_Entier",
   "UL_Type_Flottant",
   "UL_Type_Vide",
+  "UL_Interface",
+  "UL_Extends",
+  "UL_Final",
+  "UL_Abstract",
+  "UL_Public",
+  "UL_Private",
+  "UL_Static",
+  "UL_Class",
+  "UL_Implements",
+  "UL_Protected",
+  "UL_This",
+  "UL_SUPER",
+  "UL_Construct",
+  "UL_ARGS",
   "UL_Identificateur",
+  "UL_Identificateur_Type",
   "UL_Chaine",
   "UL_Caractere",
   "UL_Nombre_Entier",

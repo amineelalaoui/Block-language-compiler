@@ -1,0 +1,9 @@
+//Acces e un attribut via this // impossible
+class Classe19{
+    public int i;
+}
+class Classe20 extends Classe19{
+    public void m2() {
+        int a = this.i;
+    }
+}

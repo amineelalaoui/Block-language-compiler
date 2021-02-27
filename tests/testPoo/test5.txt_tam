@@ -1,0 +1,5 @@
+function_a
+PUSH 0
+RETURN (0) 1
+HALT
+

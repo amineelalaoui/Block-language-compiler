@@ -1,0 +1,6 @@
+// Methode avec parametre
+class Classe10 {
+     private int i (int j){
+        return 0;
+    }
+}

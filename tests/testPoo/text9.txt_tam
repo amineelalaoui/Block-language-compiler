@@ -1,0 +1,52 @@
+PUSH 1
+STORE (1) 0[CB]
+JUMP FUNC_A_1_END
+FUNC_A_START
+PUSH 0
+RETURN (0) 0
+FUNC_A_1_END
+PUSH 1
+;Function A call
+LOADL 2
+SUBR MAlloc
+CALL (SB) FUNC_A_START
+STORE (1) 1[CB]
+LOADL 3
+LOADL 0
+STOREI (1)
+;a.i
+LOAD (1) 0[CB]
+SUBR IOut
+;a.i
+;(a.i + 1)
+LOAD (1) 0[CB]
+LOADL 1
+SUBR IAdd
+LOADL 0
+STOREI (1)
+;a.i
+LOAD (1) 0[CB]
+SUBR IOut
+;a.i
+;(a.i + 1)
+LOAD (1) 0[CB]
+LOADL 1
+SUBR IAdd
+LOADL 0
+STOREI (1)
+;a.i
+LOAD (1) 0[CB]
+SUBR IOut
+;a.i
+;(a.i + 1)
+LOAD (1) 0[CB]
+LOADL 1
+SUBR IAdd
+LOADL 0
+STOREI (1)
+;a.i
+LOAD (1) 0[CB]
+SUBR IOut
+HALT
+HALT
+

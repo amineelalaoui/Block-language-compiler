@@ -1,4 +1,0 @@
-test03 {
-   // Sans erreur : initialisation d'une variable de type entier avec le résultat du calcul d'une expression de type entier
-   int i = 1 + 2;
-}

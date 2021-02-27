@@ -11,10 +11,14 @@ import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.block.poo.methode.MethodeSignature;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.tam.ast.impl.FragmentImpl;
+import fr.n7.stl.util.Logger;
 
 /**
  * Represents a Block node in the Abstract Syntax Tree node for the Bloc language.
@@ -27,6 +31,13 @@ import fr.n7.stl.tam.ast.impl.FragmentImpl;
  *
  */
 public class Block {
+	public List<Instruction> getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(List<Instruction> instructions) {
+		this.instructions = instructions;
+	}
 
 	/**
 	 * Sequence of instructions contained in a block.
@@ -80,7 +91,7 @@ public class Block {
 		boolean _flag = true;
 		SymbolTable _local = new SymbolTable(_scope);
 		for(Instruction ins : instructions){
-            System.out.println("resolve of " + ins.getClass().getName() + " is " + _flag);
+//            System.out.println("resolve of " + ins.getClass().getName() + " is " + _flag);
             _flag = _flag && ins.completeResolve(_local);
 		}
 		return _flag;
@@ -105,10 +116,11 @@ public class Block {
 	 * @param _offset Inherited Current offset for the address of the variables.
 	 */
 	public void allocateMemory(Register _register, int _offset) {
-		int _address =_offset ;
+		int _address = _offset ;
 	//	System.out.println(_register );
 		for(Instruction ins : instructions){
-			_address+= ins.allocateMemory(_register,_address);
+
+			_address += ins.allocateMemory(_register,_address);
 		}
 	}
 
@@ -122,17 +134,21 @@ public class Block {
 		Fragment _frag = _factory.createFragment();
 		FunctionDeclaration f = null;
 		for(Instruction ins : instructions){
-			System.out.println(ins);
 			if(ins instanceof FunctionDeclaration){
-
-
 				f = (FunctionDeclaration) ins;
-
 				continue;
 			}
+
+
 			_frag.append(ins.getCode(_factory));
+		}
+
+		if(instructions.size() == 0){
+			_frag.add(_factory.createPush(0));
 
 		}
+
+
 		if(f!=null){
 			System.out.println(f.getRegister());
 		//	System.exit(0);
@@ -143,6 +159,17 @@ public class Block {
 		}
 		return _frag;
 	}
+
+	public Type getTypeOfReturn(){
+		for(Instruction i: instructions) {
+			if(i instanceof Return){
+				return ((Return) i).getType();
+			}
+		}
+		Logger.error("il n'y a pas de return dans la methode !! ");
+		return AtomicType.ErrorType;
+	}
+
 	
 	
 

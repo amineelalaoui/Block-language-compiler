@@ -1,0 +1,10 @@
+// Instantiation d'une classe avec constructeur sans parametres defini
+class Classe32 {
+    public construct Classe32(){}
+}
+
+class Classe33 {
+    public void m(){
+        Classe32 c = new Classe32();
+    }
+}

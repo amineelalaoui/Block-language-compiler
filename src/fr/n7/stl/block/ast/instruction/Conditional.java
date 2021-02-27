@@ -12,9 +12,12 @@ import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.AtomicType;
+import fr.n7.stl.block.ast.type.PointerType;
+import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a conditional instruction.
@@ -78,7 +81,23 @@ public class Conditional implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return condition.getType().compatibleWith(AtomicType.BooleanType) && thenBranch.checkType() && (elseBranch==null || elseBranch.checkType());
+//		return condition.getType().compatibleWith(AtomicType.BooleanType) && thenBranch.checkType() && (elseBranch==null || elseBranch.checkType());
+		Type tvalue = this.condition.getType();
+		if(tvalue instanceof PointerType) {
+			tvalue = ((PointerType) this.condition.getType()).getPointedType();
+		}
+		boolean ok1 = tvalue.compatibleWith(AtomicType.BooleanType);
+		boolean ok2 = this.thenBranch.checkType();
+		if(ok1) {
+			if(this.elseBranch != null) {
+				return ok2 && this.elseBranch.checkType();
+			}else {
+				return ok2;
+			}
+		}else {
+				Logger.error(this.condition + " n'est pas un boolean ! ");
+				return false;
+			}
 	}
 
 	/* (non-Javadoc)

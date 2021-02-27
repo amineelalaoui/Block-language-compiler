@@ -19,6 +19,9 @@ import fr.n7.stl.util.Logger;
  *
  */
 public class VariableAssignment extends AbstractIdentifier implements AssignableExpression {
+	public void setDeclaration(VariableDeclaration declaration) {
+		this.declaration = declaration;
+	}
 
 	protected VariableDeclaration declaration;
 

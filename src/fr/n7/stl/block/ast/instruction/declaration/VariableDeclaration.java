@@ -2,20 +2,22 @@
  *
  */
 package fr.n7.stl.block.ast.instruction.declaration;
-
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
+import  java.util.*;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
-import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.poo.call.AttributAccess;
+import fr.n7.stl.poo.call.ConstructorCall;
+import fr.n7.stl.poo.call.MethodCall;
+import fr.n7.stl.poo.declaration.ClasseDeclaration;
+import fr.n7.stl.poo.declaration.InterfaceDeclaration;
+import fr.n7.stl.poo.type.Instanciation;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
-
-import java.util.function.Function;
 
 /**
  * Abstract Syntax Tree node for a variable declaration instruction.
@@ -38,6 +40,10 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * AST node for the initial value of the declared variable.
 	 */
 	protected Expression value;
+
+	public Expression getValue() {
+		return value;
+	}
 
 	/**
 	 * Address register that contains the base address used to store the declared variable.
@@ -136,10 +142,46 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		System.out.println("checktype of " + type + " and " + value.getType() + " : " + type.compatibleWith(value.getType()));
-		return value.getType().compatibleWith(type);
-	}
+//        System.out.println("checktype of " + type + " and " + value.getType() + " : " + type.compatibleWith(value.getType()));
+		if(this.value instanceof ConstructorCall) {
+			ConstructorCall construct = (ConstructorCall) this.value;
+			Instanciation instanciation = (Instanciation) this.type;
+			boolean resultat = construct.getInstanciation().getType().compatibleWith(instanciation.getType());
+			ClasseDeclaration cd = (ClasseDeclaration) construct.getInstanciation().getDeclaration().getContainer();
 
+			if(instanciation.getDeclaration().getContainer() instanceof InterfaceDeclaration) {
+				List<Instanciation> implement = cd.getImplementations();
+				for(Instanciation ins : implement) {
+					if(ins.getName().equals(instanciation.getName())) {
+						return true;
+					}
+				}
+				return false;
+			}else if(instanciation.getDeclaration().getContainer() instanceof ClasseDeclaration) {
+				ClasseDeclaration cd1 = (ClasseDeclaration) instanciation.getDeclaration().getContainer();
+				if(cd.getExtension().getInstanciation() != null){
+					if(cd.getExtension().getInstanciation().getName().equals(cd1.getName())) {
+						return true;
+					}
+					return false;
+
+				}
+			}
+			return resultat;
+
+		}else if(this.value instanceof MethodCall) {
+			MethodCall methode = (MethodCall) this.value;
+//            Instanciation instanciation = (Instanciation) this.type;
+			return methode.getType().compatibleWith(this.type);
+		}else if(this.value instanceof AttributAccess) {
+			AttributAccess access = (AttributAccess) this.value;
+			Type access_type = access.getType();
+//          Instanciation instanciation = (Instanciation) this.type;
+			return access.getType().compatibleWith(this.type);
+		}else {
+			return value.getType().compatibleWith(type);
+		}
+	}
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Instruction#allocateMemory(fr.n7.stl.tam.ast.Register, int)
 	 */
@@ -159,6 +201,8 @@ public class VariableDeclaration implements Declaration, Instruction {
 		frag.add(_factory.createPush(this.getType().length()));
 		System.out.println(value.getClass());
 		frag.append(value.getCode(_factory));
+		System.out.println(this.name);
+
 		frag.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
 		return frag;
 	}

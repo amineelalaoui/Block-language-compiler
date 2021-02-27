@@ -1,0 +1,17 @@
+abstract class A{
+    public final int i=5;
+
+    public int methode1();
+
+
+}
+
+class Main {
+    public static void main(){
+        A a = new A();
+        a.i = 7;
+        print(a.i);
+
+     }
+
+}

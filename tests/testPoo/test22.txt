@@ -1,0 +1,6 @@
+// Methode sans retour avec mot cle return;
+class Classe7 {
+     public void i (){
+         return 0;
+     }
+}

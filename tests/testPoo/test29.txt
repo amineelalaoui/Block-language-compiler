@@ -1,0 +1,7 @@
+//Acces a un attribut statique sans mot cle
+class Classe48 {
+    private static int i;
+    public int m() {
+        return i;
+    }
+}

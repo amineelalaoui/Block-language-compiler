@@ -1,0 +1,14 @@
+//tester une classe avec constructor + methode + attr
+class A {
+
+   public int i;
+
+   public construct A (int j) {
+       this.i = j;
+   }
+
+   public void incr() {
+           this.i = this.i+1;
+       }
+
+}

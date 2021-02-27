@@ -1,7 +1,0 @@
-test{
-    float f = 5.75;
-
-    int r = (int)f;
-    r = r+1;
-    print r;
-}

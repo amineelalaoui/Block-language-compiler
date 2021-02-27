@@ -1,0 +1,8 @@
+PUSH 1
+STORE (1) 0[CB]
+JUMP FUNC_Fighter_1_END
+FUNC_Fighter_1_START:
+PUSH 0
+FUNC_Fighter_1_END:
+HALT
+

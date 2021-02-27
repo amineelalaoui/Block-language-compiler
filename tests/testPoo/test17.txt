@@ -1,0 +1,16 @@
+//Constructeur avec param�tres de m�me nom que les attributs
+class Classe28 {
+
+    private int a;
+    private int b;
+
+    private construct Classe28(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+}
+
+// Constructeur public
+class Classe25 {
+    public construct Classe25(){}
+}

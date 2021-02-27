@@ -1,0 +1,11 @@
+//Acces d'un attribut public dans une classe externe
+class Classe38 {
+    public int a;
+}
+
+class Classe39 {
+    public void m(){
+        Classe38 c = new Classe38();
+        int a = c.a;
+    }
+}

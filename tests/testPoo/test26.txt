@@ -1,0 +1,11 @@
+// Multi implementation classique
+interface Interface200{}
+interface Interface201{}
+class Classe300 implements Interface200, Interface201{}
+// Redefinition de la portee par heritage
+class Classe12{
+    private void m1() {}
+}
+class Classe13 extends Classe12{
+    public void m1() {}
+}

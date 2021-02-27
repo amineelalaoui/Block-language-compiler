@@ -1,0 +1,37 @@
+class A {
+
+   public int i;
+
+   public construct A(int j) {
+
+       this.i = j;
+   }
+
+   public void incr(int x, int y) {
+            this.i = x ;
+            this.i = y;
+           this.i = this.i+1;
+       }
+
+}
+
+ class Main {
+
+   public static void main(String[] args) {
+
+      A a = new A(3);
+
+      print( a.i );
+
+      a.i = a.i + 1;
+
+      print( a.i );
+
+      a.i = a.i + 1;
+
+            print( a.i );
+
+
+   }
+
+}

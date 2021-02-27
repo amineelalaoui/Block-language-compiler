@@ -35,6 +35,7 @@ public class ArrayAccess extends AbstractArray implements AccessibleExpression {
 		fragment.append(this.index.getCode(_factory));
 		fragment.add(_factory.createLoadL(this.getType().length()));
 		fragment.add(Library.IMul);
+
 		fragment.add(Library.IAdd);
 		fragment.add(_factory.createLoadI(this.getType().length()));
 		return fragment;

@@ -11,6 +11,11 @@ import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.Type;
+import fr.n7.stl.poo.call.AttributAccess;
+import fr.n7.stl.poo.call.ConstructorCall;
+import fr.n7.stl.poo.declaration.ClasseDeclaration;
+import fr.n7.stl.poo.definition.Attribut;
+import fr.n7.stl.poo.type.Instanciation;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
@@ -28,6 +33,15 @@ import java.util.function.Function;
 public class IdentifierAccess extends AbstractIdentifier implements AccessibleExpression {
 
 	protected AbstractAccess expression;
+	protected Attribut attribut;
+
+	public Attribut getAttribut() {
+		return attribut;
+	}
+
+	public void setAttribut(Attribut attribut) {
+		this.attribut = attribut;
+	}
 
 	/**
 	 * Creates a variable use expression Abstract Syntax Tree node.
@@ -72,7 +86,6 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 		if (this.expression == null) {
 			if (((HierarchicalScope<Declaration>)_scope).knows(this.name)) {
 				Declaration _declaration = _scope.get(this.name);
-				System.out.println(_declaration.getClass());
 				if (_declaration instanceof ConstantDeclaration) {
 					// TODO : refactor the management of Constants
 					this.expression = new ConstantAccess((ConstantDeclaration) _declaration);
@@ -83,7 +96,13 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 				} else if(_declaration instanceof ParameterDeclaration){
 					this.expression = new ParameterAccess((ParameterDeclaration) _declaration);
 					//return true;
-				} else{
+				}
+				else if(_declaration instanceof Attribut){
+					this.attribut  = (Attribut) _declaration;
+
+				}
+
+				else{
 					Logger.error("The declaration for " + this.name + " is of the wrong kind.");
 					return false;
 				}
@@ -102,8 +121,11 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	 */
 	@Override
 	public Type getType() {
-		System.out.println(this.expression.getClass());
-		return this.expression.getType();
+		if(this.expression!=null){
+			return this.expression.getType();}
+		else{
+			return this.attribut.getType();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -111,8 +133,11 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		return this.expression.getCode(_factory);
-	}
+		if(this.expression!=null){
+			return this.expression.getCode(_factory);}
+		else{
+			return this.attribut.getCode(_factory);
+		}	}
 
 	/**
 	 *

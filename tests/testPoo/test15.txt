@@ -1,0 +1,35 @@
+//2 classes + construct + methodes + appel dans Main
+
+class A {
+
+   public int i;
+
+   public construct A (int j) {
+       this.i = j;
+       }
+
+       public void incr() {
+           this.i = this.i+1;
+       }
+
+}
+
+ class Main {
+
+   public static void main(String[] args) {
+
+      A a = new A( 2 );
+
+      print( a.i );
+
+      a.i = a.i + 1;
+
+      print( a.i );
+
+      a.incr();
+
+      print( a.i );
+
+   }
+
+   }

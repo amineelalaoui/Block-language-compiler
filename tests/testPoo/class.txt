@@ -1,0 +1,35 @@
+abstract class A {
+
+
+    public int test2(){
+    return 3 ;
+    }
+    public static int x = 99;
+    public static int y = 2;
+    public  static  int z = 8;
+}
+
+class Fighter extends A{
+
+    public construct Fighter(){
+
+     }
+    public static void main(){
+            print A.x;
+        }
+    public int test(){
+        return 9;
+    }
+
+    public int test7(){
+            return 9;
+        }
+
+
+
+
+
+
+
+
+}

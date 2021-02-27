@@ -3,14 +3,10 @@
  */
 package fr.n7.stl.block.ast.instruction.declaration;
 
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import fr.n7.stl.block.ast.Block;
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
-import fr.n7.stl.block.ast.expression.accessible.PointerAccess;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.instruction.Return;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -22,11 +18,7 @@ import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
-import fr.n7.stl.tam.ast.TAMInstruction;
-import fr.n7.stl.tam.ast.impl.TAMFactoryImpl;
 import fr.n7.stl.util.Logger;
-
-import javax.print.DocFlavor;
 
 /**
  * Abstract Syntax Tree node for a function declaration.
@@ -158,7 +150,19 @@ public class FunctionDeclaration implements Instruction, Declaration {
 	 */
 	@Override
 	public boolean checkType() {
-		return body.checkType();
+		boolean ok1 = this.body.checkType();
+		for(Instruction i : this.body.getInstructions()) {
+			if(i instanceof Return) {
+				boolean ok = ((Return) i).getType().equalsTo(this.type) && !this.getType().equals(AtomicType.ErrorType);
+				if(!ok) {
+					Logger.error("Types are incompatible, expected Type " + this.type + " but found " + ((Return) i).getType());
+					return false;
+				}else {
+					return !this.getType().equals(AtomicType.ErrorType) && ok1;
+				}
+			}
+		}
+		return !this.getType().equals(AtomicType.ErrorType) && ok1;
 	}
 
 	public int getOffset() {

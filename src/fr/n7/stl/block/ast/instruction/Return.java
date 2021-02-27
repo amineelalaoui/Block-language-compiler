@@ -3,11 +3,11 @@
  */
 package fr.n7.stl.block.ast.instruction;
 
-import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
+import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -21,7 +21,16 @@ public class Return implements Instruction {
 
 	protected Expression value;
 	private Register register;
+	private int paramssize;
 	private int offset;
+
+	public int getParamssize() {
+		return paramssize;
+	}
+
+	public void setParamssize(int paramssize) {
+		this.paramssize = paramssize;
+	}
 
 	public Return(Expression _value) {
 		this.value = _value;
@@ -79,9 +88,13 @@ public class Return implements Instruction {
 		Fragment _fragment = _factory.createFragment();
 
 		_fragment.append(this.value.getCode(_factory));
-		_fragment.add(_factory.createReturn(this.value.getType().length(), 1));
+	//	_fragment.add(_factory.createReturn(this.value.getType().length(), 1));
 
 		return _fragment;
+	}
+
+	public Type getType() {
+		return this.value.getType();
 	}
 
 }

@@ -1,0 +1,6 @@
+//Utilisation de super dans un constructeur si la classe mere a le constructeur par defaut
+class Classe33{
+}
+class Classe34 extends Classe33{
+    public construct Classe34(){super();}
+}

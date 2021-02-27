@@ -1,0 +1,7 @@
+//Acces a un attribut public a l'interieur de la classe sans mot cle this, avec argument prioritaire
+class Classe14 {
+    public int a;
+    public String getA (String a){
+        return a;
+    }
+}

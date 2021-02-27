@@ -4,9 +4,11 @@
 package fr.n7.stl.block.ast.instruction.declaration;
 
 import fr.n7.stl.block.ast.scope.Declaration;
+import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.PointerType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Register;
+import fr.n7.stl.util.Logger;
 
 /**
  * Abstract Syntax Tree node for a formal parameter in a function declaration.
@@ -44,7 +46,7 @@ public class ParameterDeclaration implements Declaration {
 	public ParameterDeclaration(String _name, Type _type) {
 		this.name = _name;
 		this.type = _type;
-		//this.offset -= type.length(); // This value should never occur...
+		this.offset = -1;
 	}
 
 	/* (non-Javadoc)
@@ -71,6 +73,27 @@ public class ParameterDeclaration implements Declaration {
 		return this.type;
 	}
 
+//	public boolean completeResolve(HierarchicalScope<Declaration> scope) {
+//		VariableDeclaration declaration = new VariableDeclaration(this.name, this.type, null);
+//		if(scope.accepts(declaration))
+//		{
+//			scope.register(declaration);
+//			return true;
+//		}
+//		Logger.error("parameter already exist");
+//		return false;
+//	}
+
+	public boolean completeResolve(HierarchicalScope<Declaration> scope) {
+//        VariableDeclaration declaration = new VariableDeclaration(this.name, this.type, null);
+		if(scope.accepts(this))
+		{
+			scope.register(this);
+			return true;
+		}
+		Logger.error("parameter already exist");
+		return false;
+	}
 	/**
 	 * Provide the offset of the formal parameter in the list of formal parameters for the function
 	 * @return Offset of the formal parameter
@@ -80,9 +103,14 @@ public class ParameterDeclaration implements Declaration {
 	}
 
 	public void setOffset(int offset) {
-		this.offset = offset - type.length();
-	}
 
+		this.offset = offset - this.getType().length() ;
+	}
+	public int allocateMemory(Register _register, int _offset) {
+		this.register = _register;
+		this.offset = _offset;
+		return this.getType().length();
+	}
 	public void setPointerOffset(int _offset){
 		this.offset = _offset;
 	}
@@ -94,4 +122,17 @@ public class ParameterDeclaration implements Declaration {
 	public Register getRegister() {
 		return register;
 	}
+	public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        ParameterDeclaration other = (ParameterDeclaration) obj;
+        if (type == null) {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
+        return true;
+    }
 }

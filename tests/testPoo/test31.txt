@@ -1,0 +1,8 @@
+//Sous typage // polymorphisme
+class C{
+}
+class Classe25947 extends C{
+    public void m() {
+        C c = new Classe25947();
+    }
+}

@@ -1,0 +1,12 @@
+// test interface
+interface A {
+     void a();
+}
+// test structure de methode sans return
+ class Classe2 {
+     public int i ;
+
+     public void m1 ( int i) {
+         print i;
+     }
+ }

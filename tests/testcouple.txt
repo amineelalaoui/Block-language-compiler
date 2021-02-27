@@ -1,7 +1,0 @@
-testcouple {
-
-	<int,int> z = {15,16};
-	int a = fst z;
-	int b = snd z;
-
-}

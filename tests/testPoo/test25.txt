@@ -1,0 +1,6 @@
+//Methode dont le type du parametre est la classe a laquelle elle appartient
+class Classe42 {
+    public Classe42 a(Classe42 b) {
+        return b;
+    }
+}

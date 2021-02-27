@@ -1,7 +1,0 @@
-test35 {
-   // Sans erreur : utilisation d'une variable après un sous-bloc.
-   int i = 1 ;
-   while (true) {
-   }
-   int j = i;
-}

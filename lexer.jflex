@@ -66,6 +66,7 @@ ContenuCommentaire 	= ( [^*] | \*+[^*/] )*
 Chaine				= \" ([^\"] | \\\") * \"
 Caractere			= \' ([^\\] | \\\\) \'
 
+Identificateur_Type = [:uppercase:] ([:jletterdigit:] | [:jletter:] | "_" )*
 Identificateur = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
 
 
@@ -131,10 +132,27 @@ Identificateur = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   "fst"				{ return symbolFactory.newSymbol("Premier", UL_Premier); }
   "snd"				{ return symbolFactory.newSymbol("Second", UL_Second); }
   "while"			{ return symbolFactory.newSymbol("Tant que", UL_Tant_Que); }
+  "interface"		{ return symbolFactory.newSymbol("Interface", UL_Interface); }
+  "extends"			{ return symbolFactory.newSymbol("Extends", UL_Extends); }
+  "final"			{ return symbolFactory.newSymbol("Final", UL_Final); }
+  "abstract"		{ return symbolFactory.newSymbol("Abstract", UL_Abstract); }
+  "public"			{ return symbolFactory.newSymbol("Public", UL_Public); }
+  "private"			{ return symbolFactory.newSymbol("Private", UL_Private); }
+  "static"			{ return symbolFactory.newSymbol("Static", UL_Static); }
+  "class"			{ return symbolFactory.newSymbol("Class", UL_Class); }
+  "implements"		{ return symbolFactory.newSymbol("Implements", UL_Implements); }
+  "protected"		{ return symbolFactory.newSymbol("Protected", UL_Protected); }
+  "this"			{ return symbolFactory.newSymbol("This", UL_This); }
+  "construct"       { return symbolFactory.newSymbol("Construct", UL_Construct); }
+  "String[] args"    { return symbolFactory.newSymbol("String[] args", UL_ARGS); }
+  "super"    { return symbolFactory.newSymbol("super", UL_SUPER); }
+
+
   {Caractere}		{ return symbolFactory.newSymbol("Caractère", UL_Caractere, yytext()); }
   {Chaine}			{ return symbolFactory.newSymbol("Chaine de caractères", UL_Chaine, yytext()); }
   {Entier}     		{ return symbolFactory.newSymbol("Nombre Entier", UL_Nombre_Entier, yytext()); }
   {Flottant}     	{ return symbolFactory.newSymbol("Nombre Flottant", UL_Nombre_Flottant, yytext()); }
+  {Identificateur_Type}	{ return symbolFactory.newSymbol("Identificateur_Type", UL_Identificateur_Type, yytext()); }
   {Identificateur}	{ return symbolFactory.newSymbol("Identificateur", UL_Identificateur, yytext()); }
 }
 

@@ -1,0 +1,4 @@
+// test appel de la methode de l'interface
+interface A {
+     void a();
+}

@@ -1,0 +1,9 @@
+interface A {
+     void a();
+}
+
+ class B implements A {
+    public void a() {
+    }
+
+ }

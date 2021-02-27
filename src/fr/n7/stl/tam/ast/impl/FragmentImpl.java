@@ -63,7 +63,7 @@ public class FragmentImpl implements Fragment {
 
 	@Override
 	public void addPrefix(String _label) {
-		if (this.instructions.size() > 0) { 
+		if (this.instructions.size() > 0) {
 			this.instructions.get(0).addPrefix(_label);
 		} else {
 			throw new IllegalArgumentException( "Fragment size is 0. No prefix label can be added.");
@@ -72,9 +72,11 @@ public class FragmentImpl implements Fragment {
 	
 	@Override
 	public void addSuffix(String _label) {
-		if (this.instructions.size() > 0) { 
+
+		if (this.instructions.size() > 0) {
 			this.instructions.get(this.instructions.size()-1).addSuffix(_label);
-		} else {
+		}
+		else {
 			throw new IllegalArgumentException( "Fragment size is 0. No suffix label can be added.");
 		}
 	}
